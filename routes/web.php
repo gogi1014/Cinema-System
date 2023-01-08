@@ -20,8 +20,15 @@ Route::get('', [MovieController::class, 'getMovies']);
 Route::get('/content/{id}', [MovieController::class, 'ShowContent']);
 Route::get('/search/', [MovieController::class, 'getMovies']);
 Route::post('/create', [MovieController::class, 'addBooking']);
+Route::get('/addMovie', [MovieController::class, 'insertform']);
+Route::post('/createMovie', [MovieController::class, 'addMovie']);
 Route::get('/movies', [MovieController::class, 'getMoviesAdmin']);
 Route::get('/moviesView', [MovieController::class, 'getMoviesAdminView']);
+Route::post('/update/{id}', [MovieController::class, 'update']);
+Route::delete('/delete/{id}', [MovieController::class, 'delete']);
 Route::get('/bookings', [MovieController::class, 'getBookingAdmin']);
 Route::get('/bookingsView', [MovieController::class, 'getBookingAdminView']);
-Route::post('update/{id}', [MovieController::class, 'update']);
+Route::post('/updateBookings/{id}', [MovieController::class, 'updateBookings']);
+Route::delete('/deleteBookings/{id}', [MovieController::class, 'deleteBookings']);
+
+

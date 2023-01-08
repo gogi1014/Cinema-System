@@ -2,6 +2,10 @@
 
 <template >
   <h1>Hello Vue!</h1>
+  <div class="search-wrapper">
+    <input type="text" v-model="search" placeholder="Search title.."/>
+        <label>Search title:</label>
+  </div>
   <table class="table table-striped table-dark">
         <thead>
             <tr>
@@ -26,7 +30,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr v-for="item in cinema" :key="item.movieId ">
+            <tr v-for="item in filteredList" :key="item.movieId ">
                 <td>{{ item.movieId  }}</td>
                 <td>{{ item.movieTitle }}</td>
                 <td>{{ item.movieImg }}</td>
@@ -38,6 +42,7 @@
                 <td>{{ item.Description }}</td>
                 <td>{{ item.movieCat }}</td>
                 <td>{{ item.movieLan }}</td>
+                <td><button type="button" class="btn btn-danger" v-on:click="Delete(item.movieId,true)">Delete</button></td>
                 <td><button id="show-modal" class="btn btn-primary"
                         @click="select(item.movieId, item.movieTitle, item.movieImg, item.movieGenre, item.movieDuration, 
                         item.movieRelDate,item.movieDirector,item.movieActors,item.Description,item.movieCat,item.movieLan, true)">Edit</button>
@@ -103,12 +108,23 @@
             </div>
         </div>
     </modal>
+    <modal v-if="showDelete" @close="showDelete = false">
+        <div class="modal-mask">
+            <div class="delete">
+                <p>Are you sure you want to delete this item?</p>
+                <button type="button" class="btn btn-danger" v-on:click="removeRow(movieId,false)">Confirm</button>
+                <button type="button" class="btn btn-primary" v-on:click="showDelete = false">Cancel</button>
+            </div>
+        </div>
+
+    </modal>
 </template>
 
 <script>
 export default {
   data() {
         return {
+            search: '',
             cinema: [],
             suc: "",
             errO: " ",
@@ -154,14 +170,40 @@ export default {
                     this.errO = error.response.data.message;
                 });
         },
-    show: function () {
-            axios.get('/movies').then(function (res) {
-                this.cinema = res.data;
-            }.bind(this));
-        }
+        show: function () {
+                axios.get('/movies').then(function (res) {
+                    this.cinema = res.data;
+                }.bind(this));
+            },
+        Delete: function(movieId,showDelete){
+            this.movieId = movieId;
+            this.showDelete = showDelete;
+        },
+        removeRow: function (movieId,showDelete) {
+            console.log("Row Deleted")
+
+            axios.delete(`/delete/${movieId}`).then(response => {
+
+                console.log(response.data);
+                if (response.data.status == true) {
+                    this.show();
+                    this.showDelete = showDelete;
+                    this.suc = "Record deleted successfully";
+                }
+
+            });
+
+        },
     },
-    created: function () {
-        this.show();
+    computed: {
+    filteredList() {
+      return this.cinema.filter(item => {
+        return item.movieTitle.toLowerCase().includes(this.search.toLowerCase())
+      })
     }
+},
+        created: function () {
+            this.show();
+        }
 }
 </script>

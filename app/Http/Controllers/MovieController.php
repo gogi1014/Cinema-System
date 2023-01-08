@@ -43,6 +43,43 @@ class MovieController extends Controller
     {
         return view('showMovies');
     } 
+    public function update(Request $request)
+    {
+       
+        (new Movie)->upd($request);
+        return ['success'=>true];
+    }
+    public function delete($id)
+    {
+        $movie = new Movie;
+        $movie = Movie::find($id);
+        if(!$movie){
+            return ["status"=>false,"message" => "Movie not found"];
+        }
+        $movie->delete();
+        return ["status"=>true];
+
+    }
+    public function insertform()
+    {
+        return view('addMovie');
+    }
+    function addMovie(Request $request)
+    {
+        $this->validate($request, [
+            'movieTitle' => 'required|string|min:3|max:255',
+            'movieGenre' => 'required|string|max:255',
+            'movieDuration' => 'required|int',
+            'movieDirector' => 'required|string|max:255',
+            'movieActors' => 'required|string|max:255',
+            'Description' => 'required|string|max:255',
+            'movieCat' => 'required|string|max:255',
+            'movieLan' => 'required|string|max:255',
+        ]);
+        Movie::store($request);
+        return redirect('/moviesView')->with('success', 'Your form has been submitted.');
+    } 
+
     public function getBookingAdmin(Request $request)
     {
         $user = User::get();
@@ -52,10 +89,21 @@ class MovieController extends Controller
     {
         return view('showBookings');
     } 
-    public function update(Request $request)
+    public function updateBookings(Request $request)
     {
        
-        (new Movie)->upd($request);
+        (new User)->upd($request);
         return ['success'=>true];
     }
+    public function deleteBookings($id)
+    {
+        $movie = new User;
+        $movie = User::find($id);
+        if(!$movie){
+            return ["status"=>false,"message" => "Booking not found"];
+        }
+        $movie->delete();
+        return ["status"=>true];
+
+    }  
 }

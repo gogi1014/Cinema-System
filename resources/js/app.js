@@ -7,7 +7,7 @@
 
 // Require Vue
 import { createApp } from 'vue';
-import example from './components/HelloVue.vue';
+import example from './components/Movies.vue';
 import Bookings from './components/Bookings.vue';
 
 

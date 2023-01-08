@@ -34,4 +34,17 @@ class User extends Authenticatable
         $user->email = $input["email"];
         $user->save();
     }
+    public function upd($request)
+    {
+        $input = $request->input();
+        $movie = Movie::find($request->id);
+        $movie->firstname = $input["firstname"];
+        $movie->lastname = $input["lastname"];
+        $movie->email = $input["email"];
+        $movie->date = $input["date"];
+        $movie->ticknum = $input["ticknum"];
+        $movie->time = $input["time"];
+        $movie->MovieId = $input["MovieId"];
+        $movie->update();
+    }
 }

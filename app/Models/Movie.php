@@ -20,8 +20,8 @@ class Movie extends Model
         'movieDirector',
         'movieActors',
         'Description',
-        'movieCat',
-        'movieLan'
+        'movieLan',
+        'movieCat'
     ];
 
 
@@ -36,6 +36,22 @@ class Movie extends Model
          return $search->paginate($input['pagg']);
         } 
         return $search->paginate($pagg);
+    }
+    public static function store($request)
+    {
+        $input = $request->input();
+        $movie = new Movie();
+        $movie->movieImg = $input["movieImg"];
+        $movie->movieTitle = $input["movieTitle"];
+        $movie->movieGenre = $input["movieGenre"];
+        $movie->movieDuration = $input["movieDuration"];
+        $movie->movieRelDate = $input["movieRelDate"];
+        $movie->movieDirector = $input["movieDirector"];
+        $movie->movieActors = $input["movieActors"];
+        $movie->Description = $input["Description"];
+        $movie->movieCat = $input["movieCat"];
+        $movie->movieLan = $input["movieLan"];
+        $movie->save();
     }
     public function upd($request)
     {
