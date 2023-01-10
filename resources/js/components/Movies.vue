@@ -3,7 +3,7 @@
 <template >
   <h1>Hello Vue!</h1>
   <div class="search-wrapper">
-    <input type="text" v-model="search" placeholder="Search title.."/>
+    <input type="text" v-model="keyword" placeholder="Search title.."/>
         <label>Search title:</label>
   </div>
   <table class="table table-striped table-dark">
@@ -30,7 +30,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr v-for="item in filteredList" :key="item.movieId ">
+            <tr v-for="item in cinema.data" :key="item.movieId ">
                 <td>{{ item.movieId  }}</td>
                 <td>{{ item.movieTitle }}</td>
                 <td>{{ item.movieImg }}</td>
@@ -50,6 +50,8 @@
               </tr>
               </tbody>
     </table>
+    <pagination :data="cinema" @pagination-change-page="getResults"></pagination>
+    
     <modal v-if="showModal" @close="showModal = false">
         <div class="modal-mask">
             <div class="edit">
@@ -124,6 +126,7 @@
 export default {
   data() {
         return {
+            keyword: null,
             search: '',
             cinema: [],
             suc: "",
@@ -143,8 +146,17 @@ export default {
             movieLan: String,
         }
     },
+    watch: {
+        keyword(after, before) {
+            this.getResults();
+        }
+    },
     name: 'HelloVue',
     methods: {
+        getResults(page=1) {
+            axios.get('/movies?page=' + page, { params: { keyword: this.keyword } })
+                .then(res => this.cinema = res.data)
+        },
         select: function (movieId, movieTitle, movieImg, movieGenre, movieDuration, movieRelDate,movieDirector,movieActors ,Description,movieCat,movieLan,showModal) {
             this.movieId = movieId;
             this.movieTitle = movieTitle;
@@ -181,28 +193,17 @@ export default {
         },
         removeRow: function (movieId,showDelete) {
             console.log("Row Deleted")
-
             axios.delete(`/delete/${movieId}`).then(response => {
-
                 console.log(response.data);
                 if (response.data.status == true) {
                     this.show();
                     this.showDelete = showDelete;
                     this.suc = "Record deleted successfully";
                 }
-
             });
-
         },
     },
-    computed: {
-    filteredList() {
-      return this.cinema.filter(item => {
-        return item.movieTitle.toLowerCase().includes(this.search.toLowerCase())
-      })
-    }
-},
-        created: function () {
+    created: function () {
             this.show();
         }
 }

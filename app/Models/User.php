@@ -32,6 +32,7 @@ class User extends Authenticatable
         $user->firstname = $input["firstname"];
         $user->lastname = $input["lastname"];
         $user->email = $input["email"];
+        $user->MovieId = $input["MovieId"];
         $user->save();
     }
     public function upd($request)

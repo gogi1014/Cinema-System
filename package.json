@@ -24,6 +24,10 @@
     "dependencies": {
         "axios": "^1.2.2",
         "bootstrap": "^5.2.3",
+        "laravel-vue": "^1.0.0",
+        "laravel-vue-pagination": "^4.0.0",
+        "pagination": "^0.4.6",
+        "vue-resource": "^1.5.3",
         "webpack": "^5.75.0"
     }
 }

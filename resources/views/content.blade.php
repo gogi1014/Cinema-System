@@ -20,10 +20,10 @@
     <td>City Name</td>
     <td>Email</td>
     </tr>
-    <td>{{ $movies->movieImg }}</td>  
+    <td><img width="300" height="315" src="{{ $movies->movieImg }}"></td>  
     <td>{{ $movies->movieTitle }}</td>
     <td>{{ $movies->movieGenre }}</td>
-    <td>{{ $movies->movieDuration }}</td>
+    <td>{{ $movies->movieDuration }} мин.</td>
     <td>{{ $movies->movieCat }}</td>
     <td>{{ $movies->movieLan }}</td>
     </tr>
@@ -32,6 +32,9 @@
 
 <form action="/create" method="post">
   @csrf
+  <div class="form-group">
+    <input type="hidden" class="form-control" name="MovieId" id="MovieId" value="{{ $movies->movieTitle }}">
+  </div>
   <div class="form-group">
     <label for="name">Name</label>
     <input type="text" class="form-control" name="firstname" id="firstname" placeholder="Name">

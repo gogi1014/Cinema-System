@@ -176,18 +176,14 @@ export default {
         },
         removeRow: function (id,showDelete) {
             console.log("Row Deleted")
-
             axios.delete(`/deleteBookings/${id}`).then(response => {
-
                 console.log(response.data);
                 if (response.data.status == true) {
                     this.show();
                     this.showDelete = showDelete;
                     this.suc = "Record deleted successfully";
                 }
-
             });
-
         },
     },
     computed: {

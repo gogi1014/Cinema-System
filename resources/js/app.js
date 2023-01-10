@@ -9,12 +9,18 @@
 import { createApp } from 'vue';
 import example from './components/Movies.vue';
 import Bookings from './components/Bookings.vue';
+import pagination from 'laravel-vue-pagination';
+
+
+
 
 
 
 let app=createApp({})
 app.component('example-component' , example);
 app.component('bookings' , Bookings);
+app.component('pagination', pagination);
+
 
 
 app.mount("#app")

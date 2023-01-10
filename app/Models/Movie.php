@@ -13,6 +13,7 @@ class Movie extends Model
     public $fillable = [
         'movieId',
         'movieImg',
+        'movieTrailer',
         'movieTitle',
         'movieGenre',
         'movieDuration',
@@ -24,7 +25,10 @@ class Movie extends Model
         'movieCat'
     ];
 
-
+    public function searchMovies($input)
+    {
+        return Movie::where('movieTitle', 'LIKE','%'.$input->keyword.'%')->paginate(2);
+    }
     public function getMovies($input)
     {
         $pagg = 5;

@@ -24,6 +24,7 @@ Route::get('/addMovie', [MovieController::class, 'insertform']);
 Route::post('/createMovie', [MovieController::class, 'addMovie']);
 Route::get('/movies', [MovieController::class, 'getMoviesAdmin']);
 Route::get('/moviesView', [MovieController::class, 'getMoviesAdminView']);
+Route::get('/moviesViewSearch/', [MovieController::class, 'getMoviesAdmin']);
 Route::post('/update/{id}', [MovieController::class, 'update']);
 Route::delete('/delete/{id}', [MovieController::class, 'delete']);
 Route::get('/bookings', [MovieController::class, 'getBookingAdmin']);

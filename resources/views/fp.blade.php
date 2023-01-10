@@ -31,7 +31,8 @@
     <table border = "1">
     @foreach ($movies as $movie)
     <tr>
-    <td >{{ $movie->movieImg }}</td>  
+    <td><img width="300" height="315" src="{{ $movie->movieImg }}"></td>  
+    <td ><iframe width="420" height="315" src="{{ $movie->movieTrailer }}" frameborder="0" allowfullscreen></iframe></td>  
     <td><a href="{{ url('content/'.$movie->movieId) }}" style="cursor:pointer;">{{ $movie->movieTitle }}</a></td>
     <td>{{ $movie->movieGenre }}</td>
     <td>{{ $movie->movieDuration }}</td>

@@ -36,7 +36,7 @@ class MovieController extends Controller
     }
     public function getMoviesAdmin(Request $request)
     {
-        $cinema = Movie::get();
+        $cinema = (new Movie)->searchMovies($request);
         return response()->json($cinema);
     } 
     public function getMoviesAdminView(Request $request)
