@@ -50,7 +50,10 @@
               </tr>
               </tbody>
     </table>
-    <pagination :data="cinema" @pagination-change-page="getResults"></pagination>
+    <TailwindPagination
+        :data="cinema"
+        @pagination-change-page="getResults"
+    />
     
     <modal v-if="showModal" @close="showModal = false">
         <div class="modal-mask">
@@ -123,7 +126,11 @@
 </template>
 
 <script>
+import pagination from 'laravel-vue-pagination'
 export default {
+    components:{
+            pagination
+        },
   data() {
         return {
             keyword: null,
@@ -153,8 +160,8 @@ export default {
     },
     name: 'HelloVue',
     methods: {
-        getResults(page=1) {
-            axios.get('/movies?page=' + page, { params: { keyword: this.keyword } })
+         getResults(page= 1) {
+         axios.get('/movies?page=' + page, { params: { keyword: this.keyword } })
                 .then(res => this.cinema = res.data)
         },
         select: function (movieId, movieTitle, movieImg, movieGenre, movieDuration, movieRelDate,movieDirector,movieActors ,Description,movieCat,movieLan,showModal) {
@@ -208,3 +215,9 @@ export default {
         }
 }
 </script>
+
+<style scoped>
+    .pagination{
+        margin-bottom: 0;
+    }
+</style>

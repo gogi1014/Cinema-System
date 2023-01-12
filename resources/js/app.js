@@ -4,6 +4,7 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+require('./bootstrap');
 
 // Require Vue
 import { createApp } from 'vue';
@@ -19,7 +20,7 @@ import pagination from 'laravel-vue-pagination';
 let app=createApp({})
 app.component('example-component' , example);
 app.component('bookings' , Bookings);
-app.component('pagination', pagination);
+
 
 
 

@@ -36,16 +36,28 @@
     <input type="hidden" class="form-control" name="MovieId" id="MovieId" value="{{ $movies->movieTitle }}">
   </div>
   <div class="form-group">
-    <label for="name">Name</label>
+    <label for="firstname">Name</label>
     <input type="text" class="form-control" name="firstname" id="firstname" placeholder="Name">
   </div>
   <div class="form-group">
-    <label for="age">Age</label>
+    <label for="lastname">Age</label>
     <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Age">
   </div>
   <div class="form-group">
-    <label for="address">Address</label>
+    <label for="email">Address</label>
     <input type="text" class="form-control" name="email" id="email" placeholder="Address">
+  </div>
+  <div class="form-group">
+    <label for="date">Address</label>
+    <input type="date" class="form-control" name="date" id="date" placeholder="Address">
+  </div>
+  <div class="form-group">
+    <label for="ticknum">Address</label>
+    <input type="text" class="form-control" name="ticknum" id="ticknum" placeholder="Address">
+  </div>
+  <div class="form-group">
+    <label for="time">Address</label>
+    <input type="text" class="form-control" name="time" id="time" placeholder="Address">
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
