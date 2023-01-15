@@ -27,7 +27,7 @@ class Movie extends Model
 
     public function searchMovies($input)
     {
-        return Movie::where('movieTitle', 'LIKE','%'.$input->keyword.'%')->paginate(2);
+        return Movie::where('movieTitle', 'LIKE','%'.$input->keyword.'%')->get();
     }
     public function getMovies($input)
     {

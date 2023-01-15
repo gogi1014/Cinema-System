@@ -30,7 +30,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr v-for="item in cinema.data" :key="item.movieId ">
+            <tr v-for="item in paginated" :key="item.movieId ">
                 <td>{{ item.movieId  }}</td>
                 <td>{{ item.movieTitle }}</td>
                 <td>{{ item.movieImg }}</td>
@@ -50,11 +50,15 @@
               </tr>
               </tbody>
     </table>
-    <TailwindPagination
-        :data="cinema"
-        @pagination-change-page="getResults"
-    />
-    
+ <!-- PAGINATION START -->
+ <div class="col-12 mt-4 pt-2">
+                    <ul class="pagination justify-content-center mb-0">
+                        <li class="page-item"><a class="page-link" @click="prev" aria-label="Previous">Prev</a></li>
+                        <li class="page-item active"><a class="page-link" href="javascript:void(0)">{{ current }}</a></li>
+                        <li class="page-item"><a class="page-link" @click="next()" aria-label="Next">Next</a></li>
+                    </ul>
+                </div><!--end col-->
+                <!-- PAGINATION END -->
     <modal v-if="showModal" @close="showModal = false">
         <div class="modal-mask">
             <div class="edit">
@@ -126,13 +130,12 @@
 </template>
 
 <script>
-import pagination from 'laravel-vue-pagination'
 export default {
-    components:{
-            pagination
-        },
+   
   data() {
         return {
+            current: 1,
+            pageSize: 2,
             keyword: null,
             search: '',
             cinema: [],
@@ -153,6 +156,17 @@ export default {
             movieLan: String,
         }
     },
+    computed:{
+        indexStart() {
+          return (this.current - 1) * this.pageSize;
+        },
+        indexEnd() {
+          return this.indexStart + this.pageSize;
+        },
+        paginated() {
+          return this.cinema.slice(this.indexStart, this.indexEnd);
+        }
+    },
     watch: {
         keyword(after, before) {
             this.getResults();
@@ -160,6 +174,14 @@ export default {
     },
     name: 'HelloVue',
     methods: {
+        prev() {
+            if ((this.current != 1))
+                this.current--;
+        },
+        next() {
+            if((this.current < Math.ceil(this.cinema.length / this.pageSize)))
+                this.current++;
+        },
          getResults(page= 1) {
          axios.get('/movies?page=' + page, { params: { keyword: this.keyword } })
                 .then(res => this.cinema = res.data)

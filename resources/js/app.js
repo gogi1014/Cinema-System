@@ -10,7 +10,7 @@ require('./bootstrap');
 import { createApp } from 'vue';
 import example from './components/Movies.vue';
 import Bookings from './components/Bookings.vue';
-import pagination from 'laravel-vue-pagination';
+import Pagination from 'v-pagination-3';
 
 
 
@@ -20,7 +20,7 @@ import pagination from 'laravel-vue-pagination';
 let app=createApp({})
 app.component('example-component' , example);
 app.component('bookings' , Bookings);
-
+app.component('pagination', Pagination);
 
 
 

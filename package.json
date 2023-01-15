@@ -23,11 +23,14 @@
         "vue-loader": "^16.2.0"
     },
     "dependencies": {
+        "@appbaseio/reactivesearch-native": "^0.12.0",
+        "@appbaseio/reactivesearch-vue": "^1.33.6",
         "axios": "^1.2.2",
         "bootstrap-vue": "^2.21.2",
         "laravel-vue": "^1.0.0",
-        "laravel-vue-pagination": "^4.0.0",
+        "laravel-vue-pagination": "^2.3.1",
         "pagination": "^0.4.6",
+        "v-pagination-3": "^0.1.7",
         "vue-resource": "^1.5.3",
         "webpack": "^5.75.0"
     }
