@@ -24,6 +24,7 @@ class User extends Authenticatable
         'ticknum',
         'time',
         'MovieId',
+        'created_at',
     ];
 
     public static function store($request)
@@ -32,16 +33,17 @@ class User extends Authenticatable
         $user = new User();
         $user->firstname = $input["firstname"];
         $user->lastname = $input["lastname"];
-        $fullName = $user->firstname.' '.$user->lastname;
+        $fullName = $user->firstname.' '.$user->lastname.' '.$user->created_at;
         $user->email = $input["email"];
         $user->date = $input["date"];
         $user->ticknum = $input["ticknum"];
         $user->time = $input["time"];
         $user->MovieId = $input["MovieId"];
-        $data = array('name'=>$fullName,'comment' => 'test message');
+        $reservation = 'Резервация за филма '.$user->MovieId.' на дата '.$user->date.' от '.$user->time.'Брой билети'.$user->ticknum;
+        $data = array('name'=>$fullName,'comment' => $reservation);
         Mail::send(['text'=>'mail'], $data, function($message) {
             $message->to('gogi1014@gmail.com', 'Tutorials Point')->subject
-                ('Laravel Basic Testing Mail');
+                ('Резервиране на билет за кино');
             $message->from('killaonthehilla@gmail.com','Кино');
         });
       echo "Basic Email Sent. Check your inbox.";

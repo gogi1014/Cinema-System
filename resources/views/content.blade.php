@@ -26,6 +26,7 @@
     <td>{{ $movies->movieDuration }} мин.</td>
     <td>{{ $movies->movieCat }}</td>
     <td>{{ $movies->movieLan }}</td>
+    <td>{{ $movies->time }}</td>
     </tr>
     </table>    
 </div>
@@ -36,29 +37,34 @@
     <input type="hidden" class="form-control" name="MovieId" id="MovieId" value="{{ $movies->movieTitle }}">
   </div>
   <div class="form-group">
-    <label for="firstname">Name</label>
-    <input type="text" class="form-control" name="firstname" id="firstname" placeholder="Name">
+    <label for="firstname">Име</label>
+    <input type="text" class="form-control" name="firstname" id="firstname" placeholder="Име">
   </div>
   <div class="form-group">
-    <label for="lastname">Age</label>
-    <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Age">
+    <label for="lastname">Фамилия</label>
+    <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Фамилия">
   </div>
   <div class="form-group">
-    <label for="email">Address</label>
-    <input type="text" class="form-control" name="email" id="email" placeholder="Address">
+    <label for="email">Имейл</label>
+    <input type="text" class="form-control" name="email" id="email" placeholder="Имейл">
   </div>
   <div class="form-group">
-    <label for="date">Address</label>
-    <input type="date" class="form-control" name="date" id="date" placeholder="Address">
+    <label for="date">Дата</label>
+    <input type="date" class="form-control" name="date" id="date" placeholder="Дата">
   </div>
   <div class="form-group">
-    <label for="ticknum">Address</label>
-    <input type="text" class="form-control" name="ticknum" id="ticknum" placeholder="Address">
+    <label for="ticknum">Брой билети</label>
+    <input type="text" class="form-control" name="ticknum" id="ticknum" placeholder="Брой билети">
   </div>
   <div class="form-group">
-    <label for="time">Address</label>
-    <input type="text" class="form-control" name="time" id="time" placeholder="Address">
+    <label for="time">Час</label>
+    <input type="text" class="form-control" name="time" id="time" placeholder="Час">
   </div>
+  <select name="user">
+    @foreach ($array = explode(',', $movies->time) as $movie)
+    <option value="{{ $movie }}">{{ $movie}}</option>
+    @endforeach
+    </select>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
