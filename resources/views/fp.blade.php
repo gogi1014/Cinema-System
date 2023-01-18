@@ -26,13 +26,12 @@
   <button type="submit">Search</button>
 </form>
 
-
- 
-
-
-
+@foreach ($moviedate as $movieDate)
+    {{ $movieDate->date }}
+@endforeach
 <div id="app">
     <table border = "1">
+
     @foreach ($movies as $movie)
     <tr>
     <td data-toggle="modal" data-target="#{{ $movie->movieTitle }}"><img width="300" height="315" src="{{ $movie->movieImg }}"></td>  

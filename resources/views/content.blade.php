@@ -49,22 +49,27 @@
     <input type="text" class="form-control" name="email" id="email" placeholder="Имейл">
   </div>
   <div class="form-group">
-    <label for="date">Дата</label>
-    <input type="date" class="form-control" name="date" id="date" placeholder="Дата">
-  </div>
-  <div class="form-group">
     <label for="ticknum">Брой билети</label>
     <input type="text" class="form-control" name="ticknum" id="ticknum" placeholder="Брой билети">
   </div>
   <div class="form-group">
-    <label for="time">Час</label>
-    <input type="text" class="form-control" name="time" id="time" placeholder="Час">
-  </div>
-  <select name="user">
-    @foreach ($array = explode(',', $movies->time) as $movie)
-    <option value="{{ $movie }}">{{ $movie}}</option>
+  <label for="dateSelected">Дата</label>
+  <select name="dateSelected" onchange="window.location.href=this.value;">
+    <option disabled selected value> -- Изберете дата -- </option>
+    @foreach ($moviedate as $date)
+      <option value="{{ url('content/'.$movies->movieId.'/'.$date->date) }}" >{{ $date->date}}</option>
     @endforeach
     </select>
+    </div>
+    <div class="form-group">
+    <label for="timeSelected">Час</label>
+    <select name="timeSelected">
+    <option disabled selected value> -- Изберете час -- </option>
+    @foreach ($movietime as $time)
+      <option value="{{ $time->time }}" >{{ $time->time}}</option>
+    @endforeach
+    </select>
+    </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 

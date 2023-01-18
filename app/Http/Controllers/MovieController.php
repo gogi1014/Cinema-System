@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\MovieDate;
 use Mail;
 
 class MovieController extends Controller
@@ -15,15 +16,18 @@ class MovieController extends Controller
     public function getMovies(Request $request)
     {
         $movies = new Movie();
+        $moviedate = MovieDate::get();
         $search = $request->input('search');
         $input =array("search" => $search,"pagg" => 2);
         
-        return view('fp', ['movies' => $movies->getMovies($input)]);
+        return view('fp', ['movies' => $movies->getMovies($input),'moviedate'=>$moviedate]);
     }
-    public function ShowContent($primaryKey)
+    public function ShowContent($primaryKey,Request $request)
     {
         $movies = Movie::find($primaryKey);
-        return view('content',['movies'=>$movies]);
+        $moviedate = MovieDate::where('MovieId',$primaryKey)->get()->unique('date');
+        $movietime = MovieDate::where('date',$request->date)->get();
+        return view('content',['movies'=>$movies,'moviedate'=>$moviedate,'movietime'=>$movietime]);
     }
     function addBooking(Request $request)
     {

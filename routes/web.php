@@ -17,7 +17,7 @@ use Inertia\Inertia;
 */
 
 Route::get('', [MovieController::class, 'getMovies']);
-Route::get('/content/{id}', [MovieController::class, 'ShowContent']);
+Route::get('/content/{id}/{date?}', [MovieController::class, 'ShowContent']);
 Route::get('/search/', [MovieController::class, 'getMovies']);
 Route::post('/create', [MovieController::class, 'addBooking']);
 Route::get('/addMovie', [MovieController::class, 'insertform']);
