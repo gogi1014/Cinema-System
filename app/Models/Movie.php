@@ -28,18 +28,18 @@ class Movie extends Model
 
     public function searchMovies($input)
     {
-        return Movie::where('movieTitle', 'LIKE','%'.$input->keyword.'%')->get();
+        return Movie::where('movieTitle', 'LIKE', '%' . $input->keyword . '%')->get();
     }
     public function getMovies($input)
     {
         $pagg = 5;
         $search = Movie::orderBy('movieId');
         if (isset($input['search'])) {
-            $search->where('movieTitle', 'LIKE', "%".$input["search"]."%");
-        }   
+            $search->where('movieTitle', 'LIKE', "%" . $input["search"] . "%");
+        }
         if (isset($input['pagg'])) {
-         return $search->paginate($input['pagg']);
-        } 
+            return $search->paginate($input['pagg']);
+        }
         return $search->paginate($pagg);
     }
     public static function store($request)
@@ -64,6 +64,7 @@ class Movie extends Model
         $movie = Movie::find($request->movieId);
         $movie->movieTitle = $input["movieTitle"];
         $movie->movieImg = $input["movieImg"];
+        $movie->movieTrailer = $input["movieTrailer"];
         $movie->movieGenre = $input["movieGenre"];
         $movie->movieDuration = $input["movieDuration"];
         $movie->movieRelDate = $input["movieRelDate"];
@@ -74,5 +75,4 @@ class Movie extends Model
         $movie->movieLan = $input["movieLan"];
         $movie->update();
     }
-    
 }

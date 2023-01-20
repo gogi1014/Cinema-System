@@ -1,11 +1,6 @@
-<!DOCTPE html>
-<html>
-<head>
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>    
+@extends('master')
 
-<title>View Student Records</title>
-</head>
-<body>
+@section('content')
 
 <form action="/createMovie" method="post">
   @csrf
@@ -52,5 +47,4 @@
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
-</body>
-</html>
+@endsection

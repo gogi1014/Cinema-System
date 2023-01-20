@@ -35,9 +35,9 @@ class User extends Authenticatable
         $user->lastname = $input["lastname"];
         $fullName = $user->firstname.' '.$user->lastname.' '.$user->created_at;
         $user->email = $input["email"];
-        $user->date = $input["date"];
+        $user->date = User::get('date');
         $user->ticknum = $input["ticknum"];
-        $user->time = $input["time"];
+        $user->time = $request->get('time');
         $user->MovieId = $input["MovieId"];
         $reservation = 'Резервация за филма '.$user->MovieId.' на дата '.$user->date.' от '.$user->time.'Брой билети'.$user->ticknum;
         $data = array('name'=>$fullName,'comment' => $reservation);
@@ -56,9 +56,9 @@ class User extends Authenticatable
         $movie->firstname = $input["firstname"];
         $movie->lastname = $input["lastname"];
         $movie->email = $input["email"];
-        $movie->date = $input["date"];
+        $movie->date = $request->date;
         $movie->ticknum = $input["ticknum"];
-        $movie->time = $input["time"];
+        $movie->time = $request->time;
         $movie->MovieId = $input["MovieId"];
         $movie->update();
     }

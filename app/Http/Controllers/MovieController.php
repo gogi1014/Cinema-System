@@ -18,16 +18,17 @@ class MovieController extends Controller
         $movies = new Movie();
         $moviedate = MovieDate::get();
         $search = $request->input('search');
-        $input =array("search" => $search,"pagg" => 2);
-        
-        return view('fp', ['movies' => $movies->getMovies($input),'moviedate'=>$moviedate]);
+        $input = array("search" => $search, "pagg" => 2);
+
+        return view('fp', ['movies' => $movies->getMovies($input), 'moviedate' => $moviedate]);
     }
-    public function ShowContent($primaryKey,Request $request)
+    public function ShowContent($primaryKey, Request $request)
     {
         $movies = Movie::find($primaryKey);
-        $moviedate = MovieDate::where('MovieId',$primaryKey)->get()->unique('date');
-        $movietime = MovieDate::where('date',$request->date)->get();
-        return view('content',['movies'=>$movies,'moviedate'=>$moviedate,'movietime'=>$movietime]);
+        $moviedate = MovieDate::where('MovieId', $primaryKey)->get()->unique('date');
+        $movietime = MovieDate::where('date', $request->date)->get();
+        $reqDate = $request->date;
+        return view('content', ['movies' => $movies, 'moviedate' => $moviedate, 'movietime' => $movietime, 'reqDate' => $reqDate]);
     }
     function addBooking(Request $request)
     {
@@ -43,27 +44,26 @@ class MovieController extends Controller
     {
         $cinema = (new Movie)->searchMovies($request);
         return response()->json($cinema);
-    } 
+    }
     public function getMoviesAdminView(Request $request)
     {
         return view('showMovies');
-    } 
+    }
     public function update(Request $request)
     {
-       
+
         (new Movie)->upd($request);
-        return ['success'=>true];
+        return ['success' => true];
     }
     public function delete($id)
     {
         $movie = new Movie;
         $movie = Movie::find($id);
-        if(!$movie){
-            return ["status"=>false,"message" => "Movie not found"];
+        if (!$movie) {
+            return ["status" => false, "message" => "Movie not found"];
         }
         $movie->delete();
-        return ["status"=>true];
-
+        return ["status" => true];
     }
     public function insertform()
     {
@@ -83,32 +83,56 @@ class MovieController extends Controller
         ]);
         Movie::store($request);
         return redirect('/moviesView')->with('success', 'Your form has been submitted.');
-    } 
+    }
 
     public function getBookingAdmin(Request $request)
     {
         $user = User::get();
         return response()->json($user);
-    } 
+    }
     public function getBookingAdminView(Request $request)
     {
         return view('showBookings');
-    } 
+    }
     public function updateBookings(Request $request)
     {
-       
+
         (new User)->upd($request);
-        return ['success'=>true];
+        return ['success' => true];
     }
     public function deleteBookings($id)
     {
         $movie = new User;
         $movie = User::find($id);
-        if(!$movie){
-            return ["status"=>false,"message" => "Booking not found"];
+        if (!$movie) {
+            return ["status" => false, "message" => "Booking not found"];
         }
         $movie->delete();
-        return ["status"=>true];
+        return ["status" => true];
+    }
+    public function getmoviesDateAdmin(Request $request)
+    {
+        $user = MovieDate::get();
+        return response()->json($user);
+    }
+    public function getmoviesDateAdminView(Request $request)
+    {
+        return view('showMovieDate');
+    }
+    public function updateMoviesDate(Request $request)
+    {
 
-    }  
+        (new MovieDate)->upd($request);
+        return ['success' => true];
+    }
+    public function deleteMoviesDate($id)
+    {
+        $movie = new MovieDate();
+        $movie = MovieDate::find($id);
+        if (!$movie) {
+            return ["status" => false, "message" => "Booking not found"];
+        }
+        $movie->delete();
+        return ["status" => true];
+    }
 }

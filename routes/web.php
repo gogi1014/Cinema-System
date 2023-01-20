@@ -31,5 +31,9 @@ Route::get('/bookings', [MovieController::class, 'getBookingAdmin']);
 Route::get('/bookingsView', [MovieController::class, 'getBookingAdminView']);
 Route::post('/updateBookings/{id}', [MovieController::class, 'updateBookings']);
 Route::delete('/deleteBookings/{id}', [MovieController::class, 'deleteBookings']);
+Route::get('/moviesDate', [MovieController::class, 'getmoviesDateAdmin']);
+Route::get('/moviesDateView', [MovieController::class, 'getmoviesDateAdminView']);
+Route::post('/updateMoviesDate/{id}', [MovieController::class, 'updateMoviesDate']);
+Route::delete('/deleteMoviesDate/{id}', [MovieController::class, 'deleteMoviesDate']);
 
 

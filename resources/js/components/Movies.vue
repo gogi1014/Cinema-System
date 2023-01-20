@@ -1,39 +1,58 @@
 // resources/components/HelloVue.vue
 
 <template >
-  <h1>Hello Vue!</h1>
-  <div class="search-wrapper">
-    <input type="text" v-model="keyword" placeholder="Search title.."/>
-        <label>Search title:</label>
-  </div>
-  <table class="table table-striped table-dark">
+    <h1>Списък с филми</h1>
+    <div class="search-wrapper">
+        <label>Търси филм:</label>
+        <input type="text" v-model="keyword" placeholder="Търси филм.." />
+    </div>
+    <table class="table table-striped table-dark">
         <thead>
             <tr>
                 <th class="text-left">
                     ID
                 </th>
                 <th class="text-left">
-                    Name
+                    Заглавие
                 </th>
                 <th class="text-left">
-                    Age
+                    Постер
                 </th>
                 <th class="text-left">
-                    Address
+                    Трейлър
                 </th>
                 <th class="text-left">
-                    Section
+                    Жанр
                 </th>
                 <th class="text-left">
-                    Salary
+                    Времетраене
+                </th>
+                <th class="text-left">
+                    Дата на излизане
+                </th>
+                <th class="text-left">
+                    Продуцент
+                </th>
+                <th class="text-left">
+                    Актъори
+                </th>
+                <th class="text-left">
+                    Описание
+                </th>
+                <th class="text-left">
+                    Категория
+                </th>
+                <th class="text-left">
+                    Език
                 </th>
             </tr>
         </thead>
         <tbody>
-            <tr v-for="item in paginated" :key="item.movieId ">
-                <td>{{ item.movieId  }}</td>
+            <tr v-for="item in paginated" :key="item.movieId">
+                <td>{{ item.movieId }}</td>
                 <td>{{ item.movieTitle }}</td>
                 <td>{{ item.movieImg }}</td>
+                <td>{{ item.movieTrailer }}</td>
                 <td>{{ item.movieGenre }}</td>
                 <td>{{ item.movieDuration }}</td>
                 <td>{{ item.movieRelDate }}</td>
@@ -42,72 +61,76 @@
                 <td>{{ item.Description }}</td>
                 <td>{{ item.movieCat }}</td>
                 <td>{{ item.movieLan }}</td>
-                <td><button type="button" class="btn btn-danger" v-on:click="Delete(item.movieId,true)">Delete</button></td>
-                <td><button id="show-modal" class="btn btn-primary"
-                        @click="select(item.movieId, item.movieTitle, item.movieImg, item.movieGenre, item.movieDuration, 
-                        item.movieRelDate,item.movieDirector,item.movieActors,item.Description,item.movieCat,item.movieLan, true)">Edit</button>
+                <td><button type="button" class="btn btn-danger" v-on:click="Delete(item.movieId, true)">Delete</button>
                 </td>
-              </tr>
-              </tbody>
+                <td><button id="show-modal" class="btn btn-primary"
+                        @click="select(item.movieId, item.movieTitle, item.movieImg, item.movieTrailer, item.movieGenre, item.movieDuration,
+                        item.movieRelDate, item.movieDirector, item.movieActors, item.Description, item.movieCat, item.movieLan, true)">Edit</button>
+                </td>
+            </tr>
+        </tbody>
     </table>
- <!-- PAGINATION START -->
- <div class="col-12 mt-4 pt-2">
-                    <ul class="pagination justify-content-center mb-0">
-                        <li class="page-item"><a class="page-link" @click="prev" aria-label="Previous">Prev</a></li>
-                        <li class="page-item active"><a class="page-link" href="javascript:void(0)">{{ current }}</a></li>
-                        <li class="page-item"><a class="page-link" @click="next()" aria-label="Next">Next</a></li>
-                    </ul>
-                </div><!--end col-->
-                <!-- PAGINATION END -->
+    <!-- PAGINATION START -->
+    <div class="col-12 mt-4 pt-2">
+        <ul class="pagination justify-content-center mb-0">
+            <li class="page-item"><a class="page-link" @click="prev" aria-label="Previous">Prev</a></li>
+            <li class="page-item active"><a class="page-link" href="javascript:void(0)">{{ current }}</a></li>
+            <li class="page-item"><a class="page-link" @click="next()" aria-label="Next">Next</a></li>
+        </ul>
+    </div><!--end col-->
+    <!-- PAGINATION END -->
     <modal v-if="showModal" @close="showModal = false">
         <div class="modal-mask">
             <div class="edit">
                 <h3>Edit</h3>
                 <table class="tab">
                     <tr>
-                        <td><label for="movieTitle">Name </label></td>
-                        <td><input type='text' id="movieTitle" v-model="movieTitle" placeholder="Name" /></td>
+                        <td><label for="movieTitle">Заглавие </label></td>
+                        <td><input type='text' id="movieTitle" v-model="movieTitle" placeholder="Заглавие" /></td>
                     </tr>
                     <tr>
-                        <td><label for="movieImg">Age </label></td>
-                        <td><input type='text' id="movieImg" v-model="movieImg" placeholder="age" /></td>
+                        <td><label for="movieImg">Постер </label></td>
+                        <td><input type='text' id="movieImg" v-model="movieImg" placeholder="Постер" /></td>
                     </tr>
                     <tr>
-                        <td><label for="movieGenre">Address </label></td>
-                        <td><input type='text' id="movieGenre" v-model="movieGenre" placeholder="address" /></td>
+                        <td><label for="movieTrailer">Трейлър </label></td>
+                        <td><input type='text' id="movieTrailer" v-model="movieTrailer" placeholder="Трейлър" /></td>
                     </tr>
                     <tr>
-                        <td><label for="movieDuration">Section </label></td>
-                        <td><input type='text' id="movieDuration" v-model="movieDuration" placeholder="section" /></td>
+                        <td><label for="movieGenre">Жанр </label></td>
+                        <td><input type='text' id="movieGenre" v-model="movieGenre" placeholder="Жанр" /></td>
                     </tr>
                     <tr>
-                        <td><label for="movieRelDate">Salary </label></td>
-                        <td><input type='text' id="movieRelDate" v-model="movieRelDate" placeholder="salary" /></td>
+                        <td><label for="movieDuration">Времетраене </label></td>
+                        <td><input type='text' id="movieDuration" v-model="movieDuration" placeholder="Времетраене" /></td>
                     </tr>
                     <tr>
-                        <td><label for="movieDirector">Salary </label></td>
-                        <td><input type='text' id="movieDirector" v-model="movieDirector" placeholder="salary" /></td>
+                        <td><label for="movieRelDate">Дата на излизане </label></td>
+                        <td><input type='text' id="movieRelDate" v-model="movieRelDate" placeholder="Дата на излизане" /></td>
                     </tr>
                     <tr>
-                        <td><label for="movieActors">Salary </label></td>
-                        <td><input type='text' id="movieActors" v-model="movieActors" placeholder="salary" /></td>
+                        <td><label for="movieDirector">Продуцент </label></td>
+                        <td><input type='text' id="movieDirector" v-model="movieDirector" placeholder="Продуцент" /></td>
                     </tr>
                     <tr>
-                        <td><label for="Description">Salary </label></td>
-                        <td><input type='text' id="Description" v-model="Description" placeholder="salary" /></td>
+                        <td><label for="movieActors">Актъори </label></td>
+                        <td><input type='text' id="movieActors" v-model="movieActors" placeholder="Актъори" /></td>
                     </tr>
                     <tr>
-                        <td><label for="movieCat">Salary </label></td>
-                        <td><input type='text' id="movieCat" v-model="movieCat" placeholder="salary" /></td>
+                        <td><label for="Description">Описание </label></td>
+                        <td><input type='text' id="Description" v-model="Description" placeholder="Описание" /></td>
                     </tr>
                     <tr>
-                        <td><label for="movieLan">Salary </label></td>
-                        <td><input type='text' id="movieLan" v-model="movieLan" placeholder="salary" /></td>
+                        <td><label for="movieCat">Категория </label></td>
+                        <td><input type='text' id="movieCat" v-model="movieCat" placeholder="Категория" /></td>
                     </tr>
                     <tr>
-                        <td><button type="button" class="btn btn-primary"
-                                v-on:click="updateRow(movieId,movieTitle, movieImg, movieGenre, movieDuration, 
-                        movieRelDate,movieDirector,movieActors,Description,movieCat,movieLan)">Update</button></td>
+                        <td><label for="movieLan">Език </label></td>
+                        <td><input type='text' id="movieLan" v-model="movieLan" placeholder="Език" /></td>
+                    </tr>
+                    <tr>
+                        <td><button type="button" class="btn btn-primary" v-on:click="updateRow(movieId, movieTitle, movieImg, movieTrailer, movieGenre, movieDuration,
+                        movieRelDate, movieDirector, movieActors, Description, movieCat, movieLan)">Update</button></td>
                         <td><button type="button" class="btn btn-danger" @click="showModal = false">Cancel</button></td>
                     </tr>
                 </table>
@@ -121,7 +144,7 @@
         <div class="modal-mask">
             <div class="delete">
                 <p>Are you sure you want to delete this item?</p>
-                <button type="button" class="btn btn-danger" v-on:click="removeRow(movieId,false)">Confirm</button>
+                <button type="button" class="btn btn-danger" v-on:click="removeRow(movieId, false)">Confirm</button>
                 <button type="button" class="btn btn-primary" v-on:click="showDelete = false">Cancel</button>
             </div>
         </div>
@@ -131,8 +154,8 @@
 
 <script>
 export default {
-   
-  data() {
+
+    data() {
         return {
             current: 1,
             pageSize: 2,
@@ -146,6 +169,7 @@ export default {
             movieId: Number,
             movieTitle: String,
             movieImg: String,
+            movieTrailer: String,
             movieGenre: String,
             movieDuration: Number,
             movieRelDate: Date,
@@ -156,15 +180,15 @@ export default {
             movieLan: String,
         }
     },
-    computed:{
+    computed: {
         indexStart() {
-          return (this.current - 1) * this.pageSize;
+            return (this.current - 1) * this.pageSize;
         },
         indexEnd() {
-          return this.indexStart + this.pageSize;
+            return this.indexStart + this.pageSize;
         },
         paginated() {
-          return this.cinema.slice(this.indexStart, this.indexEnd);
+            return this.cinema.slice(this.indexStart, this.indexEnd);
         }
     },
     watch: {
@@ -172,24 +196,24 @@ export default {
             this.getResults();
         }
     },
-    name: 'HelloVue',
     methods: {
         prev() {
             if ((this.current != 1))
                 this.current--;
         },
         next() {
-            if((this.current < Math.ceil(this.cinema.length / this.pageSize)))
+            if ((this.current < Math.ceil(this.cinema.length / this.pageSize)))
                 this.current++;
         },
-         getResults(page= 1) {
-         axios.get('/movies?page=' + page, { params: { keyword: this.keyword } })
+        getResults(page = 1) {
+            axios.get('/movies?page=' + page, { params: { keyword: this.keyword } })
                 .then(res => this.cinema = res.data)
         },
-        select: function (movieId, movieTitle, movieImg, movieGenre, movieDuration, movieRelDate,movieDirector,movieActors ,Description,movieCat,movieLan,showModal) {
+        select: function (movieId, movieTitle, movieImg,movieTrailer , movieGenre, movieDuration, movieRelDate, movieDirector, movieActors, Description, movieCat, movieLan, showModal) {
             this.movieId = movieId;
             this.movieTitle = movieTitle;
             this.movieImg = movieImg;
+            this.movieTrailer = movieTrailer;
             this.movieGenre = movieGenre;
             this.movieDuration = movieDuration;
             this.movieRelDate = movieRelDate;
@@ -200,8 +224,8 @@ export default {
             this.movieLan = movieLan;
             this.showModal = showModal;
         },
-        updateRow: function (movieId, movieTitle, movieImg, movieGenre, movieDuration, movieRelDate,movieDirector,movieActors ,Description,movieCat,movieLan) {
-            axios.post(`update/${movieId}`, { movieId, movieTitle, movieImg, movieGenre, movieDuration, movieRelDate,movieDirector,movieActors ,Description,movieCat,movieLan }).then(response => {
+        updateRow: function (movieId, movieTitle, movieImg, movieTrailer,movieGenre, movieDuration, movieRelDate, movieDirector, movieActors, Description, movieCat, movieLan) {
+            axios.post(`update/${movieId}`, { movieId, movieTitle, movieImg, movieTrailer, movieGenre, movieDuration, movieRelDate, movieDirector, movieActors, Description, movieCat, movieLan }).then(response => {
                 console.log(response);
                 this.show();
                 this.suc = "Record updated successfully";
@@ -212,15 +236,15 @@ export default {
                 });
         },
         show: function () {
-                axios.get('/movies').then(function (res) {
-                    this.cinema = res.data;
-                }.bind(this));
-            },
-        Delete: function(movieId,showDelete){
+            axios.get('/movies').then(function (res) {
+                this.cinema = res.data;
+            }.bind(this));
+        },
+        Delete: function (movieId, showDelete) {
             this.movieId = movieId;
             this.showDelete = showDelete;
         },
-        removeRow: function (movieId,showDelete) {
+        removeRow: function (movieId, showDelete) {
             console.log("Row Deleted")
             axios.delete(`/delete/${movieId}`).then(response => {
                 console.log(response.data);
@@ -233,13 +257,13 @@ export default {
         },
     },
     created: function () {
-            this.show();
-        }
+        this.show();
+    }
 }
 </script>
 
 <style scoped>
-    .pagination{
-        margin-bottom: 0;
-    }
+.pagination {
+    margin-bottom: 0;
+}
 </style>
