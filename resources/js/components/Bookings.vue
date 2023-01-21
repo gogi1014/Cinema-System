@@ -3,8 +3,8 @@
 <template >
     <h1>Списък с резервации</h1>
     <div class="search-wrapper">
-        <label>Търси:</label>
-        <input type="text" v-model="search" placeholder="Търси.." />
+        <label>Търси филм:</label>
+        <input type="text" v-model="keyword" placeholder="Търси филм.." />
     </div>
     <table class="table table-striped table-dark" id="my-table">
         <thead>
@@ -36,7 +36,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr v-for="item in filteredList" :key="item.id">
+            <tr v-for="item in cinema" :key="item.id">
                 <td>{{ item.id }}</td>
                 <td>{{ item.firstname }}</td>
                 <td>{{ item.lastname }}</td>
@@ -52,8 +52,6 @@
             </tr>
         </tbody>
     </table>
-
-
     <modal v-if="showModal" @close="showModal = false">
         <div class="modal-mask">
             <div class="edit">
@@ -112,7 +110,11 @@
 </template>
 
 <script>
+import Paginate from 'vuejs-paginate-next';
 export default {
+    components: {
+      paginate: Paginate,
+    },
     data() {
         return {
             perPage: 1,
@@ -135,6 +137,7 @@ export default {
     },
     name: 'HelloVue',
     methods: {
+        
         select: function (id, firstname, lastname, email, date,
             ticknum, time, MovieId, showModal) {
             this.id = id;

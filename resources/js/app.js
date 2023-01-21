@@ -9,18 +9,16 @@
 import { createApp } from 'vue';
 import example from './components/Movies.vue';
 import Bookings from './components/Bookings.vue';
-import MovieDate from './components/MovieDate.vue';
 import aa from './components/MovieDate.vue';
 
+const JwPagination  = require('jw-vue-pagination');
 
+let app = createApp({})
+app.component('example-component', example);
+app.component('bookings', Bookings);
+app.component('aa', aa);
+app.component('jw-pagination', JwPagination);
 
-
-
-
-let app=createApp({})
-app.component('example-component' , example);
-app.component('bookings' , Bookings);
-app.component('aa' , aa);
 
 
 

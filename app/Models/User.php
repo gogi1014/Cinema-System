@@ -26,6 +26,10 @@ class User extends Authenticatable
         'MovieId',
         'created_at',
     ];
+    public function searchMovies($input)
+    {
+        return Movie::where('firstname', 'LIKE', '%' . $input->keyword . '%')->get();
+    }
 
     public static function store($request)
     {
@@ -35,14 +39,15 @@ class User extends Authenticatable
         $user->lastname = $input["lastname"];
         $fullName = $user->firstname.' '.$user->lastname.' '.$user->created_at;
         $user->email = $input["email"];
-        $user->date = User::get('date');
+        $user->date = $input["datte"];
+        $user->time = $input["timee"];
         $user->ticknum = $input["ticknum"];
-        $user->time = $request->get('time');
         $user->MovieId = $input["MovieId"];
-        $reservation = 'Резервация за филма '.$user->MovieId.' на дата '.$user->date.' от '.$user->time.'Брой билети'.$user->ticknum;
+        $email = $input["email"];
+        $reservation = 'Резервация за филма '.$user->MovieId.' на дата '.$user->date.' от '.$user->time.' Брой билети: '.$user->ticknum;
         $data = array('name'=>$fullName,'comment' => $reservation);
-        Mail::send(['text'=>'mail'], $data, function($message) {
-            $message->to('gogi1014@gmail.com', 'Tutorials Point')->subject
+        Mail::send(['text'=>'mail'], $data, function($message) use ($email) {
+            $message->to($email, 'Tutorials Point')->subject
                 ('Резервиране на билет за кино');
             $message->from('killaonthehilla@gmail.com','Кино');
         });

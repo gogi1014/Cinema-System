@@ -17,7 +17,16 @@ class MovieDate extends Model
         'date',
         'time',
     ];
-
+    public static function store($request)
+    {
+        $input = $request->input();
+        $movie = new MovieDate();
+        $movie->MovieId = $input["MovieId"];
+        $movie->MovieName = $input["MovieName"];
+        $movie->time = $input["time"];
+        $movie->date = $input["date"];
+        $movie->save();
+    }
     public function upd($request)
     {
         $input = $request->input();

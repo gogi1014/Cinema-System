@@ -28,7 +28,8 @@ class MovieController extends Controller
         $moviedate = MovieDate::where('MovieId', $primaryKey)->get()->unique('date');
         $movietime = MovieDate::where('date', $request->date)->get();
         $reqDate = $request->date;
-        return view('content', ['movies' => $movies, 'moviedate' => $moviedate, 'movietime' => $movietime, 'reqDate' => $reqDate]);
+        $reqTime = $request->time;
+        return view('content', ['movies' => $movies, 'moviedate' => $moviedate, 'movietime' => $movietime, 'reqDate' => $reqDate, 'reqTime' => $reqTime]);
     }
     function addBooking(Request $request)
     {
@@ -118,6 +119,20 @@ class MovieController extends Controller
     public function getmoviesDateAdminView(Request $request)
     {
         return view('showMovieDate');
+    }
+    public function insertformDate()
+    {
+        return view('addMovieDate');
+    }
+    function addMovieDate(Request $request)
+    {
+        $this->validate($request, [
+            'MovieName' => 'required|string|min:3|max:255',
+            'time' => 'required|string|max:255',
+            'date' => 'required|date',
+        ]);
+        MovieDate::store($request);
+        return redirect('/moviesDateView')->with('success', 'Your form has been submitted.');
     }
     public function updateMoviesDate(Request $request)
     {

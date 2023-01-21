@@ -8,9 +8,6 @@
   </head>
 
   <body>
-
-
-
     <div id="app">
 
       <table border="1">
@@ -35,6 +32,32 @@
     <form action="/create" method="post">
       @csrf
       <div class="form-group">
+        <label for="dateSelected">Дата</label>
+        <select name="dateSelected" id="dateSelected" onchange="window.location.href=this.value;">
+          <option disabled selected value> -- Изберете дата -- </option>
+          @foreach ($moviedate as $date)
+          <option value="{{ url('content/'.$movies->movieId.'/'.$date->date) }}" @if($reqDate==$date->date) selected @endif>{{ $date->date}}</option>
+          @endforeach
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="timeSelected">Час</label>
+        <select name="timeSelected">
+          <option disabled selected value> -- Изберете час -- </option>
+          @foreach ($movietime as $time)
+          <option value="{{$time->time}}" @if($reqTime==$time->time) selected @endif>{{ $time->time}}</option>
+          @endforeach
+        </select>
+      </div>
+      @if(isset($date->date)&& (isset($time->time)))
+      <div class="form-group">
+        <input type="hidden" class="form-control" name="datte" id="datte" value = "{{$date->date}}">
+      </div>
+      <div class="form-group">
+        <input type="hidden" class="form-control" name="timee" id="timee" value = "{{$time->time}}">
+      </div>
+      @endif
+      <div class="form-group">
         <input type="hidden" class="form-control" name="MovieId" id="MovieId" value="{{ $movies->movieTitle }}">
       </div>
       <div class="form-group">
@@ -52,24 +75,6 @@
       <div class="form-group">
         <label for="ticknum">Брой билети</label>
         <input type="text" class="form-control" name="ticknum" id="ticknum" placeholder="Брой билети">
-      </div>
-      <div class="form-group">
-        <label for="dateSelected">Дата</label>
-        <select name="dateSelected" id="dateSelected" onchange="window.location.href=this.value;">
-          <option disabled selected value> -- Изберете дата -- </option>
-          @foreach ($moviedate as $date)
-          <option value="{{ url('content/'.$movies->movieId.'/'.$date->date) }}" @if($reqDate==$date->date) selected @endif>{{ $date->date}}</option>
-          @endforeach
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="timeSelected">Час</label>
-        <select name="timeSelected">
-          <option disabled selected value> -- Изберете час -- </option>
-          @foreach ($movietime as $time)
-          <option value="{{ $time->time }}">{{ $time->time}}</option>
-          @endforeach
-        </select>
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>

@@ -70,3 +70,8 @@ body {
     background-color: white;
     text-align: center;
 }
+a { cursor: pointer; }
+.pagination {
+   justify-content: center;
+   flex-wrap: wrap;
+}

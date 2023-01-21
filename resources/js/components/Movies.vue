@@ -71,12 +71,12 @@
         </tbody>
     </table>
     <!-- PAGINATION START -->
-    <div class="col-12 mt-4 pt-2">
-        <ul class="pagination justify-content-center mb-0">
-            <li class="page-item"><a class="page-link" @click="prev" aria-label="Previous">Prev</a></li>
-            <li class="page-item active"><a class="page-link" href="javascript:void(0)">{{ current }}</a></li>
-            <li class="page-item"><a class="page-link" @click="next()" aria-label="Next">Next</a></li>
-        </ul>
+    <div class="clearfix btn-group col-md-2 offset-md-5">
+        <button type="button" class="btn btn-sm btn-outline-secondary" @click="prev"> &lt&lt </button>
+        <button type="button" class="btn btn-sm btn-outline-secondary"
+            v-for="pageNumber  in pages" @click="current = pageNumber"> {{ pageNumber }}
+        </button>
+        <button type="button" class="btn btn-sm btn-outline-secondary" @click="next"> >> </button>
     </div><!--end col-->
     <!-- PAGINATION END -->
     <modal v-if="showModal" @close="showModal = false">
@@ -102,15 +102,18 @@
                     </tr>
                     <tr>
                         <td><label for="movieDuration">Времетраене </label></td>
-                        <td><input type='text' id="movieDuration" v-model="movieDuration" placeholder="Времетраене" /></td>
+                        <td><input type='text' id="movieDuration" v-model="movieDuration" placeholder="Времетраене" />
+                        </td>
                     </tr>
                     <tr>
                         <td><label for="movieRelDate">Дата на излизане </label></td>
-                        <td><input type='text' id="movieRelDate" v-model="movieRelDate" placeholder="Дата на излизане" /></td>
+                        <td><input type='text' id="movieRelDate" v-model="movieRelDate"
+                                placeholder="Дата на излизане" /></td>
                     </tr>
                     <tr>
                         <td><label for="movieDirector">Продуцент </label></td>
-                        <td><input type='text' id="movieDirector" v-model="movieDirector" placeholder="Продуцент" /></td>
+                        <td><input type='text' id="movieDirector" v-model="movieDirector" placeholder="Продуцент" />
+                        </td>
                     </tr>
                     <tr>
                         <td><label for="movieActors">Актъори </label></td>
@@ -130,7 +133,8 @@
                     </tr>
                     <tr>
                         <td><button type="button" class="btn btn-primary" v-on:click="updateRow(movieId, movieTitle, movieImg, movieTrailer, movieGenre, movieDuration,
-                        movieRelDate, movieDirector, movieActors, Description, movieCat, movieLan)">Update</button></td>
+                        movieRelDate, movieDirector, movieActors, Description, movieCat, movieLan)">Update</button>
+                        </td>
                         <td><button type="button" class="btn btn-danger" @click="showModal = false">Cancel</button></td>
                     </tr>
                 </table>
@@ -162,6 +166,7 @@ export default {
             keyword: null,
             search: '',
             cinema: [],
+            pages: [],
             suc: "",
             errO: " ",
             showModal: false,
@@ -182,16 +187,19 @@ export default {
     },
     computed: {
         indexStart() {
-            return (this.current - 1) * this.pageSize;
+            return (this.current * this.pageSize) - this.pageSize;
         },
         indexEnd() {
-            return this.indexStart + this.pageSize;
+            return this.current * this.pageSize;
         },
         paginated() {
             return this.cinema.slice(this.indexStart, this.indexEnd);
-        }
+        },
     },
     watch: {
+        cinema() {
+            this.setPages();
+        },
         keyword(after, before) {
             this.getResults();
         }
@@ -205,11 +213,17 @@ export default {
             if ((this.current < Math.ceil(this.cinema.length / this.pageSize)))
                 this.current++;
         },
-        getResults(page = 1) {
-            axios.get('/movies?page=' + page, { params: { keyword: this.keyword } })
+        setPages() {
+            let numberOfPages = Math.ceil(this.cinema.length / this.pageSize);
+            for (let index = 1; index <= numberOfPages; index++) {
+                this.pages.push(index);
+            }
+        },
+        getResults() {
+            axios.get('/movies', { params: { keyword: this.keyword } })
                 .then(res => this.cinema = res.data)
         },
-        select: function (movieId, movieTitle, movieImg,movieTrailer , movieGenre, movieDuration, movieRelDate, movieDirector, movieActors, Description, movieCat, movieLan, showModal) {
+        select: function (movieId, movieTitle, movieImg, movieTrailer, movieGenre, movieDuration, movieRelDate, movieDirector, movieActors, Description, movieCat, movieLan, showModal) {
             this.movieId = movieId;
             this.movieTitle = movieTitle;
             this.movieImg = movieImg;
@@ -224,7 +238,7 @@ export default {
             this.movieLan = movieLan;
             this.showModal = showModal;
         },
-        updateRow: function (movieId, movieTitle, movieImg, movieTrailer,movieGenre, movieDuration, movieRelDate, movieDirector, movieActors, Description, movieCat, movieLan) {
+        updateRow: function (movieId, movieTitle, movieImg, movieTrailer, movieGenre, movieDuration, movieRelDate, movieDirector, movieActors, Description, movieCat, movieLan) {
             axios.post(`update/${movieId}`, { movieId, movieTitle, movieImg, movieTrailer, movieGenre, movieDuration, movieRelDate, movieDirector, movieActors, Description, movieCat, movieLan }).then(response => {
                 console.log(response);
                 this.show();
@@ -258,12 +272,7 @@ export default {
     },
     created: function () {
         this.show();
-    }
+    },
 }
 </script>
 
-<style scoped>
-.pagination {
-    margin-bottom: 0;
-}
-</style>
