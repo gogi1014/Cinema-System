@@ -29,6 +29,7 @@
         <a href="{{ url('/addMovie') }}">Добавяне на филм</a>
         <a href="{{ url('/bookingsView') }}">Резервации</a>
         <a href="{{ url('/moviesDateView') }}">Дати и часове</a>
+        <a href="{{ url('/addMovieDate') }}">Добавяне на дати и часове</a>
     </div>
     <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Отвори меню</span>
 

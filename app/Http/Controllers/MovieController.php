@@ -120,18 +120,22 @@ class MovieController extends Controller
     {
         return view('showMovieDate');
     }
-    public function insertformDate()
+    public function insertformDate($primaryKey = null,Request $request)
     {
-        return view('addMovieDate');
+        $movies = Movie::get();
+        $movietitle = Movie::where('movieTitle', $primaryKey)->first();
+        $reqTitle = $request->MovieName;
+        return view('addMovieDate', ['movies' => $movies,'movietitle' => $movietitle,'reqTitle' => $reqTitle]);
     }
     function addMovieDate(Request $request)
     {
         $this->validate($request, [
-            'MovieName' => 'required|string|min:3|max:255',
+            'movieTitle' => 'required|string|min:3|max:255',
             'time' => 'required|string|max:255',
             'date' => 'required|date',
         ]);
         MovieDate::store($request);
+       
         return redirect('/moviesDateView')->with('success', 'Your form has been submitted.');
     }
     public function updateMoviesDate(Request $request)

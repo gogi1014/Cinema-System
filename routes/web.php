@@ -33,7 +33,7 @@ Route::post('/updateBookings/{id}', [MovieController::class, 'updateBookings']);
 Route::delete('/deleteBookings/{id}', [MovieController::class, 'deleteBookings']);
 Route::get('/moviesDate', [MovieController::class, 'getmoviesDateAdmin']);
 Route::get('/moviesDateView', [MovieController::class, 'getmoviesDateAdminView']);
-Route::get('/addMovieDate', [MovieController::class, 'insertformDate']);
+Route::get('/addMovieDate/{MovieName?}', [MovieController::class, 'insertformDate']);
 Route::post('/createMovieDate', [MovieController::class, 'addMovieDate']);
 Route::post('/updateMoviesDate/{id}', [MovieController::class, 'updateMoviesDate']);
 Route::delete('/deleteMoviesDate/{id}', [MovieController::class, 'deleteMoviesDate']);

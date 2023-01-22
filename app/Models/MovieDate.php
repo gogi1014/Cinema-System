@@ -22,7 +22,7 @@ class MovieDate extends Model
         $input = $request->input();
         $movie = new MovieDate();
         $movie->MovieId = $input["MovieId"];
-        $movie->MovieName = $input["MovieName"];
+        $movie->MovieName = $input["movieTitle"];
         $movie->time = $input["time"];
         $movie->date = $input["date"];
         $movie->save();
