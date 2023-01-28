@@ -17,10 +17,12 @@ class MovieController extends Controller
     {
         $movies = new Movie();
         $moviedate = MovieDate::get();
+        $moviesTrailer = Movie::get()->take(6);
+        $moviesAll = Movie::get()->unique('movieCat');
         $search = $request->input('search');
-        $input = array("search" => $search, "pagg" => 2);
+        $input = array("search" => $search, "pagg" => 3);
 
-        return view('fp', ['movies' => $movies->getMovies($input), 'moviedate' => $moviedate]);
+        return view('fp', ['movies' => $movies->getMovies($input),'moviesAll' => $moviesAll ,'moviedate' => $moviedate,'moviesTrailer'=>$moviesTrailer]);
     }
     public function ShowContent($primaryKey, Request $request)
     {

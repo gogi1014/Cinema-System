@@ -11,7 +11,7 @@ import example from './components/Movies.vue';
 import Bookings from './components/Bookings.vue';
 import aa from './components/MovieDate.vue';
 
-const JwPagination  = require('jw-vue-pagination');
+import JwPagination from 'jw-vue-pagination';
 
 let app = createApp({})
 app.component('example-component', example);

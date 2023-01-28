@@ -18577,6 +18577,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Movies_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/Movies.vue */ "./resources/js/components/Movies.vue");
 /* harmony import */ var _components_Bookings_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/Bookings.vue */ "./resources/js/components/Bookings.vue");
 /* harmony import */ var _components_MovieDate_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/MovieDate.vue */ "./resources/js/components/MovieDate.vue");
+/* harmony import */ var jw_vue_pagination__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! jw-vue-pagination */ "./node_modules/jw-vue-pagination/lib/JwPagination.js");
+/* harmony import */ var jw_vue_pagination__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(jw_vue_pagination__WEBPACK_IMPORTED_MODULE_4__);
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -18588,12 +18590,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var JwPagination = __webpack_require__(/*! jw-vue-pagination */ "./node_modules/jw-vue-pagination/lib/JwPagination.js");
+
 var app = (0,vue__WEBPACK_IMPORTED_MODULE_0__.createApp)({});
 app.component('example-component', _components_Movies_vue__WEBPACK_IMPORTED_MODULE_1__["default"]);
 app.component('bookings', _components_Bookings_vue__WEBPACK_IMPORTED_MODULE_2__["default"]);
 app.component('aa', _components_MovieDate_vue__WEBPACK_IMPORTED_MODULE_3__["default"]);
-app.component('jw-pagination', JwPagination);
+app.component('jw-pagination', (jw_vue_pagination__WEBPACK_IMPORTED_MODULE_4___default()));
 app.mount("#app");
 
 /***/ }),
@@ -19512,6 +19514,18 @@ var Paginate = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render]])
 /******/ 				}
 /******/ 			}
 /******/ 			return result;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
 /******/ 		};
 /******/ 	})();
 /******/ 	
