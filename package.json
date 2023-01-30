@@ -23,8 +23,6 @@
         "vue-loader": "^16.2.0"
     },
     "dependencies": {
-        "@appbaseio/reactivesearch-native": "^0.12.0",
-        "@appbaseio/reactivesearch-vue": "^1.33.6",
         "axios": "^1.2.2",
         "bootstrap-vue": "^2.21.2",
         "jw-vue-pagination": "^1.0.3",
