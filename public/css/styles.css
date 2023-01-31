@@ -178,8 +178,7 @@ a:active {
   font-weight: bold;
   font-size: 20px;
   border-radius: 0 3px 3px 0;
-  -moz-user-select: none;
-       user-select: none;
+  user-select: none;
   -webkit-user-select: none;
 }
 
