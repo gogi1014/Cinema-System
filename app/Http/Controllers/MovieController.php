@@ -124,11 +124,12 @@ class MovieController extends Controller
     }
     public function insertformDate($primaryKey = null,Request $request)
     {
-        $movies = Movie::get();
-        if (!$primaryKey) {
+        if ($primaryKey == null) {
             $primaryKey = 1;
         }
+        $movies = Movie::get();
         $movietitle = Movie::where('movieTitle', $primaryKey)->first();
+        
         $reqTitle = $request->MovieName;
         return view('addMovieDate', ['movies' => $movies,'movietitle' => $movietitle,'reqTitle' => $reqTitle]);
     }

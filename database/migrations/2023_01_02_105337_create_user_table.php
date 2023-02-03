@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('firstname');
             $table->string('lastname');
             $table->string('email');
-            $table->integer('number');
             $table->date('date');
             $table->string('ticknum');
             $table->string('time');
