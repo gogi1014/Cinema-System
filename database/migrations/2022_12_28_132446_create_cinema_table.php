@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('movieDirector');
             $table->string('movieActors');
             $table->string('Description');
+            $table->string('movieCat');
             $table->timestamps();
         });
     }
