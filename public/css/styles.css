@@ -115,17 +115,8 @@ a {
   border-bottom: 1px solid gainsboro;
 }
 
-a:link {
-  color: black;
-  background-color: transparent;
-  text-decoration: none;
-}
 
-a:visited {
-  color: black;
-  background-color: transparent;
-  text-decoration: none;
-}
+
 
 a:hover {
   color: red;
