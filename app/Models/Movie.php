@@ -21,7 +21,6 @@ class Movie extends Model
         'movieDirector',
         'movieActors',
         'Description',
-        'time',
         'movieLan',
         'movieCat'
     ];

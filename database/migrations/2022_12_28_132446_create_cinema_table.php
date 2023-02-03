@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id("movieId");
             $table->string('movieImg');
             $table->string('movieTitle');
+            $table->string('movieTrailer');
             $table->string('movieGenre');
             $table->integer('movieDuration');
             $table->date('movieRelDate');
@@ -24,6 +25,7 @@ return new class extends Migration
             $table->string('movieActors');
             $table->string('Description');
             $table->string('movieCat');
+            $table->string('movieLan');
             $table->timestamps();
         });
     }
