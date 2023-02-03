@@ -13,6 +13,10 @@
     <input type="text" class="form-control" name="movieTitle" id="movieTitle" placeholder="Заглавие">
   </div>
   <div class="form-group">
+    <label for="movieTrailer">Трейлър</label>
+    <input type="text" class="form-control" name="movieTrailer" id="movieTrailer" placeholder="Заглавие">
+  </div>
+  <div class="form-group">
     <label for="movieGenre">Жанр</label>
     <input type="text" class="form-control" name="movieGenre" id="movieGenre" placeholder="Жанр">
   </div>

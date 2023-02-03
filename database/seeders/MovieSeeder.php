@@ -22,6 +22,7 @@ class MovieSeeder extends Seeder
         DB::table('cinema')->insert([
             'movieImg' => Str::random(10),
             'movieTitle' => Str::random(10),
+            'movieTrailer' => Str::random(10),
             'movieGenre' => Str::random(10),
             'movieDirector' => Str::random(10),
             'movieDuration' => 100,

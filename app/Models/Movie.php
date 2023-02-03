@@ -48,6 +48,7 @@ class Movie extends Model
         $movie->movieImg = $input["movieImg"];
         $movie->movieTitle = $input["movieTitle"];
         $movie->movieGenre = $input["movieGenre"];
+        $movie->movieTrailer = $input["movieTrailer"];
         $movie->movieDuration = $input["movieDuration"];
         $movie->movieRelDate = $input["movieRelDate"];
         $movie->movieDirector = $input["movieDirector"];
