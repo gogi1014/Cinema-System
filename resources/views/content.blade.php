@@ -3,9 +3,9 @@
 @section('content')
 
 <div id="app">
-<h2>{{ $movies->movieTitle }}</h2>
+  <h2>{{ $movies->movieTitle }}</h2>
   <iframe width="100%" height="600" src="{{ $movies->movieTrailer }}" frameborder="0" allowfullscreen></iframe>
-  <table id="dAt" >
+  <table id="dAt">
     <tr>
       <th>Дата на премиера </th>
       <th>Времетраене </th>
@@ -19,7 +19,7 @@
   <div>
     {{ $movies->Description }}
   </div>
-  <table >
+  <table>
     <tr>
       <td>
         <table id="contentTable">
@@ -99,5 +99,15 @@
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+
+@if ($errors->any())
+<div class="alert alert-danger">
+  <ul>
+    @foreach ($errors->all() as $error)
+    <li>{{ $error }}</li>
+    @endforeach
+  </ul>
+</div>
+@endif
 
 @endsection
