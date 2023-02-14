@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\MovieController;
+use App\Http\Controllers\Admin\AdminAuthController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -39,3 +40,31 @@ Route::post('/updateMoviesDate/{id}', [MovieController::class, 'updateMoviesDate
 Route::delete('/deleteMoviesDate/{id}', [MovieController::class, 'deleteMoviesDate']);
 
 
+
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
+    Route::get('/login', [AdminAuthController::class, 'getLogin'])->name('adminLogin');
+    Route::post('/login', [AdminAuthController::class, 'postLogin'])->name('adminLoginPost');
+ 
+    Route::group(['middleware' => 'adminauth'], function () {
+        Route::get('/', function () {
+            return view('welcome');
+        })->name('adminDashboard');
+        Route::get('/addMovie', [AdminAuthController::class, 'insertform']);
+        Route::post('/createMovie', [AdminAuthController::class, 'addMovie']);
+        Route::get('/movies', [AdminAuthController::class, 'getMoviesAdmin']);
+        Route::get('/moviesView', [AdminAuthController::class, 'getMoviesAdminView']);
+        Route::get('/moviesViewSearch/', [AdminAuthController::class, 'getMoviesAdmin']);
+        Route::post('/update/{id}', [AdminAuthController::class, 'update']);
+        Route::delete('/delete/{id}', [AdminAuthController::class, 'delete']);
+        Route::get('/bookings', [AdminAuthController::class, 'getBookingAdmin']);
+        Route::get('/bookingsView', [AdminAuthController::class, 'getBookingAdminView']);
+        Route::post('/updateBookings/{id}', [AdminAuthController::class, 'updateBookings']);
+        Route::delete('/deleteBookings/{id}', [AdminAuthController::class, 'deleteBookings']);
+        Route::get('/moviesDate', [AdminAuthController::class, 'getmoviesDateAdmin']);
+        Route::get('/moviesDateView', [AdminAuthController::class, 'getmoviesDateAdminView']);
+        Route::get('/addMovieDate/{MovieName?}', [AdminAuthController::class, 'insertformDate']);
+        Route::post('/createMovieDate', [AdminAuthController::class, 'addMovieDate']);
+        Route::post('/updateMoviesDate/{id}', [AdminAuthController::class, 'updateMoviesDate']);
+        Route::delete('/deleteMoviesDate/{id}', [AdminAuthController::class, 'deleteMoviesDate']);
+    });
+});

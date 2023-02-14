@@ -25,11 +25,12 @@
 <body>
     <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="{{ url('/moviesView') }}">Филми</a>
-        <a href="{{ url('/addMovie') }}">Добавяне на филм</a>
-        <a href="{{ url('/bookingsView') }}">Резервации</a>
-        <a href="{{ url('/moviesDateView') }}">Дати и часове</a>
-        <a href="{{ url('/addMovieDate') }}">Добавяне на дати и часове</a>
+        <a href="{{ url('/admin') }}">Филми</a>
+        <a href="{{ url('/admin/moviesView') }}">Филми</a>
+        <a href="{{ url('/admin/addMovie') }}">Добавяне на филм</a>
+        <a href="{{ url('/admin/bookingsView') }}">Резервации</a>
+        <a href="{{ url('/admin/moviesDateView') }}">Дати и часове</a>
+        <a href="{{ url('/admin/addMovieDate') }}">Добавяне на дати и часове</a>
     </div>
     <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Отвори меню</span>
 
