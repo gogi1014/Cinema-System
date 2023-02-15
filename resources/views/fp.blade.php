@@ -83,7 +83,7 @@
 <div id="MovSoon">
   <h2>Очаквайте</h2>
   <div class="container">
-    @foreach ($moviesTrailer as $movie)
+    @foreach ($moviesSoon as $movie)
     <div class="mySlides">
       <img src="{{ $movie->movieImg }}" width="250px" height="315px">
       <div class="text">{{ $movie->movieTitle }}</div>

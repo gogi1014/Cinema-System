@@ -18,11 +18,13 @@ class MovieController extends Controller
         $movies = new Movie();
         $moviedate = MovieDate::get();
         $moviesTrailer = Movie::get()->take(6);
+        $moviesSoon = Movie::where('active', '0')->get();
         $moviesAll = Movie::get()->unique('movieCat');
         $search = $request->input('search');
         $input = array("search" => $search, "pagg" => 3);
 
-        return view('fp', ['movies' => $movies->getMovies($input),'moviesAll' => $moviesAll ,'moviedate' => $moviedate,'moviesTrailer'=>$moviesTrailer]);
+        return view('fp', ['movies' => $movies->getMovies($input),'moviesAll' => $moviesAll ,'moviedate' => $moviedate,'moviesTrailer'=>$moviesTrailer,
+        'moviesSoon'=>$moviesSoon]);
     }
     public function ShowContent($primaryKey, Request $request)
     {

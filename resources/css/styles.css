@@ -1,5 +1,6 @@
 body {
   font-family: "Lato", sans-serif;
+  color: #d1d1d1;
 }
 
 .sidenav {
@@ -90,11 +91,11 @@ a {
 .header {
   padding: 60px;
   text-align: center;
-  background-image: url('http://camposolonline.com/wp-content/uploads/2018/01/cinema-header.jpg');
+  background-image: url('https://pbs.twimg.com/media/DGArItcW0AAZA-e.jpg');
   color: white;
   font-size: 30px;
-  background-size: cover;
-
+  height: 50%;
+  filter: grayscale(1) blur(8px);
 }
 
 .grid {
@@ -203,4 +204,60 @@ a:active {
 #contentTable {
   border-spacing: 0 1em;
   border-collapse: separate;
+}
+
+#title {
+  width:50%;
+  margin-top: 50;
+  margin-bottom: 50;
+}
+
+#background{
+  background-image: url("https://st2.depositphotos.com/2800301/11048/v/600/depositphotos_110481368-stock-illustration-cinema-icons-set-cinema-pattern.jpg");
+}
+
+.container{
+  background-color: #2B2B2B ;
+}
+.headerTitle{
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+  color: white;
+  font-weight: bold;
+  border: 3px solid #f1f1f1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 80%;
+  padding: 20px;
+  text-align: center;
+}
+
+.hero {
+  display: flex;
+  justify-content: center !important;
+  align-items: center;
+  background: #10151e;
+  width: 100%;
+}
+
+.image{
+  display: flex;
+  margin: 0 5%;
+  height: 100%;
+  width: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.section{
+  flex: 1;
+}
+
+.image h1{
+  color:white;
+  padding-top:5%;
+  font-size: 30px;
 }

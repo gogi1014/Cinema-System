@@ -48,6 +48,10 @@
     <label for="movieCat">Категория</label>
     <input type="text" class="form-control" name="movieCat" id="movieCat" placeholder="Категория">
   </div>
+  <div class="form-group">
+    <label for="active">Активен</label>
+    <input type="number" class="form-control" name="active" id="active" placeholder="Активен">
+  </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 

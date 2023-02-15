@@ -25,3 +25,15 @@ function showSlides() {
     slides[slideIndex-1].style.display = "block";  
     setTimeout(showSlides, 5000); // Change image every 2 seconds
 }
+
+function createBooking() {
+  var x = document.getElementById("createBooking");
+  x.addEventListener('click', function handleClick() {
+    x.textContent = 'Button clicked';
+  });
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}

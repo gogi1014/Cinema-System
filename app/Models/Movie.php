@@ -22,7 +22,8 @@ class Movie extends Model
         'movieActors',
         'Description',
         'movieLan',
-        'movieCat'
+        'movieCat',
+        'active'
     ];
 
     public function searchMovies($input)
@@ -56,6 +57,7 @@ class Movie extends Model
         $movie->Description = $input["Description"];
         $movie->movieCat = $input["movieCat"];
         $movie->movieLan = $input["movieLan"];
+        $movie->active = $input["active"];
         $movie->save();
     }
     public function upd($request)
@@ -73,6 +75,8 @@ class Movie extends Model
         $movie->Description = $input["Description"];
         $movie->movieCat = $input["movieCat"];
         $movie->movieLan = $input["movieLan"];
+        $movie->active = $input["active"];
         $movie->update();
     }
+    
 }

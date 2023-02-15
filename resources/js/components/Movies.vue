@@ -61,11 +61,12 @@
                 <td>{{ item.Description }}</td>
                 <td>{{ item.movieCat }}</td>
                 <td>{{ item.movieLan }}</td>
+                <td>{{ item.active }}</td>
                 <td><button type="button" class="btn btn-danger" v-on:click="Delete(item.movieId, true)">Delete</button>
                 </td>
                 <td><button id="show-modal" class="btn btn-primary"
                         @click="select(item.movieId, item.movieTitle, item.movieImg, item.movieTrailer, item.movieGenre, item.movieDuration,
-                        item.movieRelDate, item.movieDirector, item.movieActors, item.Description, item.movieCat, item.movieLan, true)">Edit</button>
+                        item.movieRelDate, item.movieDirector, item.movieActors, item.Description, item.movieCat, item.movieLan,item.active, true)">Edit</button>
                 </td>
             </tr>
         </tbody>
@@ -132,8 +133,12 @@
                         <td><input type='text' id="movieLan" v-model="movieLan" placeholder="Език" /></td>
                     </tr>
                     <tr>
+                        <td><label for="active">Активен </label></td>
+                        <td><input type='number' id="active" v-model="active" placeholder="Активен" /></td>
+                    </tr>
+                    <tr>
                         <td><button type="button" class="btn btn-primary" v-on:click="updateRow(movieId, movieTitle, movieImg, movieTrailer, movieGenre, movieDuration,
-                        movieRelDate, movieDirector, movieActors, Description, movieCat, movieLan)">Update</button>
+                        movieRelDate, movieDirector, movieActors, Description, movieCat, movieLan,active)">Update</button>
                         </td>
                         <td><button type="button" class="btn btn-danger" @click="showModal = false">Cancel</button></td>
                     </tr>
@@ -183,6 +188,7 @@ export default {
             Description: String,
             movieCat: String,
             movieLan: String,
+            active: Number,
         }
     },
     computed: {
@@ -223,7 +229,7 @@ export default {
             axios.get('/movies', { params: { keyword: this.keyword } })
                 .then(res => this.cinema = res.data)
         },
-        select: function (movieId, movieTitle, movieImg, movieTrailer, movieGenre, movieDuration, movieRelDate, movieDirector, movieActors, Description, movieCat, movieLan, showModal) {
+        select: function (movieId, movieTitle, movieImg, movieTrailer, movieGenre, movieDuration, movieRelDate, movieDirector, movieActors, Description, movieCat, movieLan,active, showModal) {
             this.movieId = movieId;
             this.movieTitle = movieTitle;
             this.movieImg = movieImg;
@@ -236,10 +242,11 @@ export default {
             this.Description = Description;
             this.movieCat = movieCat;
             this.movieLan = movieLan;
+            this.active = active;
             this.showModal = showModal;
         },
-        updateRow: function (movieId, movieTitle, movieImg, movieTrailer, movieGenre, movieDuration, movieRelDate, movieDirector, movieActors, Description, movieCat, movieLan) {
-            axios.post(`update/${movieId}`, { movieId, movieTitle, movieImg, movieTrailer, movieGenre, movieDuration, movieRelDate, movieDirector, movieActors, Description, movieCat, movieLan }).then(response => {
+        updateRow: function (movieId, movieTitle, movieImg, movieTrailer, movieGenre, movieDuration, movieRelDate, movieDirector, movieActors, Description, movieCat, movieLan,active) {
+            axios.post(`update/${movieId}`, { movieId, movieTitle, movieImg, movieTrailer, movieGenre, movieDuration, movieRelDate, movieDirector, movieActors, Description, movieCat, movieLan,active }).then(response => {
                 console.log(response);
                 this.show();
                 this.suc = "Record updated successfully";

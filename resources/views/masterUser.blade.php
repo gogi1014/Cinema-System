@@ -27,16 +27,31 @@
 
     <body>
 
-        <div class="header">
-            <h1>Уеб информационна система за кино</h1>
+        <div id="background">
+
+            <div class="header">
+                <div class="headerTitle">
+                    <h1>Уеб информационна система за кино</h1>
+                </div>
+            </div>
+
+            <div class="hero">
+                <div class="image">
+                    <div class="section">
+                        <h1>@yield('title')</h1>
+                    </div>
+                    <div class="section">
+                    </div>
+                </div>
+            </div>
+
+            @yield('contentHeader')
+
+            <div class="container">
+                @yield('content')
+            </div>
+
         </div>
-
-       
-
-        <div class="container">
-            @yield('content')
-        </div>
-
     </body>
 
     </html>

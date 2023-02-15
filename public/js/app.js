@@ -17800,7 +17800,8 @@ __webpack_require__.r(__webpack_exports__);
       movieActors: String,
       Description: String,
       movieCat: String,
-      movieLan: String
+      movieLan: String,
+      active: Number
     };
   },
   computed: {
@@ -17845,7 +17846,7 @@ __webpack_require__.r(__webpack_exports__);
         return _this.cinema = res.data;
       });
     },
-    select: function select(movieId, movieTitle, movieImg, movieTrailer, movieGenre, movieDuration, movieRelDate, movieDirector, movieActors, Description, movieCat, movieLan, showModal) {
+    select: function select(movieId, movieTitle, movieImg, movieTrailer, movieGenre, movieDuration, movieRelDate, movieDirector, movieActors, Description, movieCat, movieLan, active, showModal) {
       this.movieId = movieId;
       this.movieTitle = movieTitle;
       this.movieImg = movieImg;
@@ -17858,9 +17859,10 @@ __webpack_require__.r(__webpack_exports__);
       this.Description = Description;
       this.movieCat = movieCat;
       this.movieLan = movieLan;
+      this.active = active;
       this.showModal = showModal;
     },
-    updateRow: function updateRow(movieId, movieTitle, movieImg, movieTrailer, movieGenre, movieDuration, movieRelDate, movieDirector, movieActors, Description, movieCat, movieLan) {
+    updateRow: function updateRow(movieId, movieTitle, movieImg, movieTrailer, movieGenre, movieDuration, movieRelDate, movieDirector, movieActors, Description, movieCat, movieLan, active) {
       var _this2 = this;
       axios.post("update/".concat(movieId), {
         movieId: movieId,
@@ -17874,7 +17876,8 @@ __webpack_require__.r(__webpack_exports__);
         movieActors: movieActors,
         Description: Description,
         movieCat: movieCat,
-        movieLan: movieLan
+        movieLan: movieLan,
+        active: active
       }).then(function (response) {
         console.log(response);
         _this2.show();
@@ -18383,16 +18386,19 @@ var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
   "for": "movieLan"
 }, "Език ")], -1 /* HOISTED */);
-var _hoisted_25 = {
+var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "active"
+}, "Активен ")], -1 /* HOISTED */);
+var _hoisted_26 = {
   "class": "Err"
 };
-var _hoisted_26 = {
+var _hoisted_27 = {
   "class": "modal-mask"
 };
-var _hoisted_27 = {
+var _hoisted_28 = {
   "class": "delete"
 };
-var _hoisted_28 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "Are you sure you want to delete this item?", -1 /* HOISTED */);
+var _hoisted_29 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "Are you sure you want to delete this item?", -1 /* HOISTED */);
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_modal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("modal");
@@ -18405,7 +18411,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.keyword]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_4, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($options.paginated, function (item) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("tr", {
       key: item.movieId
-    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.movieId), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.movieTitle), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.movieImg), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.movieTrailer), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.movieGenre), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.movieDuration), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.movieRelDate), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.movieDirector), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.movieActors), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.Description), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.movieCat), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.movieLan), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.movieId), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.movieTitle), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.movieImg), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.movieTrailer), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.movieGenre), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.movieDuration), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.movieRelDate), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.movieDirector), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.movieActors), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.Description), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.movieCat), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.movieLan), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.active), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
       type: "button",
       "class": "btn btn-danger",
       onClick: function onClick($event) {
@@ -18415,7 +18421,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       id: "show-modal",
       "class": "btn btn-primary",
       onClick: function onClick($event) {
-        return $options.select(item.movieId, item.movieTitle, item.movieImg, item.movieTrailer, item.movieGenre, item.movieDuration, item.movieRelDate, item.movieDirector, item.movieActors, item.Description, item.movieCat, item.movieLan, true);
+        return $options.select(item.movieId, item.movieTitle, item.movieImg, item.movieTrailer, item.movieGenre, item.movieDuration, item.movieRelDate, item.movieDirector, item.movieActors, item.Description, item.movieCat, item.movieLan, item.active, true);
       }
     }, "Edit", 8 /* PROPS */, _hoisted_7)])]);
   }), 128 /* KEYED_FRAGMENT */))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" PAGINATION START "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
@@ -18440,7 +18446,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, " >> ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("end col"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" PAGINATION END "), $data.showModal ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_modal, {
     key: 0,
-    onClose: _cache[16] || (_cache[16] = function ($event) {
+    onClose: _cache[17] || (_cache[17] = function ($event) {
       return $data.showModal = false;
     })
   }, {
@@ -18522,39 +18528,46 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           return $data.movieLan = $event;
         }),
         placeholder: "Език"
-      }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.movieLan]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+      }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.movieLan]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [_hoisted_25, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+        type: "number",
+        id: "active",
+        "onUpdate:modelValue": _cache[14] || (_cache[14] = function ($event) {
+          return $data.active = $event;
+        }),
+        placeholder: "Активен"
+      }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.active]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         type: "button",
         "class": "btn btn-primary",
-        onClick: _cache[14] || (_cache[14] = function ($event) {
-          return $options.updateRow($data.movieId, $data.movieTitle, $data.movieImg, $data.movieTrailer, $data.movieGenre, $data.movieDuration, $data.movieRelDate, $data.movieDirector, $data.movieActors, $data.Description, $data.movieCat, $data.movieLan);
+        onClick: _cache[15] || (_cache[15] = function ($event) {
+          return $options.updateRow($data.movieId, $data.movieTitle, $data.movieImg, $data.movieTrailer, $data.movieGenre, $data.movieDuration, $data.movieRelDate, $data.movieDirector, $data.movieActors, $data.Description, $data.movieCat, $data.movieLan, $data.active);
         })
       }, "Update")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         type: "button",
         "class": "btn btn-danger",
-        onClick: _cache[15] || (_cache[15] = function ($event) {
+        onClick: _cache[16] || (_cache[16] = function ($event) {
           return $data.showModal = false;
         })
-      }, "Cancel")])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_25, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.errO), 1 /* TEXT */)])])];
+      }, "Cancel")])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_26, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.errO), 1 /* TEXT */)])])];
     }),
 
     _: 1 /* STABLE */
   })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.showDelete ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_modal, {
     key: 1,
-    onClose: _cache[19] || (_cache[19] = function ($event) {
+    onClose: _cache[20] || (_cache[20] = function ($event) {
       return $data.showDelete = false;
     })
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_26, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_27, [_hoisted_28, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_27, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_28, [_hoisted_29, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         type: "button",
         "class": "btn btn-danger",
-        onClick: _cache[17] || (_cache[17] = function ($event) {
+        onClick: _cache[18] || (_cache[18] = function ($event) {
           return $options.removeRow($data.movieId, false);
         })
       }, "Confirm"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         type: "button",
         "class": "btn btn-primary",
-        onClick: _cache[18] || (_cache[18] = function ($event) {
+        onClick: _cache[19] || (_cache[19] = function ($event) {
           return $data.showDelete = false;
         })
       }, "Cancel")])])];
