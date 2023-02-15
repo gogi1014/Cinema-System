@@ -87,7 +87,7 @@ class AdminAuthController extends Controller
             'movieDuration' => 'required|int',
             'movieDirector' => 'required|string|max:255',
             'movieActors' => 'required|string|max:255',
-            'Description' => 'required|string|max:255',
+            'Description' => 'required|string',
             'movieCat' => 'required|string|max:255',
             'movieLan' => 'required|string|max:255',
         ]);
