@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('Description');
             $table->string('movieCat');
             $table->string('movieLan');
+            $table->boolean('active');
             $table->timestamps();
         });
     }
