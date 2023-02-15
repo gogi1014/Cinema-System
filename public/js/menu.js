@@ -37,3 +37,16 @@ function createBooking() {
     x.style.display = "none";
   }
 }
+
+$(document).ready(function() {
+
+  str = $('div.hero').text();
+  
+  if($.trim(str) === "") {
+  
+  $('div.hero').hide();
+  
+  }
+  
+  });
+  

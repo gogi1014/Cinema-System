@@ -240,7 +240,6 @@ a:active {
   display: flex;
   justify-content: center !important;
   align-items: center;
-  background: #10151e;
   width: 100%;
 }
 
@@ -262,3 +261,4 @@ a:active {
   padding-top:5%;
   font-size: 30px;
 }
+

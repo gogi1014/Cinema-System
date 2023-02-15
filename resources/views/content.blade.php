@@ -1,7 +1,7 @@
 @extends('masterUser')
 
 @section('contentHeader')
-<div class="hero">
+<div class="hero" style="  background: #10151e;">
   <div class="image" >
     <div class="section">
       <h1>{{ $movies->movieTitle }}</h1>
@@ -43,7 +43,7 @@
             </table>
     </div>
     <div class="section" style="background:linear-gradient(to right, rgba(16, 21, 30, 1),rgba(16, 21, 30, 0.95), rgba(16, 21, 30, 0.25), rgba(16, 21, 30, 0.2)),url({{$movies->movieImg}});
-                background-repeat:no-repeat;display: flex;margin: 0 5%;width:100%; float: right">
+                background-repeat:no-repeat;display: flex;width:100%; float: right">
     </div>
   </div>
 </div>
@@ -121,3 +121,8 @@
 @endif
 
 @endsection
+
+<script>
+$('div.section:empty').hide();
+
+</script>
