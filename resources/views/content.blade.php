@@ -1,8 +1,8 @@
 @extends('masterUser')
 
 @section('contentHeader')
-<div class="hero" style="  background: #10151e;">
-  <div class="image" >
+<div class="hero" style="background: #10151e;">
+  <div class="image">
     <div class="section">
       <h1>{{ $movies->movieTitle }}</h1>
       <table id="dAt">
@@ -19,31 +19,31 @@
       <div>
         {{ $movies->Description }}
       </div>
-            <table id="contentTable">
-              <tr>
-                <th>Жанр: </th>
-                <td>{{$movies->movieGenre}}</td>
-              </tr>
-              <tr>
-                <th>Актьори: </th>
-                <td>{{$movies->movieActors}}</td>
-              </tr>
-              <tr>
-                <th>Режисьор: </th>
-                <td>{{$movies->movieDirector}}</td>
-              </tr>
-              <tr>
-                <th>Оригинално аудио: </th>
-                <td>{{$movies->movieLan}}</td>
-              </tr>
-              <tr>
-                <th>Категория: </th>
-                <td>{{$movies->movieCat}}</td>
-              </tr>
-            </table>
+      <table id="contentTable">
+        <tr>
+          <th>Жанр: </th>
+          <td>{{$movies->movieGenre}}</td>
+        </tr>
+        <tr>
+          <th>Актьори: </th>
+          <td>{{$movies->movieActors}}</td>
+        </tr>
+        <tr>
+          <th>Режисьор: </th>
+          <td>{{$movies->movieDirector}}</td>
+        </tr>
+        <tr>
+          <th>Оригинално аудио: </th>
+          <td>{{$movies->movieLan}}</td>
+        </tr>
+        <tr>
+          <th>Категория: </th>
+          <td>{{$movies->movieCat}}</td>
+        </tr>
+      </table>
     </div>
     <div class="section" style="background:linear-gradient(to right, rgba(16, 21, 30, 1),rgba(16, 21, 30, 0.95), rgba(16, 21, 30, 0.25), rgba(16, 21, 30, 0.2)),url({{$movies->movieImg}});
-                background-repeat:no-repeat;display: flex;width:100%; float: right">
+                background-repeat:no-repeat;display: flex; float: right">
     </div>
   </div>
 </div>
@@ -123,6 +123,5 @@
 @endsection
 
 <script>
-$('div.section:empty').hide();
-
+  $('div.section:empty').hide();
 </script>

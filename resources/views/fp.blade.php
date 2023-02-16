@@ -1,9 +1,8 @@
 @extends('masterUser')
 
 @section('content')
-
 <form action="{{ url('/') }}" method="GET">
-  <input type="text" name="search" required />
+  <input type="text"  name="search" required />
   <button type="submit">Search</button>
 </form>
 

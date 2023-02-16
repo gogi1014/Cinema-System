@@ -10,6 +10,9 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css">
         <script src="https://unpkg.com/laravel-vue-pagination@2.3.1/dist/laravel-vue-pagination.umd.min.js"></script>
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+        <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/vue"></script>
         <script src="https://unpkg.com/vue@3"></script>
@@ -34,6 +37,14 @@
                 <div class="headerTitle">
                     <h1>Уеб информационна система за кино</h1>
                 </div>
+                <div class="headerSearch">
+                    <form action="{{ url('/') }}" method="GET">
+                        <input type="text" name="search" class="searchTerm" required />
+                        <button type="submit" class="searchButton">
+                            <i class="fa fa-search" class="searchButton"></i></button>
+                    </form>
+                </div>
+
             </div>
 
             <div class="hero">
