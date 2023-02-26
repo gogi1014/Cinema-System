@@ -21,7 +21,8 @@ class MovieController extends Controller
         $moviesSoon = Movie::where('active', '0')->get();
         $moviesAll = Movie::get()->unique('movieCat');
         $search = $request->input('search');
-        $input = array("search" => $search, "pagg" => 3);
+        $category = $request->input('category');
+        $input = array("search" => $search,"category" => $category, "pagg" => 3);
 
         return view('fp', ['movies' => $movies->getMovies($input),'moviesAll' => $moviesAll ,'moviedate' => $moviedate,'moviesTrailer'=>$moviesTrailer,
         'moviesSoon'=>$moviesSoon]);

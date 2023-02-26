@@ -6,7 +6,8 @@
         <label>Търси филм:</label>
         <input type="text" v-model="keyword" placeholder="Търси филм.." />
     </div>
-    <table class="table table-striped table-dark">
+    <div class="container">
+    <table style="display: block; height: 1020px; overflow: auto;" class="table table-striped table-dark" >
         <thead>
             <tr>
                 <th class="text-left">
@@ -14,9 +15,6 @@
                 </th>
                 <th class="text-left">
                     Заглавие
-                </th>
-                <th class="text-left">
-                    Постер
                 </th>
                 <th class="text-left">
                     Трейлър
@@ -51,14 +49,13 @@
             <tr v-for="item in paginated" :key="item.movieId">
                 <td>{{ item.movieId }}</td>
                 <td>{{ item.movieTitle }}</td>
-                <td>{{ item.movieImg }}</td>
                 <td>{{ item.movieTrailer }}</td>
                 <td>{{ item.movieGenre }}</td>
                 <td>{{ item.movieDuration }}</td>
                 <td>{{ item.movieRelDate }}</td>
                 <td>{{ item.movieDirector }}</td>
-                <td>{{ item.movieActors }}</td>
-                <td>{{ item.Description }}</td>
+                <td><div style="height:125px; overflow:hidden">{{ item.movieActors }}</div></td>
+                <td><div style="height:125px; overflow:auto">{{ item.Description }}</div></td>
                 <td>{{ item.movieCat }}</td>
                 <td>{{ item.movieLan }}</td>
                 <td>{{ item.active }}</td>
@@ -71,6 +68,7 @@
             </tr>
         </tbody>
     </table>
+</div>
     <!-- PAGINATION START -->
     <div class="clearfix btn-group col-md-2 offset-md-5">
         <button type="button" class="btn btn-sm btn-outline-secondary" @click="prev"> &lt&lt </button>
@@ -167,7 +165,7 @@ export default {
     data() {
         return {
             current: 1,
-            pageSize: 2,
+            pageSize: 5,
             keyword: null,
             search: '',
             cinema: [],

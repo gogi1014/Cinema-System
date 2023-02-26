@@ -10,16 +10,18 @@
 {{ $movieDate->date }}
 @endforeach
 
-
+<form name="comboboxFilter" action="{{ url('/') }}" method="GET">
 <div class="form-group">
-  <label for="timeSelected">Категория</label>
-  <select name="timeSelected">
+  <label for="category">Категория</label>
+  <select name="category" onChange="comboboxFilter.submit();">
     <option disabled selected value> -- Изберете категория -- </option>
     @foreach ($moviesAll as $movie)
-    <option value="{{ url('/') }}">{{$movie->movieCat}}</option>
+    <option value="{{$movie->movieCat}}">{{$movie->movieCat}}</option>
     @endforeach
   </select>
 </div>
+</form>
+
 
 <div id="app">
   <table id="tableContent">
@@ -81,16 +83,42 @@
 </div>
 <div id="MovSoon">
   <h2>Очаквайте</h2>
-  <div class="container">
+  <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img height="600px" src="{{ $movie->movieImg }}" class="center" alt="...">
+    </div>
     @foreach ($moviesSoon as $movie)
-    <div class="mySlides">
-      <img src="{{ $movie->movieImg }}" width="250px" height="315px">
-      <div class="text">{{ $movie->movieTitle }}</div>
+    <div class="carousel-item ">
+      <img height="600px" src="{{ $movie->movieImg }}" class="center" alt="..." >
+      {{ $movie->movieTitle }}
     </div>
     @endforeach
-    <!-- Next and previous buttons -->
-    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-    <a class="next" onclick="plusSlides(1)">&#10095;</a>
-  </div>
 </div>
+<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+
+<div class="owl-carousel owl-theme mt-5">
+        <div class="item"><h4>1</h4></div>
+        <div class="item"><h4>2</h4></div>
+        <div class="item"><h4>3</h4></div>
+        <div class="item"><h4>4</h4></div>
+        <div class="item"><h4>5</h4></div>
+        <div class="item"><h4>6</h4></div>
+        <div class="item"><h4>7</h4></div>
+        <div class="item"><h4>8</h4></div>
+        <div class="item"><h4>9</h4></div>
+        <div class="item"><h4>10</h4></div>
+        <div class="item"><h4>11</h4></div>
+        <div class="item"><h4>12</h4></div>
+</div>
+
 @endsection
+
