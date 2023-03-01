@@ -20,21 +20,26 @@ class MovieController extends Controller
         $moviesTrailer = Movie::get()->take(6);
         $moviesSoon = Movie::where('active', '0')->get();
         $moviesAll = Movie::get()->unique('movieCat');
+        $moviesGenre = Movie::get()->unique('movieGenre');
         $search = $request->input('search');
         $category = $request->input('category');
-        $input = array("search" => $search,"category" => $category, "pagg" => 3);
-
-        return view('fp', ['movies' => $movies->getMovies($input),'moviesAll' => $moviesAll ,'moviedate' => $moviedate,'moviesTrailer'=>$moviesTrailer,
-        'moviesSoon'=>$moviesSoon]);
+        $genres = $request->input('genres');
+        $input = array("search" => $search,"category" => $category,"genres" => $genres, "pagg" => 3);
+        return view('fp', ['movies' => $movies->getMovies($input),'moviesAll' => $moviesAll ,'moviesGenre' => $moviesGenre ,'moviedate' => $moviedate,
+        'moviesTrailer'=>$moviesTrailer,'moviesSoon'=>$moviesSoon]);
+        return view('content', ['movies' => $movies->getMovies($input),'moviesAll' => $moviesAll]);
     }
     public function ShowContent($primaryKey, Request $request)
     {
         $movies = Movie::find($primaryKey);
         $moviedate = MovieDate::where('MovieId', $primaryKey)->get()->unique('date');
         $movietime = MovieDate::where('date', $request->date)->get();
+        $moviesAll = Movie::get()->unique('movieCat');
+        $moviesGenre = Movie::get()->unique('movieGenre');
         $reqDate = $request->date;
         $reqTime = $request->time;
-        return view('content', ['movies' => $movies, 'moviedate' => $moviedate, 'movietime' => $movietime, 'reqDate' => $reqDate, 'reqTime' => $reqTime]);
+        return view('content', ['movies' => $movies, 'moviedate' => $moviedate,'moviesAll' => $moviesAll , 'movietime' => $movietime, 
+        'moviesGenre' => $moviesGenre ,'reqDate' => $reqDate, 'reqTime' => $reqTime]);
     }
     function addBooking(Request $request)
     {

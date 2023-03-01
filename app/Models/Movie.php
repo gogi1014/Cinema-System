@@ -40,6 +40,9 @@ class Movie extends Model
         if (isset($input['category'])) {
             $search->where('movieCat', 'LIKE', $input["category"]);
         }
+        if (isset($input['genres'])) {
+            $search->where('movieGenre', 'LIKE', "%" . $input["genres"] . "%");
+        }
         if (isset($input['pagg'])) {
             return $search->paginate($input['pagg']);
         }

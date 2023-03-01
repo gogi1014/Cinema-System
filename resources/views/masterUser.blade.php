@@ -23,11 +23,11 @@
         <script src="https://unpkg.com/vuesax@4.0.1-alpha.16/dist/vuesax.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-        <script src= https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css></script>
-        <script src= https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js></script>
+        <script src=https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css></script>
+        <script src=https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.green.min.css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.green.min.css" />
         <script defer src="plugins/OwlCarousel2.3/owl.carousel.min.js"></script>
         <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
         <script type="text/javascript" src="{{ URL::asset('js/menu.js') }}"></script>
@@ -49,8 +49,27 @@
                         <button type="submit" class="searchButton">
                             <i class="fa fa-search" class="searchButton"></i></button>
                     </form>
+                    <form name="comboboxFilter" action="{{ url('/') }}" method="GET">
+                    <div class="form-group">
+                        <select name="category" onChange="comboboxFilter.submit();">
+                            <option disabled selected value> -- Изберете категория -- </option>
+                            @foreach ($moviesAll as $movie)
+                            <option value="{{$movie->movieCat}}">{{$movie->movieCat}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </form>
+                <form name="genresFilter" action="{{ url('/') }}" method="GET">
+                    <div class="form-group">
+                        <select name="genres" onChange="genresFilter.submit();">
+                            <option disabled selected value> -- Изберете жанр -- </option>
+                            @foreach ($moviesGenre as $moviesGenres)
+                            <option value="{{$moviesGenres->movieGenre}}">{{$moviesGenres->movieGenre}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </form>
                 </div>
-
             </div>
 
             <div class="hero">
