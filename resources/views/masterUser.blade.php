@@ -63,9 +63,10 @@
                     <div class="form-group">
                         <select name="genres" onChange="genresFilter.submit();">
                             <option disabled selected value> -- Изберете жанр -- </option>
-                            @foreach ($moviesGenre as $moviesGenres)
+                            @foreach ($moviesGenre  as $moviesGenres)
                             <option value="{{$moviesGenres->movieGenre}}">{{$moviesGenres->movieGenre}}</option>
                             @endforeach
+                            
                         </select>
                     </div>
                 </form>
