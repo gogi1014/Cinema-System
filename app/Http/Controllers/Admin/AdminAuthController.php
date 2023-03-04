@@ -131,9 +131,6 @@ class AdminAuthController extends Controller
     }
     public function insertformDate($primaryKey = null,Request $request)
     {
-        if ($primaryKey == null) {
-            $primaryKey = 1;
-        }
         $movies = Movie::get();
         $movietitle = Movie::where('movieTitle', $primaryKey)->first();
         
