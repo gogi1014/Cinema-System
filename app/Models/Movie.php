@@ -84,5 +84,19 @@ class Movie extends Model
         $movie->active = $input["active"];
         $movie->update();
     }
-    
+    public function fpMovies()
+    {
+        $client = Movie::select(
+            Movie::raw('SUBSTRING_INDEX(movieGenre, ",", 1) as movieGenres'),
+            Movie::raw('SUBSTRING_INDEX(SUBSTRING_INDEX(movieGenre, ",", 2), ",", -1) as movieGenress'),
+            Movie::raw('SUBSTRING_INDEX(SUBSTRING_INDEX(movieGenre, ",", 3), ",", -1) as movieGenresss')
+        )->get()->unique('movieGenres', 'movieGenress', 'movieGenresss');
+        $arr = array();
+        foreach ($client as $item) {
+            array_push($arr, $item['movieGenres']);
+            array_push($arr, $item['movieGenress']);
+            array_push($arr, $item['movieGenresss']);
+        }
+        return $arr;
+    }
 }

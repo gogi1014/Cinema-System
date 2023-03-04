@@ -1,18 +1,7 @@
 @extends('masterUser')
 
 @section('content')
-<form action="{{ url('/') }}" method="GET">
-  <input type="text" name="search" required />
-  <button type="submit">Search</button>
-</form>
 
-@foreach ($moviedate as $movieDate)
-{{ $movieDate->date }}
-@endforeach
-
-@foreach ($moviesGenre as $moviesGenres)
-{{ $moviesGenres->movieGenre }}
-@endforeach
 
 <div id="app">
   <table id="tableContent">

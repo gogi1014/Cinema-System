@@ -343,3 +343,7 @@ transform: translateX(0);
   font-weight: 400;
   margin-top: 0rem;
  }
+
+ .vuetab {
+  width: max-content;
+ }

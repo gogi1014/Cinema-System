@@ -55,7 +55,7 @@
                 <td>{{ item.movieRelDate }}</td>
                 <td>{{ item.movieDirector }}</td>
                 <td><div style="height:125px; overflow:hidden">{{ item.movieActors }}</div></td>
-                <td><div style="height:125px; overflow:auto">{{ item.Description }}</div></td>
+                <td><div style="height:125px; overflow:hidden">{{ item.Description }}</div></td>
                 <td>{{ item.movieCat }}</td>
                 <td>{{ item.movieLan }}</td>
                 <td>{{ item.active }}</td>
@@ -85,54 +85,54 @@
                 <table class="tab">
                     <tr>
                         <td><label for="movieTitle">Заглавие </label></td>
-                        <td><input type='text' id="movieTitle" v-model="movieTitle" placeholder="Заглавие" /></td>
+                        <td><input type='text' id="movieTitle" style="width: 100%;" v-model="movieTitle" placeholder="Заглавие" /></td>
                     </tr>
                     <tr>
                         <td><label for="movieImg">Постер </label></td>
-                        <td><input type='text' id="movieImg" v-model="movieImg" placeholder="Постер" /></td>
+                        <td><input type='text' id="movieImg" style="width: 100%;" v-model="movieImg" placeholder="Постер" /></td>
                     </tr>
                     <tr>
                         <td><label for="movieTrailer">Трейлър </label></td>
-                        <td><input type='text' id="movieTrailer" v-model="movieTrailer" placeholder="Трейлър" /></td>
+                        <td><input type='text' id="movieTrailer" style="width: 100%;" v-model="movieTrailer" placeholder="Трейлър" /></td>
                     </tr>
                     <tr>
                         <td><label for="movieGenre">Жанр </label></td>
-                        <td><input type='text' id="movieGenre" v-model="movieGenre" placeholder="Жанр" /></td>
+                        <td><input type='text' id="movieGenre" style="width: 100%;" v-model="movieGenre" placeholder="Жанр" /></td>
                     </tr>
                     <tr>
                         <td><label for="movieDuration">Времетраене </label></td>
-                        <td><input type='text' id="movieDuration" v-model="movieDuration" placeholder="Времетраене" />
+                        <td><input type='text' id="movieDuration" style="width: 100%;" v-model="movieDuration" placeholder="Времетраене" />
                         </td>
                     </tr>
                     <tr>
                         <td><label for="movieRelDate">Дата на излизане </label></td>
-                        <td><input type='text' id="movieRelDate" v-model="movieRelDate"
+                        <td><input type='text' id="movieRelDate" style="width: 100%;" v-model="movieRelDate"
                                 placeholder="Дата на излизане" /></td>
                     </tr>
                     <tr>
                         <td><label for="movieDirector">Продуцент </label></td>
-                        <td><input type='text' id="movieDirector" v-model="movieDirector" placeholder="Продуцент" />
+                        <td><input type='text' id="movieDirector" style="width: 100%;" v-model="movieDirector" placeholder="Продуцент" />
                         </td>
                     </tr>
                     <tr>
                         <td><label for="movieActors">Актъори </label></td>
-                        <td><input type='text' id="movieActors" v-model="movieActors" placeholder="Актъори" /></td>
+                        <td><input  type='text' id="movieActors" style="width: 100%;" v-model="movieActors" placeholder="Актъори" /></td>
                     </tr>
                     <tr>
                         <td><label for="Description">Описание </label></td>
-                        <td><input type='text' id="Description" v-model="Description" placeholder="Описание" /></td>
+                        <td><textarea rows = "5" cols = "60" id="Description" v-model="Description" placeholder="Описание" ></textarea></td>
                     </tr>
                     <tr>
                         <td><label for="movieCat">Категория </label></td>
-                        <td><input type='text' id="movieCat" v-model="movieCat" placeholder="Категория" /></td>
+                        <td><input type='text' id="movieCat" style="width: 100%;" v-model="movieCat" placeholder="Категория" /></td>
                     </tr>
                     <tr>
                         <td><label for="movieLan">Език </label></td>
-                        <td><input type='text' id="movieLan" v-model="movieLan" placeholder="Език" /></td>
+                        <td><input type='text' id="movieLan" style="width: 100%;" v-model="movieLan" placeholder="Език" /></td>
                     </tr>
                     <tr>
                         <td><label for="active">Активен </label></td>
-                        <td><input type='number' id="active" v-model="active" placeholder="Активен" /></td>
+                        <td><input type='number' id="active" style="width: 100%;" v-model="active" placeholder="Активен" /></td>
                     </tr>
                     <tr>
                         <td><button type="button" class="btn btn-primary" v-on:click="updateRow(movieId, movieTitle, movieImg, movieTrailer, movieGenre, movieDuration,

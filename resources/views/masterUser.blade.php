@@ -50,29 +50,27 @@
                             <i class="fa fa-search" class="searchButton"></i></button>
                     </form>
                     <form name="comboboxFilter" action="{{ url('/') }}" method="GET">
-                    <div class="form-group">
-                        <select name="category" onChange="comboboxFilter.submit();">
-                            <option disabled selected value> -- Изберете категория -- </option>
-                            @foreach ($moviesAll as $movie)
-                            <option value="{{$movie->movieCat}}">{{$movie->movieCat}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </form>
-                <form name="genresFilter" action="{{ url('/') }}" method="GET">
-                    <div class="form-group">
-                        <select name="genres" onChange="genresFilter.submit();">
-                            <option disabled selected value> -- Изберете жанр -- </option>
-                            @foreach ($moviesGenre  as $moviesGenres)
-                            <option value="{{$moviesGenres->movieGenre}}">{{$moviesGenres->movieGenre}}</option>
-                            @endforeach
-                            
-                        </select>
-                    </div>
-                </form>
+                        <div class="form-group">
+                            <select name="category" onChange="comboboxFilter.submit();">
+                                <option disabled selected value> -- Изберете категория -- </option>
+                                @foreach ($moviesAll as $movie)
+                                <option value="{{$movie->movieCat}}">{{$movie->movieCat}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </form>
+                    <form name="genresFilter" action="{{ url('/') }}" method="GET">
+                        <div class="form-group">
+                            <select name="genres" onChange="genresFilter.submit();">
+                                <option disabled selected value> -- Изберете жанр -- </option>
+                                @foreach (array_unique($arr) as $moviesGenres)
+                                <option value="{{$moviesGenres}}">{{$moviesGenres}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </form>
                 </div>
             </div>
-
             <div class="hero">
                 <div class="image">
                     <div class="section">
@@ -82,17 +80,13 @@
                     </div>
                 </div>
             </div>
-
             @yield('contentHeader')
-
             <div class="container">
                 @yield('content')
             </div>
-
             <div class="footer">
                 footer
             </div>
-
         </div>
     </body>
 

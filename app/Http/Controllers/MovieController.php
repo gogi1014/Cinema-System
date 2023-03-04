@@ -20,14 +20,13 @@ class MovieController extends Controller
         $moviesTrailer = Movie::get()->take(6);
         $moviesSoon = Movie::where('active', '0')->get();
         $moviesAll = Movie::get()->unique('movieCat');
-        $moviesGenre = Movie::get()->unique('movieGenre');
         $search = $request->input('search');
         $category = $request->input('category');
         $genres = $request->input('genres');
-        $input = array("search" => $search,"category" => $category,"genres" => $genres, "pagg" => 3);
-        return view('fp', ['movies' => $movies->getMovies($input),'moviesAll' => $moviesAll ,'moviesGenre' => $moviesGenre ,'moviedate' => $moviedate,
-        'moviesTrailer'=>$moviesTrailer,'moviesSoon'=>$moviesSoon]);
-        return view('content', ['movies' => $movies->getMovies($input),'moviesAll' => $moviesAll]);
+        $input = array("search" => $search, "category" => $category, "genres" => $genres, "pagg" => 3);
+        return view('fp', [
+            'movies' => $movies->getMovies($input), 'moviesAll' => $moviesAll, 'moviedate' => $moviedate,
+            'moviesTrailer' => $moviesTrailer, 'moviesSoon' => $moviesSoon, 'arr' => $movies->fpMovies()]);
     }
     public function ShowContent($primaryKey, Request $request)
     {
@@ -35,11 +34,11 @@ class MovieController extends Controller
         $moviedate = MovieDate::where('MovieId', $primaryKey)->get()->unique('date');
         $movietime = MovieDate::where('date', $request->date)->get();
         $moviesAll = Movie::get()->unique('movieCat');
-        $moviesGenre = Movie::get()->unique('movieGenre');
         $reqDate = $request->date;
         $reqTime = $request->time;
-        return view('content', ['movies' => $movies, 'moviedate' => $moviedate,'moviesAll' => $moviesAll , 'movietime' => $movietime, 
-        'moviesGenre' => $moviesGenre ,'reqDate' => $reqDate, 'reqTime' => $reqTime]);
+        return view('content', [
+            'movies' => $movies, 'moviedate' => $moviedate, 'moviesAll' => $moviesAll, 'movietime' => $movietime,
+            'reqDate' => $reqDate, 'reqTime' => $reqTime,'arr' => $movies->fpMovies()]);
     }
     function addBooking(Request $request)
     {
@@ -130,16 +129,16 @@ class MovieController extends Controller
     {
         return view('showMovieDate');
     }
-    public function insertformDate($primaryKey = null,Request $request)
+    public function insertformDate($primaryKey = null, Request $request)
     {
         if ($primaryKey == null) {
             $primaryKey = 1;
         }
         $movies = Movie::get();
         $movietitle = Movie::where('movieTitle', $primaryKey)->first();
-        
+
         $reqTitle = $request->MovieName;
-        return view('addMovieDate', ['movies' => $movies,'movietitle' => $movietitle,'reqTitle' => $reqTitle]);
+        return view('addMovieDate', ['movies' => $movies, 'movietitle' => $movietitle, 'reqTitle' => $reqTitle]);
     }
     function addMovieDate(Request $request)
     {
@@ -149,7 +148,7 @@ class MovieController extends Controller
             'date' => 'required|date',
         ]);
         MovieDate::store($request);
-       
+
         return redirect('/moviesDateView')->with('success', 'Your form has been submitted.');
     }
     public function updateMoviesDate(Request $request)
@@ -169,3 +168,5 @@ class MovieController extends Controller
         return ["status" => true];
     }
 }
+
+?>

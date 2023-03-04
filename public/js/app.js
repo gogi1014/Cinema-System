@@ -18352,7 +18352,7 @@ var _hoisted_7 = {
 var _hoisted_8 = {
   style: {
     "height": "125px",
-    "overflow": "auto"
+    "overflow": "hidden"
   }
 };
 var _hoisted_9 = ["onClick"];
@@ -18472,6 +18472,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [_hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [_hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         type: "text",
         id: "movieTitle",
+        style: {
+          "width": "100%"
+        },
         "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
           return $data.movieTitle = $event;
         }),
@@ -18479,6 +18482,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.movieTitle]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [_hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         type: "text",
         id: "movieImg",
+        style: {
+          "width": "100%"
+        },
         "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
           return $data.movieImg = $event;
         }),
@@ -18486,6 +18492,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.movieImg]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [_hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         type: "text",
         id: "movieTrailer",
+        style: {
+          "width": "100%"
+        },
         "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
           return $data.movieTrailer = $event;
         }),
@@ -18493,6 +18502,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.movieTrailer]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [_hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         type: "text",
         id: "movieGenre",
+        style: {
+          "width": "100%"
+        },
         "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
           return $data.movieGenre = $event;
         }),
@@ -18500,6 +18512,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.movieGenre]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [_hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         type: "text",
         id: "movieDuration",
+        style: {
+          "width": "100%"
+        },
         "onUpdate:modelValue": _cache[7] || (_cache[7] = function ($event) {
           return $data.movieDuration = $event;
         }),
@@ -18507,6 +18522,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.movieDuration]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [_hoisted_22, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         type: "text",
         id: "movieRelDate",
+        style: {
+          "width": "100%"
+        },
         "onUpdate:modelValue": _cache[8] || (_cache[8] = function ($event) {
           return $data.movieRelDate = $event;
         }),
@@ -18514,6 +18532,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.movieRelDate]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [_hoisted_23, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         type: "text",
         id: "movieDirector",
+        style: {
+          "width": "100%"
+        },
         "onUpdate:modelValue": _cache[9] || (_cache[9] = function ($event) {
           return $data.movieDirector = $event;
         }),
@@ -18521,12 +18542,16 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.movieDirector]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [_hoisted_24, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         type: "text",
         id: "movieActors",
+        style: {
+          "width": "100%"
+        },
         "onUpdate:modelValue": _cache[10] || (_cache[10] = function ($event) {
           return $data.movieActors = $event;
         }),
         placeholder: "Актъори"
-      }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.movieActors]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [_hoisted_25, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-        type: "text",
+      }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.movieActors]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [_hoisted_25, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("textarea", {
+        rows: "5",
+        cols: "60",
         id: "Description",
         "onUpdate:modelValue": _cache[11] || (_cache[11] = function ($event) {
           return $data.Description = $event;
@@ -18535,6 +18560,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.Description]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [_hoisted_26, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         type: "text",
         id: "movieCat",
+        style: {
+          "width": "100%"
+        },
         "onUpdate:modelValue": _cache[12] || (_cache[12] = function ($event) {
           return $data.movieCat = $event;
         }),
@@ -18542,6 +18570,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.movieCat]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [_hoisted_27, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         type: "text",
         id: "movieLan",
+        style: {
+          "width": "100%"
+        },
         "onUpdate:modelValue": _cache[13] || (_cache[13] = function ($event) {
           return $data.movieLan = $event;
         }),
@@ -18549,6 +18580,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.movieLan]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [_hoisted_28, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         type: "number",
         id: "active",
+        style: {
+          "width": "100%"
+        },
         "onUpdate:modelValue": _cache[14] || (_cache[14] = function ($event) {
           return $data.active = $event;
         }),
