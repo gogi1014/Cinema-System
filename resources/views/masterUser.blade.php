@@ -29,6 +29,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.green.min.css" />
         <script defer src="plugins/OwlCarousel2.3/owl.carousel.min.js"></script>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
         <script type="text/javascript" src="{{ URL::asset('js/menu.js') }}"></script>
 
@@ -64,9 +65,10 @@
                             <select name="genres" onChange="genresFilter.submit();">
                                 <option disabled selected value> -- Изберете жанр -- </option>
                                 @foreach (array_unique($arr) as $moviesGenres)
-                                <option value="{{$moviesGenres}}">{{$moviesGenres}}</option>
+                                <?php $str=str_replace('"', '', $moviesGenres) ?>
+                                <option value="{{$str}}">{{utf8_encode($str)}}</option>
                                 @endforeach
-                            </select>
+                                </select>
                         </div>
                     </form>
                 </div>
@@ -89,5 +91,4 @@
             </div>
         </div>
     </body>
-
     </html>

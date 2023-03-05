@@ -26,9 +26,9 @@ class User extends Authenticatable
         'MovieId',
         'created_at',
     ];
-    public function searchMovies($input)
+    public function searchBookings($input)
     {
-        return Movie::where('firstname', 'LIKE', '%' . $input->keyword . '%')->get();
+        return User::where('firstname', 'LIKE', '%' . $input->keyword . '%')->get();
     }
 
     public static function store($request)
@@ -68,3 +68,5 @@ class User extends Authenticatable
         $movie->update();
     }
 }
+
+?>

@@ -58,6 +58,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::delete('/delete/{id}', [AdminAuthController::class, 'delete']);
         Route::get('/bookings', [AdminAuthController::class, 'getBookingAdmin']);
         Route::get('/bookingsView', [AdminAuthController::class, 'getBookingAdminView']);
+        Route::get('/bookingsViewSearch/', [AdminAuthController::class, 'getBookingAdmin']);
         Route::post('/updateBookings/{id}', [AdminAuthController::class, 'updateBookings']);
         Route::delete('/deleteBookings/{id}', [AdminAuthController::class, 'deleteBookings']);
         Route::get('/moviesDate', [AdminAuthController::class, 'getmoviesDateAdmin']);

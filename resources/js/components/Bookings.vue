@@ -4,7 +4,7 @@
     <h1>Списък с резервации</h1>
     <div class="search-wrapper">
         <label>Търси филм:</label>
-        <input type="text" v-model="keyword" placeholder="Търси филм.." />
+        <input type="text" v-model="keyword" placeholder="Търси .." />
     </div>
     <table class="table table-striped table-dark" id="my-table">
         <thead>
@@ -36,7 +36,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr v-for="item in cinema" :key="item.id">
+            <tr v-for="item in paginated" :key="item.id">
                 <td>{{ item.id }}</td>
                 <td>{{ item.firstname }}</td>
                 <td>{{ item.lastname }}</td>
@@ -52,6 +52,15 @@
             </tr>
         </tbody>
     </table>
+    <!-- PAGINATION START -->
+    <div class="clearfix btn-group col-md-2 offset-md-5">
+        <button type="button" class="btn btn-sm btn-outline-secondary" @click="prev"> &lt&lt </button>
+        <button type="button" class="btn btn-sm btn-outline-secondary"
+            v-for="pageNumber  in pages" @click="current = pageNumber"> {{ pageNumber }}
+        </button>
+        <button type="button" class="btn btn-sm btn-outline-secondary" @click="next"> >> </button>
+    </div><!--end col-->
+    <!-- PAGINATION END -->
     <modal v-if="showModal" @close="showModal = false">
         <div class="modal-mask">
             <div class="edit">
@@ -117,10 +126,12 @@ export default {
     },
     data() {
         return {
-            perPage: 1,
-            currentPage: 1,
+            current: 1,
+            pageSize: 5,
+            keyword: null,
             search: '',
             cinema: [],
+            pages: [],
             suc: "",
             errO: " ",
             showModal: false,
@@ -136,8 +147,44 @@ export default {
         }
     },
     name: 'HelloVue',
+    computed: {
+        indexStart() {
+            return (this.current * this.pageSize) - this.pageSize;
+        },
+        indexEnd() {
+            return this.current * this.pageSize;
+        },
+        paginated() {
+            return this.cinema.slice(this.indexStart, this.indexEnd);
+        },
+    },
+    watch: {
+        cinema() {
+            this.setPages();
+        },
+        keyword(after, before) {
+            this.getResults();
+        }
+    },
     methods: {
-        
+        prev() {
+            if ((this.current != 1))
+                this.current--;
+        },
+        next() {
+            if ((this.current < Math.ceil(this.cinema.length / this.pageSize)))
+                this.current++;
+        },
+        setPages() {
+            let numberOfPages = Math.ceil(this.cinema.length / this.pageSize);
+            for (let index = 1; index <= numberOfPages; index++) {
+                this.pages.push(index);
+            }
+        },
+        getResults() {
+            axios.get('/bookings', { params: { keyword: this.keyword } })
+                .then(res => this.cinema = res.data)
+        },
         select: function (id, firstname, lastname, email, date,
             ticknum, time, MovieId, showModal) {
             this.id = id;
@@ -181,16 +228,6 @@ export default {
                 }
             });
         },
-    },
-    computed: {
-        filteredList() {
-            return this.cinema.filter(item => {
-                return item.firstname.toLowerCase().includes(this.search.toLowerCase())
-            })
-        },
-        rows() {
-            return this.cinema.length
-        }
     },
     created: function () {
         this.show();

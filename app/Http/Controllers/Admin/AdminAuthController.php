@@ -97,7 +97,7 @@ class AdminAuthController extends Controller
 
     public function getBookingAdmin(Request $request)
     {
-        $user = User::get();
+        $user = User::get()->searchBookings($request);
         return response()->json($user);
     }
     public function getBookingAdminView(Request $request)
