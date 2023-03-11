@@ -64,9 +64,8 @@
                         <div class="form-group">
                             <select name="genres" onChange="genresFilter.submit();">
                                 <option disabled selected value> -- Изберете жанр -- </option>
-                                @foreach (array_unique($arr) as $moviesGenres)
-                                <?php $str=str_replace('"', '', $moviesGenres) ?>
-                                <option value="{{$str}}">{{utf8_encode($str)}}</option>
+                                @foreach (($arr) as $moviesGenres)
+                                <option value="{{$moviesGenres}}">{{$moviesGenres}}</option>
                                 @endforeach
                                 </select>
                         </div>

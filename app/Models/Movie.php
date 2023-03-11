@@ -86,8 +86,10 @@ class Movie extends Model
     }
     public function fpMovies()
     {
-        $client = Movie::pluck('movieGenre');
-        $data=explode(",", $client);
+        $client = Movie::all()->pluck('movieGenre')->toArray();
+        $client2 = implode(",",  $client );
+        $data=explode(",", $client2);
         return $data;
     }
 }
+
