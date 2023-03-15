@@ -32,6 +32,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
         <script type="text/javascript" src="{{ URL::asset('js/menu.js') }}"></script>
+        <script src="{{ mix('js/app.js') }}" type="text/javascript"></script>
+
 
         <title>View Student Records</title>
     </head>

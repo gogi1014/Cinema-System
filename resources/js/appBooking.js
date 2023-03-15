@@ -62,21 +62,11 @@ items.forEach((el) => {
     }
 })
 
-jQuery(document).ready(function($){
-  $('.owl-carousel').owlCarousel({
-    loop:true,
-    margin:10,
-    nav:true,
-    responsive:{
-      0:{
-        items:1
-      },
-      600:{
-        items:3
-      },
-      1000:{
-        items:5
-      }
-    }
-  })
-})
+function showPass() {
+  var x = document.getElementById("password");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}

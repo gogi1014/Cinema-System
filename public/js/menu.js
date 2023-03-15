@@ -19,26 +19,11 @@ function createBooking() {
   }
 }
 
-function myFunction() {
-  document.getElementById("demo").innerHTML = "Hello World";
+function showPass() {
+  var x = document.getElementById("password");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
 }
-
-jQuery(window).load() (function($){
-  $('.owl-carousel').owlCarousel({
-    loop:true,
-    margin:10,
-    nav:true,
-    responsive:{
-      0:{
-        items:1
-      },
-      600:{
-        items:3
-      },
-      1000:{
-        items:5
-      }
-    }
-  })
-})
-  

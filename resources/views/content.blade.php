@@ -51,9 +51,7 @@
 
 
 @section('content')
-
 <div id="app">
-
   <h2 id="title">{{ $movies->movieTitle }}</h2>
   <iframe width="100%" height="600" src="{{ $movies->movieTrailer }}" frameborder="0" allowfullscreen></iframe>
 </div>
@@ -63,7 +61,7 @@
     @csrf
     <div class="form-group">
       <label for="dateSelected">Дата</label>
-      <select name="dateSelected" id="dateSelected" onchange="window.location.href=this.value;">
+      <select name="dateSelected" id="dateSelected"  onchange="window.history.pushState(null, null,this.value);window.location.reload();">
         <option disabled selected value> -- Изберете дата -- </option>
         @foreach ($moviedate as $date)
         <option value="{{ url('content/'.$movies->movieId.'/'.$date->date) }}" @if($reqDate==$date->date) selected @endif>{{ $date->date}}</option>
@@ -72,7 +70,7 @@
     </div>
     <div class="form-group">
       <label for="timeSelected">Час</label>
-      <select name="timeSelected">
+      <select name="timeSelected" >
         <option disabled selected value> -- Изберете час -- </option>
         @foreach ($movietime as $time)
         <option value="{{$time->time}}" @if($reqTime==$time->time) selected @endif>{{ $time->time}}</option>
@@ -109,7 +107,6 @@
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
 </div>
-
 @if ($errors->any())
 <div class="alert alert-danger">
   <ul>
@@ -121,7 +118,3 @@
 @endif
 
 @endsection
-
-<script>
-  $('div.section:empty').hide();
-</script>
