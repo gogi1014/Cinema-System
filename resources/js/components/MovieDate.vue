@@ -113,7 +113,7 @@ export default {
             this.showModal = showModal;
         },
         updateRow: function (id, MovieId,MovieName, date, time) {
-            axios.post(`/updateMoviesDate/${id}`, { id, MovieId,MovieName, date, time }).then(response => {
+            axios.post(`updateMoviesDate/${id}`, { id, MovieId,MovieName, date, time }).then(response => {
                 console.log(response);
                 this.show();
                 this.suc = "Record updated successfully";
@@ -124,7 +124,7 @@ export default {
                 });
         },
         show: function () {
-            axios.get('/moviesDate').then(function (res) {
+            axios.get('moviesDate').then(function (res) {
                 this.cinema = res.data;
             }.bind(this));
         },
@@ -134,7 +134,7 @@ export default {
         },
         removeRow: function (id, showDelete) {
             console.log("Row Deleted")
-            axios.delete(`/deleteMoviesDate/${id}`).then(response => {
+            axios.delete(`deleteMoviesDate/${id}`).then(response => {
                 console.log(response.data);
                 if (response.data.status == true) {
                     this.show();

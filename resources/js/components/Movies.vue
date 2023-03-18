@@ -218,13 +218,14 @@ export default {
                 this.current++;
         },
         setPages() {
+            this.pages.length = 0;
             let numberOfPages = Math.ceil(this.cinema.length / this.pageSize);
             for (let index = 1; index <= numberOfPages; index++) {
                 this.pages.push(index);
             }
         },
         getResults() {
-            axios.get('/movies', { params: { keyword: this.keyword } })
+            axios.get('movies', { params: { keyword: this.keyword } })
                 .then(res => this.cinema = res.data)
         },
         select: function (movieId, movieTitle, movieImg, movieTrailer, movieGenre, movieDuration, movieRelDate, movieDirector, movieActors, Description, movieCat, movieLan,active, showModal) {
@@ -255,7 +256,7 @@ export default {
                 });
         },
         show: function () {
-            axios.get('/movies').then(function (res) {
+            axios.get('movies').then(function (res) {
                 this.cinema = res.data;
             }.bind(this));
         },
@@ -265,7 +266,7 @@ export default {
         },
         removeRow: function (movieId, showDelete) {
             console.log("Row Deleted")
-            axios.delete(`/delete/${movieId}`).then(response => {
+            axios.delete(`delete/${movieId}`).then(response => {
                 console.log(response.data);
                 if (response.data.status == true) {
                     this.show();

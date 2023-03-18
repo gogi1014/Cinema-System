@@ -176,13 +176,14 @@ export default {
                 this.current++;
         },
         setPages() {
+            this.pages.length = 0;
             let numberOfPages = Math.ceil(this.cinema.length / this.pageSize);
             for (let index = 1; index <= numberOfPages; index++) {
                 this.pages.push(index);
             }
         },
         getResults() {
-            axios.get('/bookings', { params: { keyword: this.keyword } })
+            axios.get('bookings', { params: { keyword: this.keyword } })
                 .then(res => this.cinema = res.data)
         },
         select: function (id, firstname, lastname, email, date,
@@ -198,7 +199,7 @@ export default {
             this.showModal = showModal;
         },
         updateRow: function (id, firstname, lastname, email, date, ticknum, time, MovieId) {
-            axios.post(`/updateBookings/${id}`, { id, firstname, lastname, email, date, ticknum, time, MovieId }).then(response => {
+            axios.post(`updateBookings/${id}`, { id, firstname, lastname, email, date, ticknum, time, MovieId }).then(response => {
                 console.log(response);
                 this.show();
                 this.suc = "Record updated successfully";
@@ -209,7 +210,7 @@ export default {
                 });
         },
         show: function () {
-            axios.get('/bookings').then(function (res) {
+            axios.get('bookings').then(function (res) {
                 this.cinema = res.data;
             }.bind(this));
         },
@@ -219,7 +220,7 @@ export default {
         },
         removeRow: function (id, showDelete) {
             console.log("Row Deleted")
-            axios.delete(`/deleteBookings/${id}`).then(response => {
+            axios.delete(`deleteBookings/${id}`).then(response => {
                 console.log(response.data);
                 if (response.data.status == true) {
                     this.show();

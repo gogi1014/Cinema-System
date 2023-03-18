@@ -1,14 +1,15 @@
 @extends('master')
 
 @section('content')
-<form action="createMovieDate" method="post">
+<form action="/admin/createMovieDate" method="post">
   @csrf
+
   <div class="form-group">
     <label for="timeSelected">Филм</label>
     <select name="timeSelected" onchange="window.location.href=this.value;">
       <option disabled selected value> -- Изберете филм -- </option>
       @foreach ($movies as $movie)
-      <option value="{{ url('admin/addMovieDate/'. $movie->movieTitle) }}" @if($reqTitle==$movie->movieTitle) selected @endif>{{$movie->movieTitle}}</option>
+      <option value="{{ url('/admin/addMovieDate/'. $movie->movieTitle) }}" @if($reqTitle==$movie->movieTitle) selected @endif>{{$movie->movieTitle}}</option>
       @endforeach
     </select>
   </div>

@@ -57,7 +57,7 @@ class AdminAuthController extends Controller
     }
     public function getMoviesAdminView(Request $request)
     {
-        return view('showMovies');
+        return view('/showMovies');
     }
     public function update(Request $request)
     {
@@ -77,7 +77,7 @@ class AdminAuthController extends Controller
     }
     public function insertform()
     {
-        return view('addMovie');
+        return view('/addMovie');
     }
     function addMovie(Request $request)
     {
@@ -92,17 +92,17 @@ class AdminAuthController extends Controller
             'movieLan' => 'required|string|max:255',
         ]);
         Movie::store($request);
-        return redirect('/moviesView')->with('success', 'Your form has been submitted.');
+        return redirect('admin/moviesView')->with('success', 'Your form has been submitted.');
     }
 
     public function getBookingAdmin(Request $request)
     {
-        $user = User::get()->searchBookings($request);
+        $user = User::get();
         return response()->json($user);
     }
     public function getBookingAdminView(Request $request)
     {
-        return view('showBookings');
+        return view('/showBookings');
     }
     public function updateBookings(Request $request)
     {
@@ -127,7 +127,7 @@ class AdminAuthController extends Controller
     }
     public function getmoviesDateAdminView(Request $request)
     {
-        return view('showMovieDate');
+        return view('/showMovieDate');
     }
     public function insertformDate($primaryKey = null,Request $request)
     {
@@ -146,7 +146,7 @@ class AdminAuthController extends Controller
         ]);
         MovieDate::store($request);
        
-        return redirect('/moviesDateView')->with('success', 'Your form has been submitted.');
+        return redirect('admin/moviesDateView')->with('success', 'Your form has been submitted.');
     }
     public function updateMoviesDate(Request $request)
     {

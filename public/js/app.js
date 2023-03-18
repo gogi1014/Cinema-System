@@ -17638,6 +17638,7 @@ __webpack_require__.r(__webpack_exports__);
       if (this.current < Math.ceil(this.cinema.length / this.pageSize)) this.current++;
     },
     setPages: function setPages() {
+      this.pages.length = 0;
       var numberOfPages = Math.ceil(this.cinema.length / this.pageSize);
       for (var index = 1; index <= numberOfPages; index++) {
         this.pages.push(index);
@@ -17645,7 +17646,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     getResults: function getResults() {
       var _this = this;
-      axios.get('/bookings', {
+      axios.get('bookings', {
         params: {
           keyword: this.keyword
         }
@@ -17666,7 +17667,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     updateRow: function updateRow(id, firstname, lastname, email, date, ticknum, time, MovieId) {
       var _this2 = this;
-      axios.post("/updateBookings/".concat(id), {
+      axios.post("updateBookings/".concat(id), {
         id: id,
         firstname: firstname,
         lastname: lastname,
@@ -17685,7 +17686,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     show: function show() {
-      axios.get('/bookings').then(function (res) {
+      axios.get('bookings').then(function (res) {
         this.cinema = res.data;
       }.bind(this));
     },
@@ -17696,7 +17697,7 @@ __webpack_require__.r(__webpack_exports__);
     removeRow: function removeRow(id, showDelete) {
       var _this3 = this;
       console.log("Row Deleted");
-      axios["delete"]("/deleteBookings/".concat(id)).then(function (response) {
+      axios["delete"]("deleteBookings/".concat(id)).then(function (response) {
         console.log(response.data);
         if (response.data.status == true) {
           _this3.show();
@@ -17753,7 +17754,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     updateRow: function updateRow(id, MovieId, MovieName, date, time) {
       var _this = this;
-      axios.post("/updateMoviesDate/".concat(id), {
+      axios.post("updateMoviesDate/".concat(id), {
         id: id,
         MovieId: MovieId,
         MovieName: MovieName,
@@ -17769,7 +17770,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     show: function show() {
-      axios.get('/moviesDate').then(function (res) {
+      axios.get('moviesDate').then(function (res) {
         this.cinema = res.data;
       }.bind(this));
     },
@@ -17780,7 +17781,7 @@ __webpack_require__.r(__webpack_exports__);
     removeRow: function removeRow(id, showDelete) {
       var _this2 = this;
       console.log("Row Deleted");
-      axios["delete"]("/deleteMoviesDate/".concat(id)).then(function (response) {
+      axios["delete"]("deleteMoviesDate/".concat(id)).then(function (response) {
         console.log(response.data);
         if (response.data.status == true) {
           _this2.show();
@@ -17863,6 +17864,7 @@ __webpack_require__.r(__webpack_exports__);
       if (this.current < Math.ceil(this.cinema.length / this.pageSize)) this.current++;
     },
     setPages: function setPages() {
+      this.pages.length = 0;
       var numberOfPages = Math.ceil(this.cinema.length / this.pageSize);
       for (var index = 1; index <= numberOfPages; index++) {
         this.pages.push(index);
@@ -17870,7 +17872,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     getResults: function getResults() {
       var _this = this;
-      axios.get('/movies', {
+      axios.get('movies', {
         params: {
           keyword: this.keyword
         }
@@ -17920,7 +17922,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     show: function show() {
-      axios.get('/movies').then(function (res) {
+      axios.get('movies').then(function (res) {
         this.cinema = res.data;
       }.bind(this));
     },
@@ -17931,7 +17933,7 @@ __webpack_require__.r(__webpack_exports__);
     removeRow: function removeRow(movieId, showDelete) {
       var _this3 = this;
       console.log("Row Deleted");
-      axios["delete"]("/delete/".concat(movieId)).then(function (response) {
+      axios["delete"]("delete/".concat(movieId)).then(function (response) {
         console.log(response.data);
         if (response.data.status == true) {
           _this3.show();

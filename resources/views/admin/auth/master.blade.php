@@ -26,7 +26,7 @@
     <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <a href="{{ url('/admin') }}">Начало</a>
-        <a href="{{ url('/admin/moviesView') }}">Филми</a>
+        <a href="{{ url('admin.auth.moviesView') }}">Филми</a>
         <a href="{{ url('/admin/addMovie') }}">Добавяне на филм</a>
         <a href="{{ url('/admin/bookingsView') }}">Резервации</a>
         <a href="{{ url('/admin/moviesDateView') }}">Дати и часове</a>

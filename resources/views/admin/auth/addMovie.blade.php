@@ -2,7 +2,7 @@
 
 @section('content')
 
-<form action="createMovie" method="post">
+<form action="/admin/createMovie" method="post">
   @csrf
   <div class="form-group">
     <label for="movieImg">Постер</label>
