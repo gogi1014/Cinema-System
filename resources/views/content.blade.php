@@ -61,30 +61,18 @@
     @csrf
     <div class="form-group">
       <label for="dateSelected">Дата</label>
-      <select name="dateSelected" id="dateSelected"  onchange="window.history.pushState(null, null,this.value);window.location.reload();">
+      <select name="dateSelected" id="dateSelected"  onchange="window.history.pushState(null, null,this.value);">
         <option disabled selected value> -- Изберете дата -- </option>
         @foreach ($moviedate as $date)
-        <option value="{{ url('content/'.$movies->movieId.'/'.$date->date) }}" @if($reqDate==$date->date) selected @endif>{{ $date->date}}</option>
+        <option value="{{ url('content/'.$movies->movieId.'/'.$date->date.'/') }}" @if($reqDate==$date->date) selected @endif>{{ $date->date}}</option>
         @endforeach
       </select>
     </div>
-    <div class="form-group">
-      <label for="timeSelected">Час</label>
-      <select name="timeSelected" >
-        <option disabled selected value> -- Изберете час -- </option>
-        @foreach ($movietime as $time)
-        <option value="{{$time->time}}" @if($reqTime==$time->time) selected @endif>{{ $time->time}}</option>
-        @endforeach
-      </select>
-    </div>
-    @if(isset($date->date)&& (isset($time->time)))
-    <div class="form-group">
-      <input type="hidden" class="form-control" name="datte" id="datte" value="{{$date->date}}">
-    </div>
-    <div class="form-group">
-      <input type="hidden" class="form-control" name="timee" id="timee" value="{{$time->time}}">
-    </div>
-    @endif
+    <div id="Selecteed">
+    @foreach ($movietime as $time)
+      <input type="button" onclick="timeButton('{{$time->time}}','{{ $reqDate}}')" id="time" value="{{$time->time}}">
+    @endforeach
+    <p id="myPara"></p>
     <div class="form-group">
       <input type="hidden" class="form-control" name="MovieId" id="MovieId" value="{{ $movies->movieTitle }}">
     </div>
@@ -104,9 +92,20 @@
       <label for="ticknum">Брой билети</label>
       <input type="text" class="form-control" name="ticknum" id="ticknum" placeholder="Брой билети">
     </div>
+    @if(isset($date->date)&& (isset($time->time)))
+    <div class="form-group">
+      <input type="hidden" class="form-control" name="datte" id="datte" value="{{$reqDate}}" >
+    </div>
+    <div class="form-group">
+      <input type="hidden" class="form-control" name="timee" id="timee">
+    </div>
+    @endif
     <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
   </form>
 </div>
+<script src="{{ asset('js/menu.js') }}" defer></script>
+
 @if ($errors->any())
 <div class="alert alert-danger">
   <ul>

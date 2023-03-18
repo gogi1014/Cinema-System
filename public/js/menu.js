@@ -27,3 +27,12 @@ function showPass() {
     x.type = "password";
   }
 }
+
+$("#dateSelected").change(function() {
+  $("#Selecteed").load(location.href+" #Selecteed>*","");
+}); 
+
+function timeButton(time,date) {
+  document.getElementById("timee").value = time;
+  document.getElementById("myPara").innerHTML = "Вие избрахте в " + time + " часа" + " на дата: " + date;
+}
