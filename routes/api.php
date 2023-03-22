@@ -16,11 +16,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('movie', PostController::class, 'index');
-Route::get('movie/{id}', PostController::class, 'show');
-Route::delete('movie/delete/{id}', PostController::class, 'destroy');
-Route::post('movie/update/{id}', PostController::class, 'update');
-Route::post('movie/create', PostController::class, 'store');
 
 Route::apiResource('movie', PostController::class);
 
