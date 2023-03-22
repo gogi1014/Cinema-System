@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('ticknum');
             $table->string('time');
             $table->string('MovieId');
+            $table->string('places');
             $table->timestamps();
         });
     }
