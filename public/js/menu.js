@@ -36,3 +36,17 @@ function timeButton(time,date) {
   document.getElementById("timee").value = time;
   document.getElementById("myPara").innerHTML = "Вие избрахте в " + time + " часа" + " на дата: " + date;
 }
+
+function formdata() 
+{
+var firstname1= document.getElementById("filterID").value;
+window.location  = "https://seahorse-app-5zbbj.ondigitalocean.app/api/movie/" + firstname1;
+
+}
+
+function changeType(typee) 
+{
+  document.getElementById("Typ").value = typee;
+
+
+}

@@ -1,7 +1,7 @@
 @extends('master')
 
 @section('content')
-<form action="/admin/createMovieDate" method="post">
+<form action="/createMovieDate" method="post">
   @csrf
 
   <div class="form-group">
@@ -28,6 +28,10 @@
   <div class="form-group">
     <label for="date">Дата</label>
     <input type="date" class="form-control" name="date" id="date" placeholder="date">
+  </div>
+  <div class="form-group">
+    <label for="type">Тип</label>
+    <input type="text" class="form-control" name="type" id="type" placeholder="date">
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>

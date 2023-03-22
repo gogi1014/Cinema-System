@@ -38,7 +38,7 @@
   </div>
   <div class="form-group">
     <label for="Description">Описание</label>
-    <input type="text" class="form-control" name="Description" id="Description" placeholder="Описание">
+    <textarea rows = "5" cols = "60" type="text" class="form-control" name="Description" id="Description" placeholder="Описание"></textarea>
   </div>
   <div class="form-group">
     <label for="movieLan">Език</label>

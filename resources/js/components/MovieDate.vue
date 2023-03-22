@@ -20,6 +20,9 @@
                     Дата
                 </th>
                 <th class="text-left">
+                    Тип
+                </th>
+                <th class="text-left">
                     Час
                 </th>
             </tr>
@@ -30,10 +33,11 @@
                 <td>{{ item.MovieId }}</td>
                 <td>{{ item.MovieName }}</td>
                 <td>{{ item.date }}</td>
+                <td>{{ item.type }}</td>
                 <td>{{ item.time }}</td>
                 <td><button type="button" class="btn btn-danger" v-on:click="Delete(item.id, true)">Delete</button></td>
                 <td><button id="show-modal" class="btn btn-primary"
-                        @click="select(item.id, item.MovieId,item.MovieName, item.date, item.time, true)">Edit</button>
+                        @click="select(item.id, item.MovieId,item.MovieName, item.date, item.time,item.type, true)">Edit</button>
                 </td>
             </tr>
         </tbody>
@@ -61,8 +65,12 @@
                         <td><input type='text' id="time" v-model="time" placeholder="Час" /></td>
                     </tr>
                     <tr>
+                        <td><label for="time">Тип </label></td>
+                        <td><input type='text' id="time" v-model="type" placeholder="Час" /></td>
+                    </tr>
+                    <tr>
                         <td><button type="button" class="btn btn-primary"
-                                v-on:click="updateRow(id, MovieId,MovieName, date, time)">Update</button></td>
+                                v-on:click="updateRow(id, MovieId,MovieName, date, time, type)">Update</button></td>
                         <td><button type="button" class="btn btn-danger" @click="showModal = false">Cancel</button></td>
                     </tr>
                 </table>
@@ -99,21 +107,23 @@ export default {
             id: Number,
             date: Date,
             time: String,
+            type: String,
             MovieId: String,
             MovieName: String,
         }
     },
     methods: {
-        select: function (id, MovieId, MovieName, date, time, showModal) {
+        select: function (id, MovieId, MovieName, date, time, type, showModal) {
             this.id = id;
             this.MovieId = MovieId;
             this.MovieName = MovieName;
             this.date = date;
             this.time = time;
+            this.type = type;
             this.showModal = showModal;
         },
-        updateRow: function (id, MovieId,MovieName, date, time) {
-            axios.post(`updateMoviesDate/${id}`, { id, MovieId,MovieName, date, time }).then(response => {
+        updateRow: function (id, MovieId,MovieName, date, time, type) {
+            axios.post(`updateMoviesDate/${id}`, { id, MovieId,MovieName, date, time,type }).then(response => {
                 console.log(response);
                 this.show();
                 this.suc = "Record updated successfully";

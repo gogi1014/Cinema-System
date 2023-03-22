@@ -61,7 +61,7 @@
     @csrf
     <div class="form-group">
       <label for="dateSelected">Дата</label>
-      <select name="dateSelected" id="dateSelected"  onchange="window.history.pushState(null, null,this.value);">
+      <select name="dateSelected" id="dateSelected" onchange="window.history.pushState(null, null,this.value);">
         <option disabled selected value> -- Изберете дата -- </option>
         @foreach ($moviedate as $date)
         <option value="{{ url('content/'.$movies->movieId.'/'.$date->date.'/') }}" @if($reqDate==$date->date) selected @endif>{{ $date->date}}</option>
@@ -69,51 +69,59 @@
       </select>
     </div>
     <div id="Selecteed">
-    @foreach ($movietime as $time)
+      @if($movietime)
+      <p>2D</p>
+      @endif
+      @foreach ($movietime as $time)
       <input type="button" onclick="timeButton('{{$time->time}}','{{ $reqDate}}')" id="time" value="{{$time->time}}">
-    @endforeach
-    <p id="myPara"></p>
-    <div class="form-group">
-      <input type="hidden" class="form-control" name="MovieId" id="MovieId" value="{{ $movies->movieTitle }}">
+      @endforeach
+      <p>3D</p>
+      @foreach ($movietimee as $time)
+      <input type="button" onclick="timeButton('{{$time->time}}','{{ $reqDate}}')" id="time" value="{{$time->time}}">
+      @endforeach
+      <p id="myPara"></p>
+      <div class="form-group">
+        <input type="hidden" class="form-control" name="MovieId" id="MovieId" value="{{ $movies->movieTitle }}">
+      </div>
+      <div class="form-group">
+        <label for="firstname">Име</label>
+        <input type="text" class="form-control" name="firstname" id="firstname" placeholder="Име">
+      </div>
+      <div class="form-group">
+        <label for="lastname">Фамилия</label>
+        <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Фамилия">
+      </div>
+      <div class="form-group">
+        <label for="email">Имейл</label>
+        <input type="text" class="form-control" name="email" id="email" placeholder="Имейл">
+      </div>
+      <div class="form-group">
+        <label for="ticknum">Брой билети</label>
+        <input type="text" class="form-control" name="ticknum" id="ticknum" placeholder="Брой билети">
+      </div>
+      @if(isset($date->date)&& (isset($time->time)))
+      <div class="form-group">
+        <input type="hidden" class="form-control" name="datte" id="datte" value="{{$reqDate}}">
+      </div>
+      <div class="form-group">
+        <input type="hidden" class="form-control" name="timee" id="timee">
+      </div>
+      @endif
+      <button type="submit" class="btn btn-primary">Submit</button>
     </div>
-    <div class="form-group">
-      <label for="firstname">Име</label>
-      <input type="text" class="form-control" name="firstname" id="firstname" placeholder="Име">
-    </div>
-    <div class="form-group">
-      <label for="lastname">Фамилия</label>
-      <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Фамилия">
-    </div>
-    <div class="form-group">
-      <label for="email">Имейл</label>
-      <input type="text" class="form-control" name="email" id="email" placeholder="Имейл">
-    </div>
-    <div class="form-group">
-      <label for="ticknum">Брой билети</label>
-      <input type="text" class="form-control" name="ticknum" id="ticknum" placeholder="Брой билети">
-    </div>
-    @if(isset($date->date)&& (isset($time->time)))
-    <div class="form-group">
-      <input type="hidden" class="form-control" name="datte" id="datte" value="{{$reqDate}}" >
-    </div>
-    <div class="form-group">
-      <input type="hidden" class="form-control" name="timee" id="timee">
+    @if ($errors->any())
+    <div class="alert alert-danger">
+      <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+      </ul>
     </div>
     @endif
-    <button type="submit" class="btn btn-primary">Submit</button>
-    </div>
   </form>
 </div>
 <script src="{{ asset('js/menu.js') }}" defer></script>
 
-@if ($errors->any())
-<div class="alert alert-danger">
-  <ul>
-    @foreach ($errors->all() as $error)
-    <li>{{ $error }}</li>
-    @endforeach
-  </ul>
-</div>
-@endif
+
 
 @endsection

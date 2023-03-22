@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('MovieId');
             $table->string('MovieName');
+            $table->string('type');
             $table->date('date');
             $table->string('time');
         });

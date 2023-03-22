@@ -57,8 +57,13 @@ class PostController extends Controller
      * @param  \App\Models\Movie  $movie
      * @return \Illuminate\Http\Response
      */
-    public function show(Movie $movie)
+    public function show($id)
     {
+        $movie = Movie::find($id);
+  
+        if (!$movie) {
+            return response()->json(['message'=>"Филмът не е открит",404]);
+        }
         return [
             "status" => 1,
             "data" =>$movie
@@ -83,10 +88,15 @@ class PostController extends Controller
      * @param  \App\Models\Movie  $movie
      * @return \Illuminate\Http\Response
      */
-    public function update(StorePostRequest $request, Movie $movie)
+    public function update(StorePostRequest $request, $id)
     {
+        $movie = Movie::find($id);
         $movie->update($request->all());
 
+        if (!$movie) {
+            return response()->json(['message'=>"Филмът не е открит",404]);
+        }
+        
         return response()->json([
             'status' => true,
             'message' => "Успешно актуализиран филм!",
@@ -100,10 +110,14 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Movie $movie)
+    public function destroy($id)
     {
+        $movie = Movie::find($id);
         $movie->delete();
 
+        if (!$movie) {
+            return response()->json(['message'=>"Movie not found",404]);
+        }
         return response()->json([
             'status' => true,
             'message' => "Успешно изтрит филм!",

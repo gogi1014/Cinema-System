@@ -31,7 +31,7 @@ class MovieSeeder extends Seeder
             'Description' => Str::random(10),
             'movieCat' => Str::random(10),
             'movieLan' => Str::random(10),
-            
+            'active' => '1',
         ]);
     }
 }

@@ -23,6 +23,8 @@ Route::get('/search/', [MovieController::class, 'getMovies']);
 Route::post('/create', [MovieController::class, 'addBooking']);
 
 
+Route::get('/aaa', [MovieController::class, 'getJSON']);
+Route::get('/aaa', [MovieController::class, 'searchJSON']);
 
 
 

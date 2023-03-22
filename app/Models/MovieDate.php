@@ -16,6 +16,7 @@ class MovieDate extends Model
         'MovieName',
         'date',
         'time',
+        'type',
     ];
     public static function store($request)
     {
@@ -25,6 +26,7 @@ class MovieDate extends Model
         $movie->MovieName = $input["movieTitle"];
         $movie->time = $input["time"];
         $movie->date = $input["date"];
+        $movie->type = $input["type"];
         $movie->save();
     }
     public function upd($request)
@@ -35,6 +37,7 @@ class MovieDate extends Model
         $movie->MovieName = $input["MovieName"];
         $movie->time = $input["time"];
         $movie->date = $input["date"];
+        $movie->type = $input["type"];
         $movie->update();
     }
  

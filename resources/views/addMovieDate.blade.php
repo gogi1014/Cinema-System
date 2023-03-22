@@ -1,7 +1,7 @@
 @extends('master')
 
 @section('content')
-<form action="createMovieDate" method="post">
+<form action="/admin/createMovieDate" method="post">
   @csrf
   <div class="form-group">
     <label for="timeSelected">Филм</label>
@@ -28,17 +28,26 @@
     <label for="date">Дата</label>
     <input type="date" class="form-control" name="date" id="date" placeholder="date">
   </div>
+  <select name="type" onchange="changeType(this.value);">
+    <option disabled selected value> -- Изберете тип -- </option>
+    <option value="2D">2D</option>
+    <option value="3D">3D</option>
+  </select>
+  <input type="text" class="form-control" name="Typ" id="Typ" >
   <button type="submit" class="btn btn-primary">Submit</button>
+  <p id="myPara"></p>
+
 </form>
+<script src="{{ asset('js/menu.js') }}" defer></script>
 
 @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
+<div class="alert alert-danger">
+  <ul>
+    @foreach ($errors->all() as $error)
+    <li>{{ $error }}</li>
+    @endforeach
+  </ul>
+</div>
 @endif
 
 @endsection

@@ -32,12 +32,13 @@ class MovieController extends Controller
     {
         $movies = Movie::find($primaryKey);
         $moviedate = MovieDate::where('MovieId', $primaryKey)->get()->unique('date');
-        $movietime = MovieDate::where('date', $request->date)->get();
+        $movietime = MovieDate::where('date', $request->date) ->where('type', '2D')->get();
+        $movietimee = MovieDate::where('date', $request->date) ->where('type', '3D')->get();
         $moviesAll = Movie::get()->unique('movieCat');
         $reqDate = $request->date;
         return view('content', [
             'movies' => $movies, 'moviedate' => $moviedate, 'moviesAll' => $moviesAll, 'movietime' => $movietime,
-            'reqDate' => $reqDate,'arr' => $movies->fpMovies()]);
+            'movietimee' => $movietimee,'reqDate' => $reqDate,'arr' => $movies->fpMovies()]);
     }
     function addBooking(Request $request)
     {
@@ -50,6 +51,28 @@ class MovieController extends Controller
         return redirect('')->with('success', 'Your form has been submitted.');
     }
     
+    public function getJSON(Request $request)
+{
+
+    $url = 'https://seahorse-app-5zbbj.ondigitalocean.app/api/movie';
+
+    $response = file_get_contents($url);
+    $newsData = json_decode($response);
+
+    return view('map', ['newsData' => $newsData]);
+
+}
+public function searchJSON(Request $request)
+{
+    $search = $request->input('search');
+    $url = 'https://seahorse-app-5zbbj.ondigitalocean.app/api/movie/' + $search;
+
+    $response = file_get_contents($url);
+    $newsDataa = json_decode($response);
+
+    return view('map', ['search' => $search]);
+
+}
 }
 
 
