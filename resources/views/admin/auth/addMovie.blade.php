@@ -14,7 +14,7 @@
   </div>
   <div class="form-group">
     <label for="movieTrailer">Трейлър</label>
-    <input type="text" class="form-control" name="movieTrailer" id="movieTrailer" placeholder="Заглавие">
+    <input type="text" class="form-control" name="movieTrailer" id="movieTrailer" placeholder="Трейлър">
   </div>
   <div class="form-group">
     <label for="movieGenre">Жанр</label>

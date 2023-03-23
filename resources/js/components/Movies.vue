@@ -110,8 +110,8 @@
                                 placeholder="Дата на излизане" /></td>
                     </tr>
                     <tr>
-                        <td><label for="movieDirector">Продуцент </label></td>
-                        <td><input type='text' id="movieDirector" style="width: 100%;" v-model="movieDirector" placeholder="Продуцент" />
+                        <td><label for="movieDirector">Режисьор </label></td>
+                        <td><input type='text' id="movieDirector" style="width: 100%;" v-model="movieDirector" placeholder="Режисьор" />
                         </td>
                     </tr>
                     <tr>

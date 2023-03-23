@@ -56,6 +56,7 @@
                         <div class="form-group">
                             <select name="category" onChange="comboboxFilter.submit();">
                                 <option disabled selected value> -- Изберете категория -- </option>
+                                <option value=" "> -- Всички -- </option>
                                 @foreach ($moviesAll as $movie)
                                 <option value="{{$movie->movieCat}}">{{$movie->movieCat}}</option>
                                 @endforeach
@@ -66,6 +67,7 @@
                         <div class="form-group">
                             <select name="genres" onChange="genresFilter.submit();">
                                 <option disabled selected value> -- Изберете жанр -- </option>
+                                <option value=" "> -- Всички -- </option>
                                 @foreach (($arr) as $moviesGenres)
                                 <option value="{{$moviesGenres}}">{{$moviesGenres}}</option>
                                 @endforeach

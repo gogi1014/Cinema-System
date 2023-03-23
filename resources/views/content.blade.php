@@ -99,6 +99,10 @@
         <label for="ticknum">Брой билети</label>
         <input type="text" class="form-control" name="ticknum" id="ticknum" placeholder="Брой билети">
       </div>
+      <div class="form-group">
+        <label for="ticknum">Места</label>
+        <input type="text" class="form-control" name="places" id="places" placeholder="Места">
+      </div>
       @if(isset($date->date)&& (isset($time->time)))
       <div class="form-group">
         <input type="hidden" class="form-control" name="datte" id="datte" value="{{$reqDate}}">

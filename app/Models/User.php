@@ -24,6 +24,7 @@ class User extends Authenticatable
         'ticknum',
         'time',
         'MovieId',
+        'places',
         'created_at',
     ];
     public function searchBookings($input)
@@ -44,7 +45,8 @@ class User extends Authenticatable
         $user->ticknum = $input["ticknum"];
         $user->MovieId = $input["MovieId"];
         $email = $input["email"];
-        $reservation = 'Резервация за филма '.$user->MovieId.' на дата '.$user->date.' от '.$user->time.' Брой билети: '.$user->ticknum;
+        $user->places = $input["places"];
+        $reservation = 'Резервация за филма '.$user->MovieId.' на дата '.$user->date.' от '.$user->time.' Брой билети: '.$user->ticknum.' Места: '.$user->places;
         $data = array('name'=>$fullName,'comment' => $reservation);
         Mail::send(['text'=>'mail'], $data, function($message) use ($email) {
             $message->to($email, 'Tutorials Point')->subject
