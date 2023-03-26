@@ -82,7 +82,7 @@ class AdminAuthController extends Controller
     function addMovie(Request $request)
     {
         $this->validate($request, [
-            'movieTitle' => 'required|string|min:3|max:255',
+            'movieTitle' => 'required|string|max:255',
             'movieGenre' => 'required|string|max:255',
             'movieDuration' => 'required|int',
             'movieDirector' => 'required|string|max:255',

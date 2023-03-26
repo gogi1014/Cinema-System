@@ -46,7 +46,7 @@ class PostController extends Controller
 
         return response()->json([
             'status' => true,
-            'message' => "Успешно създаден филм!",
+            'message' => "Movie created succesfully!",
             'movie' => $movie
         ], 200);
     }
@@ -62,7 +62,7 @@ class PostController extends Controller
         $movie = Movie::find($id);
   
         if (!$movie) {
-            return response()->json(['message'=>"Филмът не е открит",404]);
+            return view('error404');
         }
         return [
             "status" => 1,
@@ -91,15 +91,15 @@ class PostController extends Controller
     public function update(StorePostRequest $request, $id)
     {
         $movie = Movie::find($id);
-        $movie->update($request->all());
-
         if (!$movie) {
-            return response()->json(['message'=>"Филмът не е открит",404]);
+            return view('error404');
         }
         
+        $movie->update($request->all());
+
         return response()->json([
             'status' => true,
-            'message' => "Успешно актуализиран филм!",
+            'message' => "Movie updated succesfully!",
             'movie' => $movie
         ], 200);
     }
@@ -113,14 +113,15 @@ class PostController extends Controller
     public function destroy($id)
     {
         $movie = Movie::find($id);
+        if ($movie == null) {
+            return view('error404');
+        }
         $movie->delete();
 
-        if (!$movie) {
-            return response()->json(['message'=>"Movie not found",404]);
-        }
+        
         return response()->json([
             'status' => true,
-            'message' => "Успешно изтрит филм!",
+            'message' => "Movie deleted succesfully!",
         ], 200);
     }
 }

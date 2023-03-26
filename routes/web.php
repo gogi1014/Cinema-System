@@ -22,9 +22,8 @@ Route::get('/content/{id}/{date?}/{time?}', [MovieController::class, 'ShowConten
 Route::get('/search/', [MovieController::class, 'getMovies']);
 Route::post('/create', [MovieController::class, 'addBooking']);
 
-
-Route::get('/aaa', [MovieController::class, 'getJSON']);
-Route::get('/aaa', [MovieController::class, 'searchJSON']);
+Route::get('/aaa', [MovieController::class, 'getMovieApi']);
+Route::post('/aaa', [MovieController::class, 'getMovieApi']);
 
 
 

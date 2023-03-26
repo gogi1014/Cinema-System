@@ -40,13 +40,18 @@ function timeButton(time,date) {
 function formdata() 
 {
 var firstname1= document.getElementById("filterID").value;
-window.location  = "https://seahorse-app-5zbbj.ondigitalocean.app/api/movie/" + firstname1;
+window.location  = "/api/movie/" + firstname1;
 
 }
 
 function changeType(typee) 
 {
   document.getElementById("Typ").value = typee;
+}
 
+function formDelete() 
+{
+var firstname1= document.getElementById("searchfield").value;
+document.document.getElementById('search-theme-form').action = "{{route('movie.destroy'," + firstname1 + ")}}";
 
 }

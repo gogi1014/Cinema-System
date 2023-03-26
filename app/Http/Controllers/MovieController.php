@@ -26,19 +26,21 @@ class MovieController extends Controller
         $input = array("search" => $search, "category" => $category, "genres" => $genres, "pagg" => 3);
         return view('fp', [
             'movies' => $movies->getMovies($input), 'moviesAll' => $moviesAll, 'moviedate' => $moviedate,
-            'moviesTrailer' => $moviesTrailer, 'moviesSoon' => $moviesSoon, 'arr' => $movies->fpMovies()]);
+            'moviesTrailer' => $moviesTrailer, 'moviesSoon' => $moviesSoon, 'arr' => $movies->fpMovies()
+        ]);
     }
     public function ShowContent($primaryKey, Request $request)
     {
         $movies = Movie::find($primaryKey);
         $moviedate = MovieDate::where('MovieId', $primaryKey)->get()->unique('date');
-        $movietime = MovieDate::where('date', $request->date) ->where('type', '2D')->get();
-        $movietimee = MovieDate::where('date', $request->date) ->where('type', '3D')->get();
+        $movietime = MovieDate::where('date', $request->date)->where('type', '2D')->get();
+        $movietimee = MovieDate::where('date', $request->date)->where('type', '3D')->get();
         $moviesAll = Movie::get()->unique('movieCat');
         $reqDate = $request->date;
         return view('content', [
             'movies' => $movies, 'moviedate' => $moviedate, 'moviesAll' => $moviesAll, 'movietime' => $movietime,
-            'movietimee' => $movietimee,'reqDate' => $reqDate,'arr' => $movies->fpMovies()]);
+            'movietimee' => $movietimee, 'reqDate' => $reqDate, 'arr' => $movies->fpMovies()
+        ]);
     }
     function addBooking(Request $request)
     {
@@ -50,31 +52,13 @@ class MovieController extends Controller
         User::store($request);
         return redirect('')->with('success', 'Your form has been submitted.');
     }
-    
-    public function getJSON(Request $request)
-{
 
-    $url = 'https://seahorse-app-5zbbj.ondigitalocean.app/api/movie';
+    public function getMovieApi(Request $request)
+    {
+        $movies = Movie::all();
+        $moviess=Movie::find(1);
 
-    $response = file_get_contents($url);
-    $newsData = json_decode($response);
-
-    return view('map', ['newsData' => $newsData]);
-
+        $search = $request->input('search');
+        return view('map', ['movies' => $movies,'moviess' => $moviess,'search' => $search]);
+    }
 }
-public function searchJSON(Request $request)
-{
-    $search = $request->input('search');
-    $url = 'https://seahorse-app-5zbbj.ondigitalocean.app/api/movie/' + $search;
-
-    $response = file_get_contents($url);
-    $newsDataa = json_decode($response);
-
-    return view('map', ['search' => $search]);
-
-}
-}
-
-
-
-?>

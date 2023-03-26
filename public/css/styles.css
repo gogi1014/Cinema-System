@@ -348,3 +348,8 @@ transform: translateX(0);
   width: -moz-max-content;
   width: max-content;
  }
+
+ #deleteBtn , #editBtn {
+  display:inline-block;
+  /* additional code */
+  }

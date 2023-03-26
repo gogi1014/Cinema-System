@@ -347,3 +347,8 @@ transform: translateX(0);
  .vuetab {
   width: max-content;
  }
+
+ #deleteBtn , #editBtn {
+  display:inline-block;
+  /* additional code */
+  }
