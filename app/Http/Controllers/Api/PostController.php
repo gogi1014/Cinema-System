@@ -118,7 +118,7 @@ class PostController extends Controller
         }
         $movie->delete();
 
-        
+
         return response()->json([
             'status' => true,
             'message' => "Movie deleted succesfully!",

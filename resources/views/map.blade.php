@@ -136,64 +136,59 @@
                             <h4 class="modal-title">Редактиране</h4>
                         </div>
                         <div class="modal-body">
-                            <form action="{{route('movie.update',$movie->movieId)}}" method="post">
+                            <form action="{{route('movie.update', $movie->movieId)}}" method="post">
                                 @csrf
                                 @method('PUT')
                                 <div class="form-group">
-                                <label for="movieLan">Id</label>
-                                <input type="text" value="{{ $movie->movieId }}" />
-                                </div>
-                                <div class="form-group">
-                                <label for="movieLan">Заглавие</label>
-                                <input type="text" value="{{ $movie->movieTitle }}" />
-                                </div>
-                                <div class="form-group">
-                                <label for="movieLan">Постер</label>
-                                <input type="text" value="{{ $movie->movieImg }}" />
-                                </div>
-                                <div class="form-group">
-                                <label for="movieLan">Трейлър</label>
-                                <input type="text" value="{{ $movie->movieTrailer }}" />
-                                </div>
-                                <div class="form-group">
-                                <label for="movieLan">Жанр</label>
-                                <input type="text" value="{{ $movie->movieGenre }}" />
-                                </div>
-                                <div class="form-group">
-                                <label for="movieLan">Времетраене</label>
-                                <input type="number" value="{{ $movie->movieDuration }}" />
-                                </div>
-                                <div class="form-group">
-                                <label for="movieLan">Дата на излизане</label>
-                                <input type="date" value="{{ $movie->movieRelDate }}" />
-                                </div>
-                                <div class="form-group">
-                                <label for="movieLan">Режисьор</label>
-                                <input type="text" value="{{ $movie->movieDirector }}" />
-                                </div>
-                                <div class="form-group">
-                                <label for="movieLan">Актьори</label>
-                                <input type="text" value="{{ $movie->movieActors }}" />
-                                </div>
-                                <div class="form-group">
-                                <label for="movieLan">Описание</label>
-                                <input type="text" value="{{ $movie->Description }}" />
-                                </div>
-                                <div class="form-group">
+                                <label for="movieImg">Постер</label>
+                                <input type="text" value="{{ $movie->movieImg }}"  class="form-control" name="movieImg" id="movieImg" placeholder="Постер">
+                            </div>
+                            <div class="form-group">
+                                <label for="movieTitle">Заглавие</label>
+                                <input type="text" value="{{ $movie->movieTitle }}" class="form-control" name="movieTitle" id="movieTitle" placeholder="Заглавие">
+                            </div>
+                            <div class="form-group">
+                                <label for="movieTrailer">Трейлър</label>
+                                <input type="text" value="{{ $movie->movieTrailer }}" class="form-control" name="movieTrailer" id="movieTrailer" placeholder="Заглавие">
+                            </div>
+                            <div class="form-group">
+                                <label for="movieGenre">Жанр</label>
+                                <input type="text" value="{{ $movie->movieGenre }}" class="form-control" name="movieGenre" id="movieGenre" placeholder="Жанр">
+                            </div>
+                            <div class="form-group">
+                                <label for="movieDuration">Времетраене</label>
+                                <input type="number" value="{{ $movie->movieDuration }}" class="form-control" name="movieDuration" id="movieDuration" placeholder="Времетраене">
+                            </div>
+                            <div class="form-group">
+                                <label for="movieRelDate">Дата на излизане</label>
+                                <input type="date" value="{{ $movie->movieRelDate }}" class="form-control" name="movieRelDate" id="movieRelDate" placeholder="Дата на излизане">
+                            </div>
+                            <div class="form-group">
+                                <label for="movieDirector">Режисьор</label>
+                                <input type="text" value="{{ $movie->movieDirector }}" class="form-control" name="movieDirector" id="movieDirector" placeholder="Режисьор">
+                            </div>
+                            <div class="form-group">
+                                <label for="movieActors">Актъори</label>
+                                <input type="text" value="{{ $movie->movieActors }}" class="form-control" name="movieActors" id="movieActors" placeholder="Актъори">
+                            </div>
+                            <div class="form-group">
+                                <label for="Description">Описание</label>
+                                <input  type="text" value="{{ $movie->Description }}" class="form-control" name="Description" id="Description" >
+                            </div>
+                            <div class="form-group">
                                 <label for="movieLan">Език</label>
-                                <input type="text" value="{{ $movie->movieLan }}" />
-                                </div>
-                                <div class="form-group">
-                                <label for="movieLan">Категория</label>
-                                <input type="text" value="{{ $movie->movieCat }}" />
-                                </div>
-                                <div class="form-group">
-                                <label for="movieLan">Активен</label>
-                                <input type="text" value="{{ $movie->active }}" />
-                                </div>
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                <button type="submit">Редактирай</button>
-                            </form>
+                                <input type="text" value="{{ $movie->movieLan }}" class="form-control" name="movieLan" id="movieLan" placeholder="Език">
+                            </div>
+                            <div class="form-group">
+                                <label for="movieCat">Категория</label>
+                                <input type="text" value="{{ $movie->movieCat }}" class="form-control" name="movieCat" id="movieCat" placeholder="Категория">
+                            </div>
+                            <div class="form-group">
+                                <label for="active">Активен</label>
+                                <input type="number" value="{{ $movie->active }}" class="form-control" name="active" id="active" placeholder="Активен">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
                         </div>
                     </div>
                 </div>
