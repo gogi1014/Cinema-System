@@ -176,8 +176,10 @@
 </div>
 @endif
 </form>
-<button id="editBtn" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#a"> Избор на място</button>
-<button type="submit" form="form1" class="btn btn-primary">Submit</button>
+<div class="form-group">
+<button id="editBtn" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#a">Избор на място</button>
+</div>
+<button type="submit" form="form1" class="btn btn-primary">Резервирай</button>
 
 </div>
 <script src="{{ asset('js/menu.js') }}" defer></script>

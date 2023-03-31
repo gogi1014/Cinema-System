@@ -64,17 +64,18 @@ function reply_click(clicked_id) {
   var docId = document.getElementById(clicked_id);
 
   if (document.getElementById(clicked_id).className == "seat") {
-    cnt++;
-    if (cnt > document.getElementById("ticknum").value) {
-      for (var i = 0; i == cusid_ele.length; i++) {
-        var item = cusid_ele[i];
+    if (cnt == document.getElementById("ticknum").value) {
+      while (cusid_ele.length) {
+        var item = cusid_ele[0];
         item.className = 'seat';
         place.value = "";
-        cnt = 0;
       }
+      cnt = 0;
     }
     document.getElementById(clicked_id).className = "seat selected";
     document.getElementById("places").value += clicked_id + " ";
+    cnt++;
+    console.log(cusid_ele.length);
   }
   else {
     document.getElementById(clicked_id).className = "seat";
