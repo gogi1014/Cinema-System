@@ -89,7 +89,7 @@ class Movie extends Model
         $client = Movie::all()->pluck('movieGenre')->toArray();
         $client2 = implode(",",  $client );
         $data=explode(",", $client2);
-        return $data;
+        return array_unique($data);
     }
 }
 

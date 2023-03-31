@@ -57,7 +57,7 @@
 </div>
 <div id="createBooking">
   <h2 id="title">Направи резервация</h2>
-  <form action="/create" method="post">
+  <form action="/create" method="post" id="form1">
     @csrf
     <div class="form-group">
       <label for="dateSelected">Дата</label>
@@ -103,26 +103,82 @@
         <label for="ticknum">Места</label>
         <input type="text" class="form-control" name="places" id="places" placeholder="Места">
       </div>
-      @if(isset($date->date)&& (isset($time->time)))
-      <div class="form-group">
-        <input type="hidden" class="form-control" name="datte" id="datte" value="{{$reqDate}}">
+      <div class="modal fade" id="a" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Изберете си място</h4>
+            </div>
+            <div class="modal-body">
+              <div class="container">
+                <div class="screen"></div>
+               
+                <div class="row">
+                  @for($i=1;$i < 8; $i++) <div id="{{$i}}A" onClick="reply_click(this.id)" class="seat">
+                </div>
+                @endfor
+              </div>
+              <div class="row">
+                @for($i=1;$i < 8; $i++) <div id="{{$i}}B" onClick="reply_click(this.id)" class="seat">
+              </div>
+              @endfor
+            </div>
+            <div class="row">
+              @for($i=1;$i < 8; $i++) <div id="{{$i}}C" onClick="reply_click(this.id)" class="seat">
+            </div>
+            @endfor
+          </div>
+          <div class="row">
+            @for($i=1;$i < 8; $i++) <div id="{{$i}}D" onClick="reply_click(this.id)" class="seat">
+          </div>
+          @endfor
+        </div>
+        <div class="row">
+          @for($i=1;$i < 8; $i++) <div id="{{$i}}E" onClick="reply_click(this.id)" class="seat">
+        </div>
+        @endfor
       </div>
-      <div class="form-group">
-        <input type="hidden" class="form-control" name="timee" id="timee">
+      <div class="row">
+        @for($i=1;$i < 8; $i++) <div id="{{$i}}F" onClick="reply_click(this.id)" class="seat">
       </div>
-      @endif
-      <button type="submit" class="btn btn-primary">Submit</button>
+      @endfor
     </div>
-    @if ($errors->any())
-    <div class="alert alert-danger">
-      <ul>
-        @foreach ($errors->all() as $error)
-        <li>{{ $error }}</li>
-        @endforeach
-      </ul>
+    <div class="row">
+      @for($i=1;$i < 8; $i++) <div id="{{$i}}G" onClick="reply_click(this.id)" class="seat">
     </div>
-    @endif
-  </form>
+    @endfor
+</div>
+</div>
+</div>
+<div class="modal-footer">
+</div>
+</div>
+</div>
+</div>
+@if(isset($date->date)&& (isset($time->time)))
+<div class="form-group">
+  <input type="hidden" class="form-control" name="datte" id="datte" value="{{$reqDate}}">
+</div>
+<div class="form-group">
+  <input type="hidden" class="form-control" name="timee" id="timee">
+</div>
+@endif
+
+</div>
+@if ($errors->any())
+<div class="alert alert-danger">
+  <ul>
+    @foreach ($errors->all() as $error)
+    <li>{{ $error }}</li>
+    @endforeach
+  </ul>
+</div>
+@endif
+</form>
+<button id="editBtn" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#a"> Избор на място</button>
+<button type="submit" form="form1" class="btn btn-primary">Submit</button>
+
 </div>
 <script src="{{ asset('js/menu.js') }}" defer></script>
 

@@ -2,7 +2,6 @@
 
 @section('content')
 
-
 <div id="app">
   <table id="tableContent">
 

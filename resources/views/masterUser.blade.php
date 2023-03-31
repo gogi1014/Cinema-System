@@ -47,12 +47,12 @@
                     <h1>Уеб информационна система за кино</h1>
                 </div>
                 <div class="headerSearch">
-                    <form action="{{ url('/') }}" method="GET">
+                    <form id="searchMov" action="{{ url('/') }}" method="GET">
                         <input type="text" name="search" class="searchTerm" required />
                         <button type="submit" class="searchButton">
                             <i class="fa fa-search" class="searchButton"></i></button>
                     </form>
-                    <form name="comboboxFilter" action="{{ url('/') }}" method="GET">
+                    <form name="comboboxFilter"  action="{{ url('/') }}" method="GET">
                         <div class="form-group">
                             <select name="category" onChange="comboboxFilter.submit();">
                                 <option disabled selected value> -- Изберете категория -- </option>
