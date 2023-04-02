@@ -57,6 +57,13 @@ function getData(e) {
   e.preventDefault();
 }
 
+function getTicketNum(obj) {
+  if (obj.value.length > 0) {
+      document.getElementById("chooseBtn").disabled = false;
+  } else {
+      document.getElementById("chooseBtn").disabled = true;
+  }
+}
 var cnt = 0;
 function reply_click(clicked_id) {
   var cusid_ele = document.getElementsByClassName('seat selected');

@@ -73,38 +73,44 @@
       <p>2D</p>
       @endif
       @foreach ($movietime as $time)
-      <input type="button" onclick="timeButton('{{$time->time}}','{{ $reqDate}}')" id="time" value="{{$time->time}}">
+      <input class="btn btn-light" type="button" onclick="timeButton('{{$time->time}}','{{ $reqDate}}')" id="2D" value="{{$time->time}}">
       @endforeach
       <p>3D</p>
       @foreach ($movietimee as $time)
-      <input type="button" onclick="timeButton('{{$time->time}}','{{ $reqDate}}')" id="time" value="{{$time->time}}">
+      <input class="btn btn-light" type="button" onclick="timeButton('{{$time->time}}','{{ $reqDate}}')" id="3D" value="{{$time->time}}">
       @endforeach
       <p id="myPara"></p>
+      <div class="form-row">
+
+        <div class="form-group col-md-5">
+          <label for="firstname">Име</label>
+          <input type="text" class="form-control" name="firstname" id="firstname" placeholder="Име">
+        </div>
+        <div class="form-group col-md-5">
+          <label for="lastname">Фамилия</label>
+          <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Фамилия">
+        </div>
+      </div>
       <div class="form-group">
         <input type="hidden" class="form-control" name="MovieId" id="MovieId" value="{{ $movies->movieTitle }}">
       </div>
-      <div class="form-group">
-        <label for="firstname">Име</label>
-        <input type="text" class="form-control" name="firstname" id="firstname" placeholder="Име">
+      <div class="form-row">
+        <div class="form-group col-md-10">
+          <label for="email">Имейл</label>
+          <input type="text" class="form-control" name="email" id="email" placeholder="Имейл">
+        </div>
       </div>
-      <div class="form-group">
-        <label for="lastname">Фамилия</label>
-        <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Фамилия">
+      <label for="ticknum">Брой билети</label>
+      <div class="form-inline">
+        <div class="form-group">
+          <input type="text" class="form-control" name="ticknum" id="ticknum" onkeyup="getTicketNum(this)" placeholder="Брой билети">
+        </div>
+        <button disabled type="button" id="chooseBtn" class="btn btn-secondary" data-toggle="modal" data-target="#a">Избор на място</button>
+
       </div>
-      <div class="form-group">
-        <label for="email">Имейл</label>
-        <input type="text" class="form-control" name="email" id="email" placeholder="Имейл">
-      </div>
-      <div class="form-group">
-        <label for="ticknum">Брой билети</label>
-        <input type="text" class="form-control" name="ticknum" id="ticknum" placeholder="Брой билети">
-      </div>
-      <div class="form-group">
-        <label for="ticknum">Места</label>
-        <input type="text" class="form-control" name="places" id="places" placeholder="Места">
-      </div>
+
       <div class="modal fade" id="a" role="dialog">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -112,58 +118,35 @@
             </div>
             <div class="modal-body">
               <div class="container">
-                <div class="screen"></div>
-               
+                <div class="screenDiv">
+                  <div class="screen"></div>
+                </div>
+                @foreach(range('A','G') as $v)
                 <div class="row">
-                  @for($i=1;$i < 8; $i++) <div id="{{$i}}A" onClick="reply_click(this.id)" class="seat">
+                  @for($i=1;$i < 10; $i++) <div id="{{$i}}{{$v}}" onClick="reply_click(this.id)" class="seat">{{$i}}{{$v}}
                 </div>
                 @endfor
               </div>
-              <div class="row">
-                @for($i=1;$i < 8; $i++) <div id="{{$i}}B" onClick="reply_click(this.id)" class="seat">
-              </div>
-              @endfor
+              @endforeach
             </div>
-            <div class="row">
-              @for($i=1;$i < 8; $i++) <div id="{{$i}}C" onClick="reply_click(this.id)" class="seat">
+          </div>
+          <div class="modal-footer">
+            <div class="form-group">
+              <label for="ticknum">Места</label>
+              <input type="text" class="form-control" name="places" id="places" placeholder="Места">
             </div>
-            @endfor
           </div>
-          <div class="row">
-            @for($i=1;$i < 8; $i++) <div id="{{$i}}D" onClick="reply_click(this.id)" class="seat">
-          </div>
-          @endfor
         </div>
-        <div class="row">
-          @for($i=1;$i < 8; $i++) <div id="{{$i}}E" onClick="reply_click(this.id)" class="seat">
-        </div>
-        @endfor
       </div>
-      <div class="row">
-        @for($i=1;$i < 8; $i++) <div id="{{$i}}F" onClick="reply_click(this.id)" class="seat">
-      </div>
-      @endfor
     </div>
-    <div class="row">
-      @for($i=1;$i < 8; $i++) <div id="{{$i}}G" onClick="reply_click(this.id)" class="seat">
+    @if(isset($date->date)&& (isset($time->time)))
+    <div class="form-group">
+      <input type="hidden" class="form-control" name="datte" id="datte" value="{{$reqDate}}">
     </div>
-    @endfor
-</div>
-</div>
-</div>
-<div class="modal-footer">
-</div>
-</div>
-</div>
-</div>
-@if(isset($date->date)&& (isset($time->time)))
-<div class="form-group">
-  <input type="hidden" class="form-control" name="datte" id="datte" value="{{$reqDate}}">
-</div>
-<div class="form-group">
-  <input type="hidden" class="form-control" name="timee" id="timee">
-</div>
-@endif
+    <div class="form-group">
+      <input type="hidden" class="form-control" name="timee" id="timee">
+    </div>
+    @endif
 
 </div>
 @if ($errors->any())
@@ -177,7 +160,7 @@
 @endif
 </form>
 <div class="form-group">
-<button id="editBtn" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#a">Избор на място</button>
+
 </div>
 <button type="submit" form="form1" class="btn btn-primary">Резервирай</button>
 

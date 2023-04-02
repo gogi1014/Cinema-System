@@ -355,10 +355,10 @@ transform: translateX(0);
   /* Choose Movie places */
   .seat {
     background-color: #444451;
-    height: 26px;
-    width: 32px;
+    height: 50px;
+    width: 50px;
     margin: 3px;
-    font-size: 50px;
+    font-size: 13px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
   }
@@ -390,7 +390,7 @@ transform: translateX(0);
   }
   
   .showcase {
-    background: rgba(0, 0, 0, 0.1);
+    background: rgb(0, 0, 0);
     padding: 5px 10px;
     border-radius: 5px;
     color: #777;
@@ -411,14 +411,26 @@ transform: translateX(0);
   
   .row {
     display: flex;
-    margin-left: 12%;
+    margin-left: 14%;
   }
   
   .screen {
-    background-color: #fff;
-    height: 120px;
+    background-color: white;
+    height: 100px;
     width: 100%;
-    margin: 15px 0;
-    transform: rotateX(-48deg);
+    transform:perspective(10px) rotateX(-1deg);
     box-shadow: 0 3px 10px rgba(255, 255, 255, 0.7);
+  }
+
+  .screenDiv{
+    margin: 50px;
+    padding-top: 30px;
+    
+  }
+
+  .btn2D.selected{
+    background-color: #4CAF50;
+  }
+  .btn3D.selected{
+    background-color: #4CAF50;
   }
