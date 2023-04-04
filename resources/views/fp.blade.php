@@ -52,21 +52,13 @@
     {{$movies->appends($_GET)->links('pagination::bootstrap-4')}}
   </ul>
 </div>
-<div id="MovTrailers">
-  <h2>Трейлъри</h2>
-  <div class="grid">
-    @foreach ($moviesTrailer as $movie)
-    <div class="grid-item"><iframe width="420" height="315" src="{{ $movie->movieTrailer }}" frameborder="0" allowfullscreen></iframe></div>
-    @endforeach
-  </div>
-</div>
+
 
 <h2>Очаквайте</h2>
 <div class="slider-container" item-display-d="4" item-display-t="3" item-display-m="1">
   <div class="slider-width">
-    @foreach ($movies as $movie)
+    @foreach ($moviesTrailer as $movie)
     <div class="item"><img class="imgSoon" src="{{ $movie->movieImg }}" class="center" alt="..."></div>
-    {{ $movie->movieTitle }}
     @endforeach
   </div>
   <button type="button" class="prev" onclick="prev()">Prev</button>

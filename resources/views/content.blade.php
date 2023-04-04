@@ -124,7 +124,7 @@
                 </div>
                 @foreach(range('A','G') as $v)
                 <div class="row">
-                  @for($i=1;$i < 10; $i++) <div id="{{$i}}{{$v}}" onClick="reply_click(this.id)" class="seat">{{$i}}{{$v}}
+                  @for($i=1;$i < 10; $i++) <div id="{{$i}}{{$v}}" value="{{$i}}{{$v}}" onClick="reply_click(this.id)" class="seat">{{$i}}{{$v}}
                 </div>
                 @endfor
               </div>

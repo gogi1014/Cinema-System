@@ -7,18 +7,6 @@ function closeNav() {
 }
 
 
-function createBooking() {
-  var x = document.getElementById("createBooking");
-  x.addEventListener('click', function handleClick() {
-    x.textContent = 'Button clicked';
-  });
-  if (x.style.display === "none") {
-    x.style.display = "block";
-  } else {
-    x.style.display = "none";
-  }
-}
-
 function showPass() {
   var x = document.getElementById("password");
   if (x.type === "password") {
@@ -33,18 +21,18 @@ $("#dateSelected").change(function () {
 });
 
 function timeButton(time, date) {
+  /*let seatSold = document.getElementById("seatSold");
   var cusid_ele = document.getElementsByClassName('seat');
-  var seatSold = document.getElementById("seatSold")
-  var str = "1A FFFSAD"
+  for (var i=0; i< cusid_ele.length; i++) {
+    var item = cusid_ele[i].getAttribute('value');
+    console.log(item.match(seatSold.value));
+
+  }*/
   document.getElementById("timee").value = time;
   document.getElementById("myPara").innerHTML = "Вие избрахте в " + time + " часа" + " на дата: " + date;
   $("#selectedSeats").load(window.location.href + " #selectedSeats");
-  for (var i = 0; i < cusid_ele.length; i++) {
-    var item = cusid_ele[i];
-    let result = item.match("2A");
-    alert(result);
-  }
 }
+
 
 function formdata() {
   var firstname1 = document.getElementById("filterID").value;
@@ -60,10 +48,6 @@ function formDelete() {
   var firstname1 = document.getElementById("searchfield").value;
   document.document.getElementById('search-theme-form').action = "{{route('movie.destroy'," + firstname1 + ")}}";
 
-}
-
-function getData(e) {
-  e.preventDefault();
 }
 
 

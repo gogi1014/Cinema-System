@@ -100,12 +100,41 @@ a {
 
 .grid {
   display: grid;
+  
   grid-template-columns: repeat(3, 150px);
   /* 3 columns */
   grid-template-rows: repeat(2, 150px);
   /* 3 rows  */
   grid-gap: 60% 22%;
   /* 50 pixels of space added between rows and 30 pixels added between columns  */
+  
+}
+
+@media only screen and (max-width: 1400px) {
+  .grid {
+    display: grid;
+    
+    grid-template-columns: repeat(2, 50px);
+    /* 3 columns */
+    grid-template-rows: repeat(2, 50px);
+    /* 3 rows  */
+    grid-gap: 65% 50%;
+    /* 50 pixels of space added between rows and 30 pixels added between columns  */
+    
+  }
+}
+@media only screen and (max-width: 970px) {
+  .grid {
+    display: grid;
+    
+    grid-template-columns: repeat(1, 100px);
+    /* 3 columns */
+    grid-template-rows: repeat(1, 100px);
+    /* 3 rows  */
+    grid-gap: 2% 22%;
+    /* 50 pixels of space added between rows and 30 pixels added between columns  */
+    
+  }
 }
 
 #tableContent {
@@ -165,7 +194,7 @@ a:active {
   width: auto;
   padding: 16px;
   margin-top: -50px;
-  color: white;
+  color: black;
   font-weight: bold;
   font-size: 20px;
   border-radius: 0 3px 3px 0;
@@ -289,42 +318,6 @@ a:active {
   height: 50px;
   border-radius: 5px 0 0 5px;
   outline: none;
-}
-
-
-
-@media (max-width: 767px) {
-  .carousel-inner .carousel-item > div {
-      display: none;
-  }
-  .carousel-inner .carousel-item > div:first-child {
-      display: block;
-  }
-}
-
-.carousel-inner .carousel-item.active,
-.carousel-inner .carousel-item-next,
-.carousel-inner .carousel-item-prev {
-  display: flex;
-}
-
-/* medium and up screens */
-@media (min-width: 768px) {
-  
-  .carousel-inner .carousel-item-end.active,
-  .carousel-inner .carousel-item-next {
-    transform: translateX(25%);
-  }
-  
-  .carousel-inner .carousel-item-start.active, 
-  .carousel-inner .carousel-item-prev {
-    transform: translateX(-25%);
-  }
-}
-
-.carousel-inner .carousel-item-end,
-.carousel-inner .carousel-item-start { 
-transform: translateX(0);
 }
 
 .center {
@@ -470,7 +463,6 @@ transform: translateX(0);
    align-items: center;
     width: 200px;
     height: 500px;
-    margin: 0 10px;
     color: #fff;
     text-align: center;
     font-size: 40px;
@@ -479,5 +471,8 @@ transform: translateX(0);
 }
 
 .imgSoon {
-  height: 500px;
+  height: auto;
+
+  max-width: 80%
 }
+
