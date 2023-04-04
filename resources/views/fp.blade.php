@@ -60,28 +60,19 @@
     @endforeach
   </div>
 </div>
-<div id="MovSoon">
-  <h2>Очаквайте</h2>
-  <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img height="600px" src="{{ $movie->movieImg }}" class="center" alt="...">
-      </div>
-      @foreach ($moviesSoon as $movie)
-      <div class="carousel-item ">
-        <img height="600px" src="{{ $movie->movieImg }}" class="center" alt="...">
-        {{ $movie->movieTitle }}
-      </div>
-      @endforeach
-    </div>
-    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="sr-only">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="sr-only">Next</span>
-    </a>
-  </div>
 
-  @endsection
+<h2>Очаквайте</h2>
+<div class="slider-container" item-display-d="4" item-display-t="3" item-display-m="1">
+  <div class="slider-width">
+    @foreach ($movies as $movie)
+    <div class="item"><img class="imgSoon" src="{{ $movie->movieImg }}" class="center" alt="..."></div>
+    {{ $movie->movieTitle }}
+    @endforeach
+  </div>
+  <button type="button" class="prev" onclick="prev()">Prev</button>
+  <button type="button" class="next" onclick="next()">Next</button>
+</div>
+
+<script src="{{ asset('js/menu.js') }}" defer></script>
+
+@endsection

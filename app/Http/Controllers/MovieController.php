@@ -32,14 +32,16 @@ class MovieController extends Controller
     public function ShowContent($primaryKey, Request $request)
     {
         $movies = Movie::find($primaryKey);
+        $reqDate = $request->date;
+        $reqTime = $request->time;
         $moviedate = MovieDate::where('MovieId', $primaryKey)->get()->unique('date');
         $movietime = MovieDate::where('date', $request->date)->where('type', '2D')->get();
         $movietimee = MovieDate::where('date', $request->date)->where('type', '3D')->get();
         $moviesAll = Movie::get()->unique('movieCat');
-        $reqDate = $request->date;
+        $seatSold = User::where('MovieId', $movies->movieTitle)->where('date',$reqDate)->where('time',$reqTime)->get();
         return view('content', [
             'movies' => $movies, 'moviedate' => $moviedate, 'moviesAll' => $moviesAll, 'movietime' => $movietime,
-            'movietimee' => $movietimee, 'reqDate' => $reqDate, 'arr' => $movies->fpMovies()
+            'movietimee' => $movietimee, 'reqDate' => $reqDate, 'reqTime' => $reqTime, 'arr' => $movies->fpMovies(),'seatSold' => $seatSold
         ]);
     }
     function addBooking(Request $request)

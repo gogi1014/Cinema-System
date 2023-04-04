@@ -55,6 +55,7 @@
   <h2 id="title">{{ $movies->movieTitle }}</h2>
   <iframe width="100%" height="600" src="{{ $movies->movieTrailer }}" frameborder="0" allowfullscreen></iframe>
 </div>
+
 <div id="createBooking">
   <h2 id="title">Направи резервация</h2>
   <form action="/create" method="post" id="form1">
@@ -70,14 +71,14 @@
     </div>
     <div id="Selecteed">
       @if($movietime)
-      <p>2D</p>
+      <p id="label2D">2D</p>
       @endif
       @foreach ($movietime as $time)
-      <input class="btn btn-light" type="button" onclick="timeButton('{{$time->time}}','{{ $reqDate}}')" id="2D" value="{{$time->time}}">
+      <button type="button" value="{{ url('content/'.$movies->movieId.'/'.$date->date.'/'.$time->time.'/') }}" class="btn btn-light sm" type="button" onclick="window.history.pushState(null, null,this.value);timeButton('{{$time->time}}','{{ $reqDate}}')" id="2D">{{$time->time}}</button>
       @endforeach
-      <p>3D</p>
+      <p id="label3D">3D</p>
       @foreach ($movietimee as $time)
-      <input class="btn btn-light" type="button" onclick="timeButton('{{$time->time}}','{{ $reqDate}}')" id="3D" value="{{$time->time}}">
+      <button type="button" value="{{ url('content/'.$movies->movieId.'/'.$date->date.'/'.$time->time.'/') }}" class="btn btn-light sm" type="button" onclick="window.history.pushState(null, null,this.value);timeButton('{{$time->time}}','{{ $reqDate}}')" id="3D">{{$time->time}}</button>
       @endforeach
       <p id="myPara"></p>
       <div class="form-row">
@@ -144,11 +145,15 @@
       <input type="hidden" class="form-control" name="datte" id="datte" value="{{$reqDate}}">
     </div>
     <div class="form-group">
-      <input type="hidden" class="form-control" name="timee" id="timee">
+      <input type="hidden" class="form-control" name="timee" id="timee" value="{{$reqTime}}">
     </div>
     @endif
-
 </div>
+<div id="selectedSeats">
+  <input type="text" class="form-control" name="seatSold" id="seatSold" value="@foreach ($seatSold as $seat){{$seat->places}}@endforeach">
+</div>
+<p id="demo"></p>
+
 @if ($errors->any())
 <div class="alert alert-danger">
   <ul>

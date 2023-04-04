@@ -131,6 +131,7 @@ a:active {
 
 #MovTrailers {
   padding-top: 20%;
+  padding-bottom: 50%;
 }
 
 #MovSoon {
@@ -434,3 +435,49 @@ transform: translateX(0);
   .btn3D.selected{
     background-color: #4CAF50;
   }
+
+  .carousel-control {
+    padding-top: 10%;
+    width: 5%;
+  }
+  
+  .thumbnail {
+    width: 100px;
+    height: 100px;
+    background-color: skyblue;
+    text-align: center;
+    color: white;
+    font-size: 30px;
+  }
+  
+  .slider-container{
+    position: relative;
+    overflow-x: hidden;
+    height: 700px;
+}
+.slider-width{
+    position: absolute;
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    left: 0;
+    top: 0;
+    transition: 0.4s ease-in-out;
+}
+.item{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+    width: 200px;
+    height: 500px;
+    margin: 0 10px;
+    color: #fff;
+    text-align: center;
+    font-size: 40px;
+    font-weight: 800;
+    overflow: hidden;
+}
+
+.imgSoon {
+  height: 500px;
+}

@@ -17,10 +17,10 @@ class PostController extends Controller
     public function index()
     {
         $movies = Movie::all();
-
+        
         return response()->json([
             'status' => true,
-            'movies' => $movies
+            'movies' => $movies,
         ]);
     }
 
