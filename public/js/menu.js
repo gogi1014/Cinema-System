@@ -21,13 +21,15 @@ $("#dateSelected").change(function () {
 });
 
 function timeButton(time, date) {
-  /*let seatSold = document.getElementById("seatSold");
-  var cusid_ele = document.getElementsByClassName('seat');
-  for (var i=0; i< cusid_ele.length; i++) {
-    var item = cusid_ele[i].getAttribute('value');
-    console.log(item.match(seatSold.value));
+  let seatSold = document.getElementById("seatSold");
 
-  }*/
+  var cusid_ele = document.getElementsByClassName('seat');
+  for (var i = 0; i < cusid_ele.length; i++) {
+    var item = cusid_ele[i].getAttribute('value');
+    if (seatSold.value.match(item) != null) {
+      cusid_ele[i].className = 'seat sold';
+    }
+  }
   document.getElementById("timee").value = time;
   document.getElementById("myPara").innerHTML = "Вие избрахте в " + time + " часа" + " на дата: " + date;
   $("#selectedSeats").load(window.location.href + " #selectedSeats");
@@ -49,7 +51,6 @@ function formDelete() {
   document.document.getElementById('search-theme-form').action = "{{route('movie.destroy'," + firstname1 + ")}}";
 
 }
-
 
 /* $(document).ready(function(){
 }); */
@@ -98,7 +99,7 @@ var slider = document.getElementsByClassName("slider-width")[0];
 var itemDisplay = 0;
 if (screen.width > 990) {
   itemDisplay = document.getElementsByClassName("slider-container")[0].getAttribute("item-display-d");
-  margin = itemDisplay * 5;
+  margin = 0;
 }
 if (screen.width > 700 && screen.width < 990) {
   itemDisplay = document.getElementsByClassName("slider-container")[0].getAttribute("item-display-t");
@@ -114,7 +115,7 @@ var items = document.getElementsByClassName("item");
 var itemleft = items.length % itemDisplay;
 var itemslide = Math.floor(items.length / itemDisplay) - 1;
 for (let i = 0; i < items.length; i++) {
-  items[i].style.width = (screen.width / itemDisplay) - margin + "px";
+  items[i].style.width = (screen.width / itemDisplay) + "px";
 }
 
 function next() {

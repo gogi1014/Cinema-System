@@ -52,7 +52,7 @@ class MovieController extends Controller
             'email' => 'required|string|min:3|max:255',
         ]);
         User::store($request);
-        return redirect('')->with('success', 'Your form has been submitted.');
+        return redirect('')->with('success', 'Успешно направена резервацията. Проверете имейла си.');
     }
 
     public function getMovieApi(Request $request)

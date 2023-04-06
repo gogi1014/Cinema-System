@@ -74,11 +74,11 @@
       <p id="label2D">2D</p>
       @endif
       @foreach ($movietime as $time)
-      <button type="button" value="{{ url('content/'.$movies->movieId.'/'.$date->date.'/'.$time->time.'/') }}" class="btn btn-light sm" type="button" onclick="window.history.pushState(null, null,this.value);timeButton('{{$time->time}}','{{ $reqDate}}')" id="2D">{{$time->time}}</button>
+      <button type="button" value="{{ url('content/'.$movies->movieId.'/'.$date->date.'/'.$time->time.'/') }}" class="btnTime" type="button" onclick="window.history.pushState(null, null,this.value);timeButton('{{$time->time}}','{{ $reqDate}}')" id="2D">{{$time->time}}</button>
       @endforeach
       <p id="label3D">3D</p>
       @foreach ($movietimee as $time)
-      <button type="button" value="{{ url('content/'.$movies->movieId.'/'.$date->date.'/'.$time->time.'/') }}" class="btn btn-light sm" type="button" onclick="window.history.pushState(null, null,this.value);timeButton('{{$time->time}}','{{ $reqDate}}')" id="3D">{{$time->time}}</button>
+      <button type="button" value="{{ url('content/'.$movies->movieId.'/'.$date->date.'/'.$time->time.'/') }}" class="btnTime" type="button" onclick="window.history.pushState(null, null,this.value);timeButton('{{$time->time}}','{{ $reqDate}}')" id="3D">{{$time->time}}</button>
       @endforeach
       <p id="myPara"></p>
       <div class="form-row">
@@ -119,6 +119,20 @@
             </div>
             <div class="modal-body">
               <div class="container">
+                <ul class="showcase">
+                  <li>
+                    <div class="seat"></div>
+                    <small>Свободно</small>
+                  </li>
+                  <li>
+                    <div class="seat selected"></div>
+                    <small>Избрано</small>
+                  </li>
+                  <li>
+                    <div class="seat sold"></div>
+                    <small>Продадено</small>
+                  </li>
+                </ul>
                 <div class="screenDiv">
                   <div class="screen"></div>
                 </div>
@@ -150,10 +164,8 @@
     @endif
 </div>
 <div id="selectedSeats">
-  <input type="text" class="form-control" name="seatSold" id="seatSold" value="@foreach ($seatSold as $seat){{$seat->places}}@endforeach">
+  <input type="hidden" class="form-control" name="seatSold" id="seatSold" value="@foreach ($seatSold as $seat){{$seat->places}}@endforeach">
 </div>
-<p id="demo"></p>
-
 @if ($errors->any())
 <div class="alert alert-danger">
   <ul>
@@ -164,10 +176,7 @@
 </div>
 @endif
 </form>
-<div class="form-group">
-
-</div>
-<button type="submit" form="form1" class="btn btn-primary">Резервирай</button>
+<button type="submit" id="submitForm" form="form1" class="btn btn-primary">Резервирай</button>
 
 </div>
 <script src="{{ asset('js/menu.js') }}" defer></script>

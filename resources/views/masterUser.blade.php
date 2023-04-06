@@ -45,6 +45,7 @@
                     </form>
                     <form name="comboboxFilter"  action="{{ url('/') }}" method="GET">
                         <div class="form-group">
+                        <div class="selectCat">
                             <select name="category" onChange="comboboxFilter.submit();">
                                 <option disabled selected value> -- Изберете категория -- </option>
                                 <option value=" "> -- Всички -- </option>
@@ -52,6 +53,7 @@
                                 <option value="{{$movie->movieCat}}">{{$movie->movieCat}}</option>
                                 @endforeach
                             </select>
+                        </div>
                         </div>
                     </form>
                     <form name="genresFilter" action="{{ url('/') }}" method="GET">

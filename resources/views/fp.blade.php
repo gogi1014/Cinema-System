@@ -7,7 +7,7 @@
 
     @foreach ($movies as $movie)
     <tr class='trMovie'>
-      <td data-toggle="modal" data-target="#a{{ $movie->movieId }}"><img width="250px" height="315px" src="{{ $movie->movieImg }}"></td>
+      <td data-toggle="modal" data-target="#a{{ $movie->movieId }}"><img class="imgContent" src="{{ $movie->movieImg }}"></td>
       <td class='trMovie'>
         <table>
           <tr>
@@ -23,7 +23,7 @@
       <td>
         <!-- Modal -->
         <div class="modal fade" id="a{{ $movie->movieId }}" role="dialog">
-          <div class="modal-dialog">
+          <div class="modal-dialog modal-lg" >
 
             <!-- Modal content-->
             <div class="modal-content">
@@ -32,11 +32,11 @@
                 <h4 class="modal-title">{{ $movie->movieTitle }}</h4>
               </div>
               <div class="modal-body">
-                <iframe width="420" height="315" src="{{ $movie->movieTrailer }}" frameborder="0" allowfullscreen></iframe>
+                <iframe class="iframe"  src="{{ $movie->movieTrailer }}" frameborder="0" allowfullscreen></iframe>
               </div>
               <div class="modal-footer">
                 {{ $movie->movieGenre }} | {{ $movie->movieDuration }} мин. | Категория: {{ $movie->movieCat }} | {{ $movie->movieLan }}
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Затвори</button>
               </div>
             </div>
 
@@ -61,8 +61,8 @@
     <div class="item"><img class="imgSoon" src="{{ $movie->movieImg }}" class="center" alt="..."></div>
     @endforeach
   </div>
-  <button type="button" class="prev" onclick="prev()">Prev</button>
-  <button type="button" class="next" onclick="next()">Next</button>
+  <button type="button" class="prev" onclick="prev()">Назад</button>
+  <button type="button" class="next" onclick="next()">Напред</button>
 </div>
 
 <script src="{{ asset('js/menu.js') }}" defer></script>
