@@ -434,6 +434,26 @@ a:active {
   .seat.sold {
     background-color: #fff;
   }
+
+  .seatSelected {
+    background-color: green;
+    height: 50px;
+    width: 50px;
+    margin: 3px;
+    font-size: 13px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+  
+  .seatSold {
+    background-color: #fff;
+    height: 50px;
+    width: 50px;
+    margin: 3px;
+    font-size: 13px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
   
   .seat:nth-of-type(2) {
     margin-right: 18px;
@@ -521,9 +541,9 @@ a:active {
     font-size: 40px;
     font-weight: 800;
     overflow: hidden;
-    margin-right:-155px;
+    margin-right:-5%;
 }
 .imgSoon {
-
+  width: 350px;
   height: 500px
 }

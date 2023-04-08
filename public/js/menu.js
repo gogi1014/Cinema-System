@@ -21,10 +21,12 @@ $("#dateSelected").change(function () {
 });
 
 function timeButton(time, date) {
-  let seatSold = document.getElementById("seatSold");
+  $("#selectedSeats").load(window.location.href + " #selectedSeats");
 
+  let seatSold = document.getElementById("seatSold");
   var cusid_ele = document.getElementsByClassName('seat');
   for (var i = 0; i < cusid_ele.length; i++) {
+    cusid_ele[i].className = 'seat';
     var item = cusid_ele[i].getAttribute('value');
     if (seatSold.value.match(item) != null) {
       cusid_ele[i].className = 'seat sold';
@@ -32,7 +34,6 @@ function timeButton(time, date) {
   }
   document.getElementById("timee").value = time;
   document.getElementById("myPara").innerHTML = "Вие избрахте в " + time + " часа" + " на дата: " + date;
-  $("#selectedSeats").load(window.location.href + " #selectedSeats");
 }
 
 
@@ -52,8 +53,10 @@ function formDelete() {
 
 }
 
-/* $(document).ready(function(){
-}); */
+ $(document).ready(function(){
+  
+
+});
 
 function getTicketNum(obj) {
   if (obj.value.length > 0) {
