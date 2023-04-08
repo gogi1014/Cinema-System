@@ -18,12 +18,13 @@ class MovieController extends Controller
         $movies = new Movie();
         $moviedate = MovieDate::get();
         $moviesSoon = Movie::where('active', '0')->get();
+        $moviesSoonn = Movie::all();
         $search = $request->input('search');
         $category = $request->input('category');
         $genres = $request->input('genres');
         $input = array("search" => $search, "category" => $category, "genres" => $genres, "pagg" => 3);
         return view('fp', [
-            'movies' => $movies->getMovies($input), 'moviesAll' => $movies->getAllMovies(), 'moviedate' => $moviedate,
+            'movies' => $movies->getMovies($input), 'moviesAll' => $movies->getAllMovies(),'movieSoon' => $moviesSoonn, 'moviedate' => $moviedate,
             'moviesSoon' => $moviesSoon, 'arr' => $movies->fpMovies()
         ]);
     }
