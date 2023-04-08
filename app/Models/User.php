@@ -49,9 +49,10 @@ class User extends Authenticatable
         $user->MovieId = $input["MovieId"];
         $email = $input["email"];
         $user->places = $input["places"];
-        $reservation = 'Резервация за филма '.$user->MovieId.' на дата '.$user->date.' от '.$user->time.' Брой билети: '.$user->ticknum.' Места: '.$user->places;
-        $data = array('name'=>$fullName,'comment' => $reservation);
-        Mail::send(['text'=>'mail'], $data, function($message) use ($email) {
+        $full = $user->firstname." ".$user->lastname;
+        $data = array('name'=>$fullName,'movieName' => $user->MovieId,'full' => $full,
+        'date' => $user->date,'time' => $user->time,'ticknum' => $user->ticknum,'places' => $user->places);
+        Mail::send('mail', $data, function($message) use ($email) {
             $message->to($email, 'Tutorials Point')->subject
                 ('Резервиране на билет за кино');
             $message->from('killaonthehilla@gmail.com','Кино');
