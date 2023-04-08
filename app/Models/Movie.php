@@ -30,6 +30,10 @@ class Movie extends Model
     {
         return Movie::where('movieTitle', 'LIKE', '%' . $input->keyword . '%')->get();
     }
+    public function getAllMovies()
+    {
+        return Movie::get()->unique('movieCat');;
+    }
     public function getMovies($input)
     {
         $pagg = 5;

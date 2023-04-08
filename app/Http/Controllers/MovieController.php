@@ -17,31 +17,27 @@ class MovieController extends Controller
     {
         $movies = new Movie();
         $moviedate = MovieDate::get();
-        $moviesTrailer = Movie::get()->take(6);
         $moviesSoon = Movie::where('active', '0')->get();
-        $moviesAll = Movie::get()->unique('movieCat');
         $search = $request->input('search');
         $category = $request->input('category');
         $genres = $request->input('genres');
         $input = array("search" => $search, "category" => $category, "genres" => $genres, "pagg" => 3);
         return view('fp', [
-            'movies' => $movies->getMovies($input), 'moviesAll' => $moviesAll, 'moviedate' => $moviedate,
-            'moviesTrailer' => $moviesTrailer, 'moviesSoon' => $moviesSoon, 'arr' => $movies->fpMovies()
+            'movies' => $movies->getMovies($input), 'moviesAll' => $movies->getAllMovies(), 'moviedate' => $moviedate,
+            'moviesSoon' => $moviesSoon, 'arr' => $movies->fpMovies()
         ]);
     }
     public function ShowContent($primaryKey, Request $request)
     {
         $movies = Movie::find($primaryKey);
+        $moviesAll = new Movie();
+        $moviedate = new MovieDate();
         $reqDate = $request->date;
         $reqTime = $request->time;
-        $moviedate = MovieDate::where('MovieId', $primaryKey)->get()->unique('date');
-        $movietime = MovieDate::where('date', $request->date)->where('type', '2D')->get();
-        $movietimee = MovieDate::where('date', $request->date)->where('type', '3D')->get();
-        $moviesAll = Movie::get()->unique('movieCat');
-        $seatSold = User::where('MovieId', $movies->movieTitle)->where('date',$reqDate)->where('time',$reqTime)->get();
         return view('content', [
-            'movies' => $movies, 'moviedate' => $moviedate, 'moviesAll' => $moviesAll, 'movietime' => $movietime,
-            'movietimee' => $movietimee, 'reqDate' => $reqDate, 'reqTime' => $reqTime, 'arr' => $movies->fpMovies(),'seatSold' => $seatSold
+            'movies' => $movies, 'moviedate' => $moviedate->getMovieDate($primaryKey), 'moviesAll' => $moviesAll->getAllMovies(), 'movietime' => $moviedate->get2D($request),
+            'movietimee' => $moviedate->get3D($request), 'reqDate' => $reqDate, 'reqTime' => $reqTime, 'arr' => $movies->fpMovies(),
+            'seatSold' => (new User)->soldSeats($movies,$reqDate,$reqTime)
         ]);
     }
     function addBooking(Request $request)

@@ -18,6 +18,18 @@ class MovieDate extends Model
         'time',
         'type',
     ];
+    public function getMovieDate($primaryKey)
+    {
+        return MovieDate::where('MovieId', $primaryKey)->get()->unique('date');
+    }
+    public function get2D($request)
+    {
+        return MovieDate::where('date', $request->date)->where('type', '2D')->get();
+    }
+    public function get3D($request)
+    {
+        return MovieDate::where('date', $request->date)->where('type', '3D')->get();
+    }
     public static function store($request)
     {
         $input = $request->input();

@@ -164,7 +164,7 @@
     @endif
 </div>
 <div id="selectedSeats">
-  <input type="text" class="form-control" name="seatSold" id="seatSold" value="@foreach ($seatSold as $seat){{$seat->places}} @endforeach">
+  <input type="hidden" class="form-control" name="seatSold" id="seatSold" value="@foreach ($seatSold as $seat){{$seat->places}} @endforeach">
 </div>
 @if ($errors->any())
 <div class="alert alert-danger">

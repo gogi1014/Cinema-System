@@ -57,7 +57,7 @@
 <h2>Очаквайте</h2>
 <div class="slider-container" item-display-d="4" item-display-t="3" item-display-m="1">
   <div class="slider-width">
-    @foreach ($moviesTrailer as $movie)
+    @foreach ($moviesAll as $movie)
     <div class="item"><img class="imgSoon" src="{{ $movie->movieImg }}" class="center" alt="..."></div>
     @endforeach
   </div>

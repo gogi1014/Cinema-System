@@ -31,7 +31,10 @@ class User extends Authenticatable
     {
         return User::where('firstname', 'LIKE', '%' . $input->keyword . '%')->get();
     }
-
+    public function soldSeats($movies,$reqDate,$reqTime)
+    {
+        return User::where('MovieId', $movies->movieTitle)->where('date',$reqDate)->where('time',$reqTime)->get();
+    }
     public static function store($request)
     {
         $input = $request->input();
