@@ -24,7 +24,7 @@ class MovieController extends Controller
         $genres = $request->input('genres');
         $input = array("search" => $search, "category" => $category, "genres" => $genres, "pagg" => 3);
         return view('fp', [
-            'movies' => $movies->getMovies($input), 'moviesAll' => $movies->getAllMovies(),'movieSoon' => $moviesSoonn, 'moviedate' => $moviedate,
+            'movies' => $movies->getMovies($input,$request), 'moviesAll' => $movies->getAllMovies(),'movieSoon' => $moviesSoonn, 'moviedate' => $moviedate,
             'moviesSoon' => $moviesSoon, 'arr' => $movies->fpMovies()
         ]);
     }

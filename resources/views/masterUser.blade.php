@@ -43,17 +43,17 @@
                         <button type="submit" class="searchButton">
                             <i class="fa fa-search" class="searchButton"></i></button>
                     </form>
-                    <form name="comboboxFilter"  action="{{ url('/') }}" method="GET">
+                    <form name="comboboxFilter" action="{{ url('/') }}" method="GET">
                         <div class="form-group">
-                        <div class="selectCat">
-                            <select name="category" onChange="comboboxFilter.submit();">
-                                <option disabled selected value> -- Изберете категория -- </option>
-                                <option value=" "> -- Всички -- </option>
-                                @foreach ($moviesAll as $movie)
-                                <option value="{{$movie->movieCat}}">{{$movie->movieCat}}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                            <div class="selectCat">
+                                <select name="category" onChange="comboboxFilter.submit();">
+                                    <option disabled selected value> -- Изберете категория -- </option>
+                                    <option value=" "> -- Всички -- </option>
+                                    @foreach ($moviesAll as $movie)
+                                    <option value="{{$movie->movieCat}}">{{$movie->movieCat}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
                     </form>
                     <form name="genresFilter" action="{{ url('/') }}" method="GET">
@@ -64,7 +64,16 @@
                                 @foreach (($arr) as $moviesGenres)
                                 <option value="{{$moviesGenres}}">{{$moviesGenres}}</option>
                                 @endforeach
-                                </select>
+                            </select>
+                        </div>
+                    </form>
+                    <form name="genresCheckBox" action="{{ url('/') }}" method="GET" class="mb-4">
+                        {{csrf_field()}}
+                        <div class="form-group">
+                            @foreach (($arr) as $moviesGenres)
+                            <input type="checkbox" name="genres[{{$moviesGenres}}]">{{$moviesGenres}}
+                            @endforeach
+                            <input type="submit" value="Search" />
                         </div>
                     </form>
                 </div>
@@ -87,4 +96,5 @@
             </div>
         </div>
     </body>
+
     </html>
