@@ -18,6 +18,8 @@ use Inertia\Inertia;
 */
 
 Route::get('', [MovieController::class, 'getMovies']);
+Route::get('/fpMovies', [MovieController::class, 'jsonGetMovies']);
+
 Route::get('/content/{id}/{date?}/{time?}', [MovieController::class, 'ShowContent']);
 Route::get('/search/', [MovieController::class, 'getMovies']);
 Route::post('/create', [MovieController::class, 'addBooking']);
@@ -32,9 +34,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::post('/login', [AdminAuthController::class, 'postLogin'])->name('adminLoginPost');
  
     Route::group(['middleware' => 'adminauth'], function () {
-        Route::get('/', function () {
-            return view('welcome');
-        })->name('adminDashboard');
+        Route::get('/', [AdminAuthController::class, 'getCount']);
         Route::get('/addMovie', [AdminAuthController::class, 'insertform']);
         Route::post('/createMovie', [AdminAuthController::class, 'addMovie']);
         Route::get('/movies', [AdminAuthController::class, 'getMoviesAdmin']);

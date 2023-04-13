@@ -241,12 +241,26 @@ a:active {
   margin-top: 50;
   margin-bottom: 50;
 }
-
 #background{
   background-image: url("https://st2.depositphotos.com/2800301/11048/v/600/depositphotos_110481368-stock-illustration-cinema-icons-set-cinema-pattern.jpg");
+  
 }
-
-.container{
+#welcome {
+  margin-top: 10%;
+  font-size: 80px;
+}
+#backgroundAdmin{
+  background: linear-gradient(#3a3a44,rgb(0, 0, 0));
+  min-height: 100%;
+   background-size: cover;
+   background-repeat: no-repeat;
+   background-position: center center;
+   color: #F0F0F1;
+}
+#adminTable{
+  color: #F0F0F1;
+}
+#UserContainer{
   background-color: #2B2B2B ;
 }
 .headerTitle{

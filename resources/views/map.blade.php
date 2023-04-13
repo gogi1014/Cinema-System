@@ -38,7 +38,7 @@
 </head>
 
 <body id="background">
-    <div class="container">       
+    <div class="container" id="UserContainer">       
         <nav class="navbar navbar-light bg-light">
         <h1 class="navbar-brand">Отворена база данни за филми</h1>
         <a class="nav-item" href="/api/movie">

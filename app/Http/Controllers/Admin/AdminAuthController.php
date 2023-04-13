@@ -50,6 +50,14 @@ class AdminAuthController extends Controller
         Session::put('success', 'You are logout sucessfully');
         return redirect(route('adminLogin'));
     }
+    public function getCount(Request $request)
+    {
+        $movieCount = Movie::count(); 
+        $userCount = User::count(); 
+        return view('welcome', [
+            'movieCount' => $movieCount, 'userCount' => $userCount
+        ]);
+    }
     public function getMoviesAdmin(Request $request)
     {
         $cinema = (new Movie)->searchMovies($request);
@@ -97,7 +105,7 @@ class AdminAuthController extends Controller
 
     public function getBookingAdmin(Request $request)
     {
-        $user = User::get();
+        $user = (new User)->searchBookings($request);
         return response()->json($user);
     }
     public function getBookingAdminView(Request $request)
@@ -122,7 +130,7 @@ class AdminAuthController extends Controller
     }
     public function getmoviesDateAdmin(Request $request)
     {
-        $user = MovieDate::get();
+        $user = (new MovieDate)->searchMovie($request);
         return response()->json($user);
     }
     public function getmoviesDateAdminView(Request $request)

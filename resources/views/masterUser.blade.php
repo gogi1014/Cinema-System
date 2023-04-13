@@ -77,7 +77,7 @@
                 </div>
             </div>
             @yield('contentHeader')
-            <div class="container">
+            <div class="container" id="UserContainer">
                 @yield('content')
             </div>
             <div class="footer">
@@ -87,3 +87,4 @@
     </body>
 
     </html>
+    

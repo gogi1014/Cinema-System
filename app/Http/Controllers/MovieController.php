@@ -23,10 +23,19 @@ class MovieController extends Controller
         $category = $request->input('category');
         $genres = $request->input('genres');
         $input = array("search" => $search, "category" => $category, "genres" => $genres, "pagg" => 3);
+        $movieCount = Movie::count(); 
         return view('fp', [
-            'movies' => $movies->getMovies($input,$request), 'moviesAll' => $movies->getAllMovies(),'movieSoon' => $moviesSoonn, 'moviedate' => $moviedate,
+            'movieCount' => $movieCount,'movies' => $movies->getMovies($input, $request), 'moviesAll' => $movies->getAllMovies(), 'movieSoon' => $moviesSoonn, 'moviedate' => $moviedate,
             'moviesSoon' => $moviesSoon, 'arr' => $movies->fpMovies()
         ]);
+    }
+    public function jsonGetMovies(Request $request)
+    {
+        $query = User::select('*');
+
+            $query->where('movieTitle', 'like', "%{$request->input('name')}%");
+        
+            return response()->json($query);
     }
     public function ShowContent($primaryKey, Request $request)
     {
@@ -38,7 +47,7 @@ class MovieController extends Controller
         return view('content', [
             'movies' => $movies, 'moviedate' => $moviedate->getMovieDate($primaryKey), 'moviesAll' => $moviesAll->getAllMovies(), 'movietime' => $moviedate->get2D($request),
             'movietimee' => $moviedate->get3D($request), 'reqDate' => $reqDate, 'reqTime' => $reqTime, 'arr' => $movies->fpMovies(),
-            'seatSold' => (new User)->soldSeats($movies,$reqDate,$reqTime)
+            'seatSold' => (new User)->soldSeats($movies, $reqDate, $reqTime)
         ]);
     }
     function addBooking(Request $request)
@@ -55,9 +64,9 @@ class MovieController extends Controller
     public function getMovieApi(Request $request)
     {
         $movies = Movie::all();
-        $moviess=Movie::find(1);
+        $moviess = Movie::find(1);
 
         $search = $request->input('search');
-        return view('map', ['movies' => $movies,'moviess' => $moviess,'search' => $search]);
+        return view('map', ['movies' => $movies, 'moviess' => $moviess, 'search' => $search]);
     }
 }

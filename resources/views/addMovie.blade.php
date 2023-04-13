@@ -1,7 +1,6 @@
 @extends('master')
 
 @section('content')
-
 <form action="createMovie" method="post">
   @csrf
   <div class="form-group">

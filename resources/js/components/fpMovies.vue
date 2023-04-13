@@ -6,9 +6,9 @@
         <label>Търси филм:</label>
         <input type="text" v-model="keyword" placeholder="Търси филм.." />
     </div>
-    <div class="container" >
-    <table style="display: block; height: 1020px; overflow: auto;" class="table " id="adminTable">
-        <thead class="thead-dark">
+    <div class="container">
+    <table style="display: block; height: 1020px; overflow: auto;" class="table table-striped table-dark" >
+        <thead>
             <tr>
                 <th class="text-left">
                     ID
@@ -42,9 +42,6 @@
                 </th>
                 <th class="text-left">
                     Език
-                </th>
-                <th class="text-left">
-                    Активен
                 </th>
             </tr>
         </thead>
@@ -231,52 +228,10 @@ export default {
             axios.get('movies', { params: { keyword: this.keyword } })
                 .then(res => this.cinema = res.data)
         },
-        select: function (movieId, movieTitle, movieImg, movieTrailer, movieGenre, movieDuration, movieRelDate, movieDirector, movieActors, Description, movieCat, movieLan,active, showModal) {
-            this.movieId = movieId;
-            this.movieTitle = movieTitle;
-            this.movieImg = movieImg;
-            this.movieTrailer = movieTrailer;
-            this.movieGenre = movieGenre;
-            this.movieDuration = movieDuration;
-            this.movieRelDate = movieRelDate;
-            this.movieDirector = movieDirector;
-            this.movieActors = movieActors;
-            this.Description = Description;
-            this.movieCat = movieCat;
-            this.movieLan = movieLan;
-            this.active = active;
-            this.showModal = showModal;
-        },
-        updateRow: function (movieId, movieTitle, movieImg, movieTrailer, movieGenre, movieDuration, movieRelDate, movieDirector, movieActors, Description, movieCat, movieLan,active) {
-            axios.post(`update/${movieId}`, { movieId, movieTitle, movieImg, movieTrailer, movieGenre, movieDuration, movieRelDate, movieDirector, movieActors, Description, movieCat, movieLan,active }).then(response => {
-                console.log(response);
-                this.show();
-                this.suc = "Record updated successfully";
-                this.showModal = false;
-            })
-                .catch((error) => {
-                    this.errO = error.response.data.message;
-                });
-        },
         show: function () {
-            axios.get('movies').then(function (res) {
+            axios.get('fpMovies').then(function (res) {
                 this.cinema = res.data;
             }.bind(this));
-        },
-        Delete: function (movieId, showDelete) {
-            this.movieId = movieId;
-            this.showDelete = showDelete;
-        },
-        removeRow: function (movieId, showDelete) {
-            console.log("Row Deleted")
-            axios.delete(`delete/${movieId}`).then(response => {
-                console.log(response.data);
-                if (response.data.status == true) {
-                    this.show();
-                    this.showDelete = showDelete;
-                    this.suc = "Record deleted successfully";
-                }
-            });
         },
     },
     created: function () {

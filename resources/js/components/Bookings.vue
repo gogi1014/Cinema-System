@@ -6,8 +6,8 @@
         <label>Търси филм:</label>
         <input type="text" v-model="keyword" placeholder="Търси .." />
     </div>
-    <table class="table table-striped table-dark" id="my-table">
-        <thead>
+    <table class="table"  id="adminTable">
+        <thead class="thead-dark">
             <tr>
                 <th class="text-left">
                     ID
@@ -64,35 +64,35 @@
     <modal v-if="showModal" @close="showModal = false">
         <div class="modal-mask">
             <div class="edit">
-                <h3>Edit</h3>
+                <h3>Редактиране</h3>
                 <table class="tab">
                     <tr>
-                        <td><label for="firstname">FS </label></td>
+                        <td><label for="firstname">Име </label></td>
                         <td><input type='text' id="firstname" v-model="firstname" placeholder="Име" /></td>
                     </tr>
                     <tr>
-                        <td><label for="lastname">Age </label></td>
+                        <td><label for="lastname">Фамилия </label></td>
                         <td><input type='text' id="lastname" v-model="lastname" placeholder="Фамилия" /></td>
                     </tr>
                     <tr>
-                        <td><label for="email">Address </label></td>
+                        <td><label for="email">Имейл </label></td>
                         <td><input type='text' id="email" v-model="email" placeholder="Имейл" /></td>
                     </tr>
                     <tr>
-                        <td><label for="date">Section </label></td>
+                        <td><label for="date">Дата </label></td>
                         <td><input type='text' id="date" v-model="date" placeholder="Дата" /></td>
                     </tr>
                     <tr>
-                        <td><label for="ticknum">Salary </label></td>
+                        <td><label for="ticknum">Брой билети </label></td>
                         <td><input type='text' id="ticknum" v-model="ticknum" placeholder="Брой билети" /></td>
                     </tr>
                     <tr>
-                        <td><label for="time">Salary </label></td>
+                        <td><label for="time">Час </label></td>
                         <td><input type='text' id="time" v-model="time" placeholder="Час" /></td>
                     </tr>
                     <tr>
-                        <td><label for="MovieId">Salary </label></td>
-                        <td><input type='text' id="MovieId" v-model="MovieId" placeholder="salary" /></td>
+                        <td><label for="MovieId">Име на филм </label></td>
+                        <td><input type='text' id="MovieId" v-model="MovieId" placeholder="Име на филм" /></td>
                     </tr>
                     <tr>
                         <td><button type="button" class="btn btn-primary" v-on:click="updateRow(id, firstname, lastname, email, date,
@@ -109,7 +109,7 @@
     <modal v-if="showDelete" @close="showDelete = false">
         <div class="modal-mask">
             <div class="delete">
-                <p>Are you sure you want to delete this item?</p>
+                <p>Сигурни ли сте, че искате да изтриете този елемент?</p>
                 <button type="button" class="btn btn-danger" v-on:click="removeRow(id, false)">Confirm</button>
                 <button type="button" class="btn btn-primary" v-on:click="showDelete = false">Cancel</button>
             </div>

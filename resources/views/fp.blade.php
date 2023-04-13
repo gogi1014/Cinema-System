@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div id="app">
+<div id="fpContent">
   <table id="tableContent">
 
     @foreach ($movies as $movie)
@@ -53,7 +53,6 @@
   </ul>
 </div>
 
-
 <h2>Очаквайте</h2>
 <div class="slider-container" item-display-d="4" item-display-t="3" item-display-m="1">
   <div class="slider-width">
@@ -66,5 +65,6 @@
 </div>
 
 <script src="{{ asset('js/menu.js') }}" defer></script>
+
 
 @endsection

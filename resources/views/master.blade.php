@@ -17,12 +17,18 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/vuesax@4.0.1-alpha.16/dist/vuesax.min.js"></script>
     <script src="https://unpkg.com/vuejs-paginate-next@latest/dist/vuejs-paginate-next.umd.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
     <script type="text/javascript" src="{{ URL::asset('js/menu.js') }}"></script>
 
 </head>
-
+<div id="backgroundAdmin">
 <body>
+
+
     <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <a href="{{ url('/admin') }}">Начало</a>
@@ -40,7 +46,7 @@
     <div class="container">
         @yield('content')
     </div>
-
 </body>
+</div>
 
 </html>

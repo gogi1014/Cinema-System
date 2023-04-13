@@ -93,6 +93,24 @@ function reply_click(clicked_id) {
   }
 }
 
+$(document).on('submit', 'form#searchForm', function (e) {
+  var q = $(this).find('input[name=q]').val();
+
+  $.ajax({
+      type: 'GET',
+      dataType: 'html',
+      url: '/admin/movies',
+      data: {
+          q: q
+      },
+      success: function (result) {
+
+          $("#results_box").html(result);
+      }
+  });
+
+  e.preventDefault();
+});
 
 //Slider
 var count = 0;

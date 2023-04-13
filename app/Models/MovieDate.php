@@ -18,6 +18,10 @@ class MovieDate extends Model
         'time',
         'type',
     ];
+    public function searchMovie($input)
+    {
+        return MovieDate::where('MovieName', 'LIKE', '%' . $input->keyword . '%')->get();
+    }
     public function getMovieDate($primaryKey)
     {
         return MovieDate::where('MovieId', $primaryKey)->get()->unique('date');
