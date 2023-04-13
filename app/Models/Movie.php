@@ -97,8 +97,8 @@ class Movie extends Model
     public function fpMovies()
     {
         $client = Movie::all()->pluck('movieGenre')->toArray();
-        $client2 = implode(",",  $client );
-        $data=explode(",", $client2);
+        $client2 = implode(", ",  $client );
+        $data=explode(", ", $client2);
         return array_unique($data);
     }
 }

@@ -56,17 +56,6 @@
                             </div>
                         </div>
                     </form>
-                    <form name="genresFilter" action="{{ url('/') }}" method="GET">
-                        <div class="form-group">
-                            <select name="genres" onChange="genresFilter.submit();">
-                                <option disabled selected value> -- Изберете жанр -- </option>
-                                <option value=" "> -- Всички -- </option>
-                                @foreach (($arr) as $moviesGenres)
-                                <option value="{{$moviesGenres}}">{{$moviesGenres}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </form>
                     <form name="genresCheckBox" action="{{ url('/') }}" method="GET" class="mb-4">
                         {{csrf_field()}}
                         <div class="form-group">
