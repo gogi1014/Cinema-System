@@ -34,7 +34,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::post('/login', [AdminAuthController::class, 'postLogin'])->name('adminLoginPost');
  
     Route::group(['middleware' => 'adminauth'], function () {
-        Route::get('/', [AdminAuthController::class, 'getCount']);
+        Route::get('/', [AdminAuthController::class, 'getCount'])->name("adminDashboard");
         Route::get('/addMovie', [AdminAuthController::class, 'insertform']);
         Route::post('/createMovie', [AdminAuthController::class, 'addMovie']);
         Route::get('/movies', [AdminAuthController::class, 'getMoviesAdmin']);
