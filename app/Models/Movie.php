@@ -26,9 +26,14 @@ class Movie extends Model
         'active'
     ];
 
-    public function searchMovies($input)
+    public function searchMovies($request)
     {
-        return Movie::where('movieTitle', 'LIKE', '%' . $input->keyword . '%')->get();
+        if($request->picked == 'TitleRadio'){
+        return Movie::where('movieTitle', 'LIKE', '%' . $request->keyword . '%')->get();
+        }
+        else{
+            return Movie::where('movieId', 'LIKE', '%' . $request->keyword . '%')->get();
+        }
     }
     public function getAllMovies()
     {

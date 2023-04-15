@@ -118,7 +118,7 @@
               <h4 class="modal-title">Изберете си място</h4>
             </div>
             <div class="modal-body">
-              <div class="container">
+              <div class="container" id="UserContainer">
                 <ul class="showcase">
                   <li>
                     <div class="seat"></div>

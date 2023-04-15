@@ -6,43 +6,67 @@
         <label>Търси филм:</label>
         <input type="text" v-model="keyword" placeholder="Търси филм.." />
     </div>
+
+    <select name="ElementsNumber" @change="onChange($event)" v-model="selPageNum">
+        <option value="3">3</option>
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="20">20</option>
+    </select>
+
+    <input type="radio" id="TitleRadio" value="TitleRadio" v-model="picked" />
+    <label for="movieTitle">movieTitle</label>
+
+    <input type="radio" id="IdRadio" value="IdRadio" v-model="picked" />
+    <label for="two">Two</label>
+
     <div class="container">
         <table style="display: block; height: 1020px; overflow: auto;" class="table " id="adminTable">
             <thead class="thead-dark">
                 <tr>
                     <th class="text-left" @click="orderedCinema('movieId')">
                         ID
-                    <div v-html="message" ref="myId" id="myDiv"></div>
+                        <div v-html="message" ref="myId" id="movieId"></div>
                     </th>
                     <th class="text-left" @click="orderedCinema('movieTitle')">
                         Заглавие
+                        <div v-html="message" ref="myId" id="movieTitle"></div>
                     </th>
                     <th class="text-left" @click="orderedCinema('movieTrailer')">
                         Трейлър
+                        <div v-html="message" ref="myId" id="movieTrailer"></div>
                     </th>
                     <th class="text-left" @click="orderedCinema('movieGenre')">
                         Жанр
+                        <div v-html="message" ref="myId" id="movieGenre"></div>
                     </th>
                     <th class="text-left" @click="orderedCinema('movieDuration')">
                         Времетраене
+                        <div v-html="message" ref="myId" id="movieDuration"></div>
                     </th>
                     <th class="text-left" @click="orderedCinema('movieRelDate')">
                         Дата на излизане
+                        <div v-html="message" ref="myId" id="movieRelDate"></div>
                     </th>
                     <th class="text-left" @click="orderedCinema('movieDirector')">
                         Продуцент
+                        <div v-html="message" ref="myId" id="movieDirector"></div>
                     </th>
                     <th class="text-left" @click="orderedCinema('movieActors')">
                         Актъори
+                        <div v-html="message" ref="myId" id="movieActors"></div>
                     </th>
                     <th class="text-left" @click="orderedCinema('Description')">
                         Описание
+                        <div v-html="message" ref="myId" id="Description"></div>
                     </th>
                     <th class="text-left" @click="orderedCinema('movieCat')">
                         Категория
+                        <div v-html="message" ref="myId" id="movieCat"></div>
                     </th>
                     <th class="text-left" @click="orderedCinema('movieLan')">
                         Език
+                        <div v-html="message" ref="myId" id="movieLan"></div>
                     </th>
                     <th class="text-left">
                         Активен
@@ -192,8 +216,10 @@ export default {
             search: '',
             cinema: [],
             pages: [],
+            selPageNum: 5,
             suc: "",
             errO: " ",
+            selected: 5,
             showModal: false,
             showDelete: false,
             sorted: false,
@@ -232,6 +258,10 @@ export default {
         }
     },
     methods: {
+        onChange(event) {
+            this.pageSize = event.target.value;
+            this.setPages();
+        },
         prev() {
             if ((this.current != 1))
                 this.current--;
@@ -251,12 +281,12 @@ export default {
             if (this.sorted == false) {
                 this.cinema = _.orderBy(this.cinema, aa, 'asc');
                 this.sorted = true;
-                this.message = "<i class='fas fa-angle-up'></i>";
+                document.getElementById(aa).innerHTML = "<i class='fas fa-angle-up'></i>";
             }
             else {
                 this.cinema = _.orderBy(this.cinema, aa, 'desc');
                 this.sorted = false;
-                this.message = "<i class='fas fa-angle-down'></i>";
+                document.getElementById(aa).innerHTML = "<i class='fas fa-angle-down'></i>";
             }
         },
         getResults() {
