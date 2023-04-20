@@ -61,7 +61,13 @@ class AdminAuthController extends Controller
     public function getMoviesAdmin(Request $request)
     {
         $cinema = (new Movie)->searchMovies($request);
-        return response()->json($cinema);
+        $fpMovies = (new Movie)->fpMovies();
+        $sortCat = (new Movie)->getAllMovies();
+        return response()->json(array(
+            'cinema' => $cinema,
+            'fpMovies' => $fpMovies,
+            'sortCat' => $sortCat,
+        ));
     }
     public function getMoviesAdminView(Request $request)
     {

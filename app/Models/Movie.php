@@ -28,10 +28,16 @@ class Movie extends Model
 
     public function searchMovies($request)
     {
-        if($request->picked == 'TitleRadio'){
-        return Movie::where('movieTitle', 'LIKE', '%' . $request->keyword . '%')->get();
+        if($request->categorySelect != 'default'){
+            return Movie::where('movieCat', 'LIKE', '%' . $request->categorySelect . '%')->get();
         }
-        else{
+        if($request->genreSelect != 'default'){
+            return Movie::where('movieGenre', 'LIKE', '%' . $request->genreSelect . '%')->get();
+        }
+        if ($request->searchModel == 'movieTitle') {
+            return Movie::where('movieTitle', 'LIKE', '%' . $request->keyword . '%')->get();
+        } 
+        elseif($request->searchModel == 'movieId') {
             return Movie::where('movieId', 'LIKE', '%' . $request->keyword . '%')->get();
         }
     }
@@ -39,7 +45,7 @@ class Movie extends Model
     {
         return Movie::get()->unique('movieCat');;
     }
-    public function getMovies($input,$request)
+    public function getMovies($input, $request)
     {
         $pagg = 5;
         $search = Movie::orderBy('movieId');
@@ -52,10 +58,10 @@ class Movie extends Model
         /*if (isset($input['genres'])) {
             $search->where('movieGenre', 'LIKE', "%" . $input["genres"] . "%");
         }*/
-        if( request()->genres){
+        if (request()->genres) {
             $genres = array_unique(array_keys(request()->genres));
-            foreach($genres as $genre){
-            $search->orWhere('movieGenre', 'LIKE', "%" . $genre . "%");
+            foreach ($genres as $genre) {
+                $search->orWhere('movieGenre', 'LIKE', "%" . $genre . "%");
             }
         }
         if (isset($input['pagg'])) {
@@ -102,9 +108,8 @@ class Movie extends Model
     public function fpMovies()
     {
         $client = Movie::all()->pluck('movieGenre')->toArray();
-        $client2 = implode(", ",  $client );
-        $data=explode(", ", $client2);
+        $client2 = implode(", ",  $client);
+        $data = explode(", ", $client2);
         return array_unique($data);
     }
 }
-

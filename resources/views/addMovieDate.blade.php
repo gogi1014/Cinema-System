@@ -33,7 +33,7 @@
     <option value="2D">2D</option>
     <option value="3D">3D</option>
   </select>
-  <input type="text" class="form-control" name="Typ" id="Typ" >
+  <input type="hidden" class="form-control" name="Typ" id="Typ" >
   <button type="submit" class="btn btn-primary">Submit</button>
   <p id="myPara"></p>
 

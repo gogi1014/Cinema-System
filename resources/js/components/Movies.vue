@@ -2,11 +2,29 @@
 
 <template >
     <h1>Списък с филми</h1>
-    <div class="search-wrapper">
+    <div class="form-inline">
         <label>Търси филм:</label>
         <input type="text" v-model="keyword" placeholder="Търси филм.." />
+        <label for="searchSelect">Търси по:</label>
+        <select class="form-control" name="searchSelect" @change="onChangeSearch($event)" v-model="searchModel">
+            <option value="movieTitle">Заглавие</option>
+            <option value="movieId">ID на филм</option>
+        </select>
+        <label for="ChooseGenre">Търси по жанр:</label>
+        <select class="form-control" name="ChooseGenre" @change="changeGenre($event)" v-model="genreSelect">
+            <option value="default">Изберете жанр</option>
+            <option v-for="item in genres" :key="item">
+                {{ item }}</option>
+        </select>
+        <label for="ChooseCategory">Търси по категория:</label>
+        <select class="form-control" name="ChooseCategory" @change="changeCategory($event)" v-model="categorySelect">
+            <option value="default">Изберете Категория</option>
+            <option v-for="item in sortCat" :key="item.movieCat">
+                {{ item.movieCat }}</option>
+        </select>
     </div>
 
+    <label for="ElementsNumber">Брой елементи на страница:</label>
     <select name="ElementsNumber" @change="onChange($event)" v-model="selPageNum">
         <option value="3">3</option>
         <option value="5">5</option>
@@ -14,11 +32,6 @@
         <option value="20">20</option>
     </select>
 
-    <input type="radio" id="TitleRadio" value="TitleRadio" v-model="picked" />
-    <label for="movieTitle">movieTitle</label>
-
-    <input type="radio" id="IdRadio" value="IdRadio" v-model="picked" />
-    <label for="two">Two</label>
 
     <div class="container">
         <table style="display: block; height: 1020px; overflow: auto;" class="table " id="adminTable">
@@ -79,7 +92,7 @@
                     <td>{{ item.movieTitle }}</td>
                     <td>{{ item.movieTrailer }}</td>
                     <td>{{ item.movieGenre }}</td>
-                    <td>{{ item.movieDuration }}</td>
+                    <td>{{ item.movieDuration }} мин.</td>
                     <td>{{ item.movieRelDate }}</td>
                     <td>{{ item.movieDirector }}</td>
                     <td>
@@ -215,8 +228,13 @@ export default {
             keyword: null,
             search: '',
             cinema: [],
+            genres: [],
             pages: [],
+            sortCat: [],
             selPageNum: 5,
+            categorySelect: "default",
+            genreSelect: "default",
+            searchModel: "movieTitle",
             suc: "",
             errO: " ",
             selected: 5,
@@ -255,12 +273,24 @@ export default {
         },
         keyword(after, before) {
             this.getResults();
+        },
+        genreSelect(after, before) {
+            this.getResults();
+            console.log(this.genreSelect);
+        },
+        categorySelect(after, before) {
+            this.getResults();
+            console.log(this.genreSelect);
         }
     },
     methods: {
         onChange(event) {
             this.pageSize = event.target.value;
             this.setPages();
+        },
+        onChangeSearch(event) {
+            this.searchModel = event.target.value;
+            console.log(this.searchModel);
         },
         prev() {
             if ((this.current != 1))
@@ -277,6 +307,13 @@ export default {
                 this.pages.push(index);
             }
         },
+        changeGenre(event) {
+            this.genreSelect = event.target.value;
+        },
+        changeCategory(event) {
+            this.categorySelect = event.target.value;
+            console.log(this.categorySelect);
+        },
         orderedCinema(aa) {
             if (this.sorted == false) {
                 this.cinema = _.orderBy(this.cinema, aa, 'asc');
@@ -290,8 +327,8 @@ export default {
             }
         },
         getResults() {
-            axios.get('movies', { params: { keyword: this.keyword } })
-                .then(res => this.cinema = res.data)
+            axios.get('movies', { params: { keyword: this.keyword, searchModel: this.searchModel, genreSelect: this.genreSelect, categorySelect: this.categorySelect } })
+                .then(res => { this.cinema = res.data.cinema; })
         },
         select: function (movieId, movieTitle, movieImg, movieTrailer, movieGenre, movieDuration, movieRelDate, movieDirector, movieActors, Description, movieCat, movieLan, active, showModal) {
             this.movieId = movieId;
@@ -322,7 +359,9 @@ export default {
         },
         show: function () {
             axios.get('movies').then(function (res) {
-                this.cinema = res.data;
+                this.cinema = res.data.cinema;
+                this.genres = res.data.fpMovies;
+                this.sortCat = res.data.sortCat;
             }.bind(this));
         },
         Delete: function (movieId, showDelete) {
