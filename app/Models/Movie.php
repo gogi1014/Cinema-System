@@ -43,7 +43,7 @@ class Movie extends Model
     }
     public function getAllMovies()
     {
-        return Movie::get()->unique('movieCat');;
+        return Movie::get()->unique('movieCat');
     }
     public function getMovies($input, $request)
     {

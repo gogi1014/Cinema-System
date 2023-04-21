@@ -29,14 +29,6 @@ class MovieController extends Controller
             'moviesSoon' => $moviesSoon, 'arr' => $movies->fpMovies()
         ]);
     }
-    public function jsonGetMovies(Request $request)
-    {
-        $query = User::select('*');
-
-            $query->where('movieTitle', 'like', "%{$request->input('name')}%");
-        
-            return response()->json($query);
-    }
     public function ShowContent($primaryKey, Request $request)
     {
         $movies = Movie::find($primaryKey);

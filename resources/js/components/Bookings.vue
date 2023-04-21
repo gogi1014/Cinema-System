@@ -2,36 +2,67 @@
 
 <template >
     <h1>Списък с резервации</h1>
-    <div class="search-wrapper">
+    <div class="form-inline">
         <label>Търси филм:</label>
         <input type="text" v-model="keyword" placeholder="Търси .." />
+        <label for="searchSelect">Търси по:</label>
+        <select class="form-control" name="searchSelect" @change="onChangeSearch($event)" v-model="searchModel">
+            <option value="id">ID на филм</option>
+            <option value="userName">Имена на потребител</option>
+            <option value="movieTitle">Име на филм</option>
+        </select>
+        <select class="form-control" name="searchSelect" @change="onChangeDate($event)" v-model="searchDateModel">
+            <option value="default">Изберете дата:</option>
+            <option v-for="item in cinema" :key="item">
+                {{ item.date }}</option>
+        </select>
+        <select class="form-control" name="searchSelect" @change="onChangeTime($event)" v-model="searchTimeModel">
+            <option value="default">Изберете час:</option>
+            <option v-for="item in cinema" :key="item">
+                {{ item.time }}</option>
+        </select>
     </div>
+    <label for="ElementsNumber">Брой елементи на страница:</label>
+    <select name="ElementsNumber" @change="onChange($event)" v-model="selPageNum">
+        <option value="3">3</option>
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="20">20</option>
+    </select>
     <table class="table"  id="adminTable">
         <thead class="thead-dark">
             <tr>
-                <th class="text-left">
+                <th class="text-left" @click="orderedCinema('movieId')">
                     ID
+                    <div ref="myId" id="id"></div>
                 </th>
-                <th class="text-left">
+                <th class="text-left" @click="orderedCinema('firstname')">
                     Име
+                    <div ref="myId" id="firstname"></div>
                 </th>
-                <th class="text-left">
+                <th class="text-left" @click="orderedCinema('lastname')">
                     Фамилия
+                    <div ref="myId" id="lastname"></div>
                 </th>
-                <th class="text-left">
+                <th class="text-left" @click="orderedCinema('email')">
                     Имейл
+                    <div ref="myId" id="email"></div>
                 </th>
-                <th class="text-left">
+                <th class="text-left" @click="orderedCinema('date')">
                     Дата
+                    <div ref="myId" id="date"></div>
                 </th>
-                <th class="text-left">
+                <th class="text-left" @click="orderedCinema('ticknum')">
                     Брой билети
+                    <div ref="myId" id="ticknum"></div>
                 </th>
-                <th class="text-left">
+                <th class="text-left" @click="orderedCinema('time')">
                     Час
+                    <div ref="myId" id="time"></div>
                 </th>
-                <th class="text-left">
+                <th class="text-left" @click="orderedCinema('MovieId')">
                     Име на филм
+                    <div ref="myId" id="movieId"></div>
                 </th>
             </tr>
         </thead>
@@ -134,6 +165,10 @@ export default {
             pages: [],
             suc: "",
             errO: " ",
+            selPageNum: 5,
+            searchModel: "movieTitle",
+            searchDateModel: "default",
+            searchTimeModel: "default",
             showModal: false,
             showDelete: false,
             id: Number,
@@ -164,9 +199,21 @@ export default {
         },
         keyword(after, before) {
             this.getResults();
+        },
+        searchDateModel(after, before) {
+            this.getResults();
+            console.log(this.searchDateModel);
+        },
+        searchTimeModel(after, before) {
+            this.getResults();
+            console.log(this.searchTimeModel);
         }
     },
     methods: {
+        onChange(event) {
+            this.pageSize = event.target.value;
+            this.setPages();
+        },
         prev() {
             if ((this.current != 1))
                 this.current--;
@@ -183,8 +230,32 @@ export default {
             }
         },
         getResults() {
-            axios.get('bookings', { params: { keyword: this.keyword } })
+            axios.get('bookings', { params: { keyword: this.keyword,searchModel: this.searchModel,searchDateModel: this.searchDateModel,searchTimeModel: this.searchTimeModel } })
                 .then(res => this.cinema = res.data)
+        },
+        onChangeSearch(event) {
+            this.searchModel = event.target.value;
+            console.log(this.searchModel);
+        },
+        onChangeDate(event) {
+            this.searchDateModel = event.target.value;
+            console.log(this.searchDateModel);
+        },
+        onChangeTime(event) {
+            this.searchTimeModel = event.target.value;
+            console.log(this.searchTimeModel);
+        },
+        orderedCinema(aa) {
+            if (this.sorted == false) {
+                this.cinema = _.orderBy(this.cinema, aa, 'asc');
+                this.sorted = true;
+                document.getElementById(aa).innerHTML = "<i class='fas fa-angle-up'></i>";
+            }
+            else {
+                this.cinema = _.orderBy(this.cinema, aa, 'desc');
+                this.sorted = false;
+                document.getElementById(aa).innerHTML = "<i class='fas fa-angle-down'></i>";
+            }
         },
         select: function (id, firstname, lastname, email, date,
             ticknum, time, MovieId, showModal) {

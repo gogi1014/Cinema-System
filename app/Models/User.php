@@ -27,9 +27,25 @@ class User extends Authenticatable
         'places',
         'created_at',
     ];
-    public function searchBookings($input)
+    public function searchBookings($request)
     {
-        return User::where('firstname', 'LIKE', '%' . $input->keyword . '%')->get();
+        if ($request->searchDateModel != 'default') {
+            if($request->searchTimeModel != 'default'){
+                return User::where('time', 'LIKE', '%' . $request->searchTimeModel . '%')->where('date', 'LIKE', '%' . $request->searchDateModel . '%')->get();
+            }
+            else{
+            return User::where('date', 'LIKE', '%' . $request->searchDateModel . '%')->get();
+            }
+        } 
+        if ($request->searchModel == 'movieTitle') {
+            return User::where('MovieId', 'LIKE', '%' . $request->keyword . '%')->get();
+        } 
+        if ($request->searchModel == 'id') {
+            return User::where('id', 'LIKE', '%' . $request->keyword . '%')->get();
+        } 
+        else{
+        return User::where('firstname', 'LIKE', '%' . $request->keyword . '%')->orWhere('lastname', 'LIKE', '%' . $request->keyword . '%')->get();
+        }
     }
     public function soldSeats($movies,$reqDate,$reqTime)
     {

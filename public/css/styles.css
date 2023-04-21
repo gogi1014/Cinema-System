@@ -561,3 +561,19 @@ a:active {
   width: 350px;
   height: 500px
 }
+
+/*Vue table scroll */
+#adminTable::-webkit-scrollbar {
+  width: 12px;
+}
+
+#adminTable::-webkit-scrollbar-track {
+  border-radius: 8px;
+  background-color: #4a4b58;
+  border: 1px solid #cacaca;
+}
+
+#adminTable::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  background-color: #2c3e50;
+}
