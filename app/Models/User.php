@@ -30,26 +30,24 @@ class User extends Authenticatable
     public function searchBookings($request)
     {
         if ($request->searchDateModel != 'default') {
-            if($request->searchTimeModel != 'default'){
+            if ($request->searchTimeModel != 'default') {
                 return User::where('time', 'LIKE', '%' . $request->searchTimeModel . '%')->where('date', 'LIKE', '%' . $request->searchDateModel . '%')->get();
+            } else {
+                return User::where('date', 'LIKE', '%' . $request->searchDateModel . '%')->get();
             }
-            else{
-            return User::where('date', 'LIKE', '%' . $request->searchDateModel . '%')->get();
-            }
-        } 
+        }
         if ($request->searchModel == 'movieTitle') {
             return User::where('MovieId', 'LIKE', '%' . $request->keyword . '%')->get();
-        } 
+        }
         if ($request->searchModel == 'id') {
             return User::where('id', 'LIKE', '%' . $request->keyword . '%')->get();
-        } 
-        else{
-        return User::where('firstname', 'LIKE', '%' . $request->keyword . '%')->orWhere('lastname', 'LIKE', '%' . $request->keyword . '%')->get();
+        } else {
+            return User::where('firstname', 'LIKE', '%' . $request->keyword . '%')->orWhere('lastname', 'LIKE', '%' . $request->keyword . '%')->get();
         }
     }
-    public function soldSeats($movies,$reqDate,$reqTime)
+    public function soldSeats($movies, $reqDate, $reqTime)
     {
-        return User::where('MovieId', $movies->movieTitle)->where('date',$reqDate)->where('time',$reqTime)->get();
+        return User::where('MovieId', $movies->movieTitle)->where('date', $reqDate)->where('time', $reqTime)->get();
     }
     public static function store($request)
     {
@@ -57,7 +55,7 @@ class User extends Authenticatable
         $user = new User();
         $user->firstname = $input["firstname"];
         $user->lastname = $input["lastname"];
-        $fullName = $user->firstname.' '.$user->lastname.' '.$user->created_at;
+        $fullName = $user->firstname . ' ' . $user->lastname . ' ' . $user->created_at;
         $user->email = $input["email"];
         $user->date = $input["datte"];
         $user->time = $input["timee"];
@@ -65,15 +63,16 @@ class User extends Authenticatable
         $user->MovieId = $input["MovieId"];
         $email = $input["email"];
         $user->places = $input["places"];
-        $full = $user->firstname." ".$user->lastname;
-        $data = array('name'=>$fullName,'movieName' => $user->MovieId,'full' => $full,
-        'date' => $user->date,'time' => $user->time,'ticknum' => $user->ticknum,'places' => $user->places);
-        Mail::send('mail', $data, function($message) use ($email) {
-            $message->to($email, 'Tutorials Point')->subject
-                ('Резервиране на билет за кино');
-            $message->from('killaonthehilla@gmail.com','Кино');
+        $full = $user->firstname . " " . $user->lastname;
+        $data = array(
+            'name' => $fullName, 'movieName' => $user->MovieId, 'full' => $full,
+            'date' => $user->date, 'time' => $user->time, 'ticknum' => $user->ticknum, 'places' => $user->places
+        );
+        Mail::send('mail', $data, function ($message) use ($email) {
+            $message->to($email, 'Tutorials Point')->subject('Резервиране на билет за кино');
+            $message->from('killaonthehilla@gmail.com', 'Кино');
         });
-      echo "Basic Email Sent. Check your inbox.";
+        echo "Basic Email Sent. Check your inbox.";
         $user->save();
     }
     public function upd($request)
@@ -90,5 +89,3 @@ class User extends Authenticatable
         $movie->update();
     }
 }
-
-?>

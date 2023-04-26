@@ -1,9 +1,32 @@
 <template >
     <h1>Списък с дати и часове</h1>
-    <div class="search-wrapper">
-        <input type="text" v-model="keyword" placeholder="Search title.." />
-        <label>Search title:</label>
+    <div class="form-inline">
+        <label>Търси:</label>
+        <input type="text" v-model="keyword" placeholder="Търси..." />
+        <label for="searchSelect">Търси по:</label>
+        <select class="form-control" name="searchSelect" @change="onChangeSearch($event)" v-model="searchModel">
+            <option value="id">ID на дата и час</option>
+            <option value="MovieId">ID на филм</option>
+            <option value="MovieName">Име на филм</option>
+        </select>
+        <select class="form-control" name="searchSelect" @change="onChangeDate($event)" v-model="searchDateModel">
+            <option value="default">Изберете дата:</option>
+            <option v-for="item in cinema" :key="item">
+                {{ item.date }}</option>
+        </select>
+        <select class="form-control" name="searchSelect" @change="onChangeTime($event)" v-model="searchTimeModel">
+            <option value="default">Изберете час:</option>
+            <option v-for="item in cinema" :key="item">
+                {{ item.time }}</option>
+        </select>
     </div>
+    <label for="ElementsNumber">Брой елементи на страница:</label>
+    <select name="ElementsNumber" @change="onChange($event)" v-model="selPageNum">
+        <option value="3">3</option>
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="20">20</option>
+    </select>
     <table class="table"  id="adminTable">
         <thead class="thead-dark">
             <tr>
@@ -112,6 +135,10 @@ export default {
             pages: [],
             suc: "",
             errO: " ",
+            selPageNum: 5,
+            searchModel: "MovieName",
+            searchDateModel: "default",
+            searchTimeModel: "default",
             showModal: false,
             showDelete: false,
             id: Number,
@@ -139,9 +166,21 @@ export default {
         },
         keyword(after, before) {
             this.getResults();
-        }
+        },
+        searchDateModel(after, before) {
+            this.getResults();
+            console.log(this.searchDateModel);
+        },
+        searchTimeModel(after, before) {
+            this.getResults();
+            console.log(this.searchTimeModel);
+        },
     },
     methods: {
+        onChange(event) {
+            this.pageSize = event.target.value;
+            this.setPages();
+        },
         prev() {
             if ((this.current != 1))
                 this.current--;
@@ -158,8 +197,21 @@ export default {
             }
         },
         getResults() {
-            axios.get('moviesDate', { params: { keyword: this.keyword } })
+            axios.get('moviesDate', { params: { keyword: this.keyword, searchModel: this.searchModel, searchDateModel: this.searchDateModel, 
+                searchTimeModel: this.searchTimeModel } })
                 .then(res => this.cinema = res.data)
+        },
+        onChangeSearch(event) {
+            this.searchModel = event.target.value;
+            console.log(this.searchModel);
+        },
+        onChangeDate(event) {
+            this.searchDateModel = event.target.value;
+            console.log(this.searchDateModel);
+        },
+        onChangeTime(event) {
+            this.searchTimeModel = event.target.value;
+            console.log(this.searchTimeModel);
         },
         select: function (id, MovieId, MovieName, date, time, type, showModal) {
             this.id = id;

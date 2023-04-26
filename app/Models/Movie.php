@@ -23,7 +23,8 @@ class Movie extends Model
         'Description',
         'movieLan',
         'movieCat',
-        'active'
+        'active',
+        'sim',
     ];
 
     public function searchMovies($request)
@@ -48,7 +49,7 @@ class Movie extends Model
     public function getMovies($input, $request)
     {
         $pagg = 5;
-        $search = Movie::orderBy('movieId');
+        $search = Movie::orderBy("sim","desc");
         if (isset($input['search'])) {
             $search->where('movieTitle', 'LIKE', "%" . $input["search"] . "%");
         }
@@ -60,8 +61,18 @@ class Movie extends Model
         }*/
         if (request()->genres) {
             $genres = array_unique(array_keys(request()->genres));
+            $impGenres = implode(" ", $genres);
+            $arr = array();
             foreach ($genres as $genre) {
-                $search->orWhere('movieGenre', 'LIKE', "%" . $genre . "%");
+                $aa = ($search->orWhere('movieGenre', 'LIKE', "%" . $genre . "%")->pluck('movieGenre'))->toArray();
+            }            
+            for ($i = 0; $i < count($aa); $i++) {
+                $expSort = explode(", ",$aa[$i]);
+                sort($expSort);
+                $impSort = implode(", ",  $expSort);
+                $newImpArr[$i] = $impSort;
+                array_push($arr,similar_text($newImpArr[$i], $impGenres, $perc));
+                Movie::where('movieGenre',$aa[$i])->update(["sim"=>$arr[$i]]);
             }
         }
         if (isset($input['pagg'])) {
@@ -110,6 +121,7 @@ class Movie extends Model
         $client = Movie::all()->pluck('movieGenre')->toArray();
         $client2 = implode(", ",  $client);
         $data = explode(", ", $client2);
+        sort($data);
         return array_unique($data);
     }
 }

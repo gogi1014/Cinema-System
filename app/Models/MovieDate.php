@@ -18,9 +18,24 @@ class MovieDate extends Model
         'time',
         'type',
     ];
-    public function searchMovie($input)
+    public function searchMovie($request)
     {
-        return MovieDate::where('MovieName', 'LIKE', '%' . $input->keyword . '%')->get();
+        if ($request->searchDateModel != 'default') {
+            if ($request->searchTimeModel != 'default') {
+                return MovieDate::where('time', 'LIKE', '%' . $request->searchTimeModel . '%')->where('date', 'LIKE', '%' . $request->searchDateModel . '%')->get();
+            } else {
+                return MovieDate::where('date', 'LIKE', '%' . $request->searchDateModel . '%')->get();
+            }
+        }
+        if ($request->searchModel == 'MovieName') {
+            return MovieDate::where('MovieName', 'LIKE', '%' . $request->keyword . '%')->get();
+        }
+        if ($request->searchModel == 'id') {
+            return MovieDate::where('id', 'LIKE', '%' . $request->keyword . '%')->get();
+        }
+        if ($request->searchModel == 'MovieId') {
+            return MovieDate::where('MovieId', 'LIKE', '%' . $request->keyword . '%')->get();
+        }
     }
     public function getMovieDate($primaryKey)
     {
@@ -56,7 +71,4 @@ class MovieDate extends Model
         $movie->type = $input["type"];
         $movie->update();
     }
- 
 }
-
-?>

@@ -52,10 +52,10 @@ function formDelete() {
   document.document.getElementById('search-theme-form').action = "{{route('movie.destroy'," + firstname1 + ")}}";
 
 }
+$("#ModalSuccess .toggle").click();
 
- $(document).ready(function(){
-  
-
+$(window).on('load', function() {
+  $('#ModalSuccess').modal('show');
 });
 
 function getTicketNum(obj) {

@@ -3,13 +3,13 @@
 <template >
     <h1>Списък с резервации</h1>
     <div class="form-inline">
-        <label>Търси филм:</label>
+        <label>Търси резервация:</label>
         <input type="text" v-model="keyword" placeholder="Търси .." />
         <label for="searchSelect">Търси по:</label>
         <select class="form-control" name="searchSelect" @change="onChangeSearch($event)" v-model="searchModel">
             <option value="id">ID на филм</option>
-            <option value="userName">Имена на потребител</option>
-            <option value="movieTitle">Име на филм</option>
+            <option value="MovieId">Имена на потребител</option>
+            <option value="MovieName">Име на филм</option>
         </select>
         <select class="form-control" name="searchSelect" @change="onChangeDate($event)" v-model="searchDateModel">
             <option value="default">Изберете дата:</option>
@@ -29,7 +29,8 @@
         <option value="10">10</option>
         <option value="20">20</option>
     </select>
-    <table class="table"  id="adminTable">
+    <button type="button" class="btn btn-danger" @click="DeleteRows(checked, true)">Изтривате</button>
+    <table class="table" id="adminTable">
         <thead class="thead-dark">
             <tr>
                 <th class="text-left" @click="orderedCinema('movieId')">
@@ -68,6 +69,7 @@
         </thead>
         <tbody>
             <tr v-for="item in paginated" :key="item.id">
+                <td><input type="checkbox" v-bind:id=item.id @click="checkBox(item.id)"></td>
                 <td>{{ item.id }}</td>
                 <td>{{ item.firstname }}</td>
                 <td>{{ item.lastname }}</td>
@@ -78,7 +80,7 @@
                 <td>{{ item.MovieId }}</td>
                 <td><button type="button" class="btn btn-danger" v-on:click="Delete(item.id, true)">Delete</button></td>
                 <td><button id="show-modal" class="btn btn-primary" @click="select(item.id, item.firstname, item.lastname, item.email, item.date,
-                item.ticknum, item.time, item.MovieId, true)">Edit</button>
+                    item.ticknum, item.time, item.MovieId, true)">Edit</button>
                 </td>
             </tr>
         </tbody>
@@ -86,8 +88,8 @@
     <!-- PAGINATION START -->
     <div class="clearfix btn-group col-md-2 offset-md-5">
         <button type="button" class="btn btn-sm btn-outline-secondary" @click="prev"> &lt&lt </button>
-        <button type="button" class="btn btn-sm btn-outline-secondary"
-            v-for="pageNumber  in pages" @click="current = pageNumber"> {{ pageNumber }}
+        <button type="button" class="btn btn-sm btn-outline-secondary" v-for="pageNumber  in pages"
+            @click="current = pageNumber"> {{ pageNumber }}
         </button>
         <button type="button" class="btn btn-sm btn-outline-secondary" @click="next"> >> </button>
     </div><!--end col-->
@@ -127,7 +129,7 @@
                     </tr>
                     <tr>
                         <td><button type="button" class="btn btn-primary" v-on:click="updateRow(id, firstname, lastname, email, date,
-                        ticknum, time, MovieId)">Update</button></td>
+                            ticknum, time, MovieId)">Update</button></td>
                         <td><button type="button" class="btn btn-danger" @click="showModal = false">Cancel</button></td>
                     </tr>
                 </table>
@@ -147,13 +149,23 @@
         </div>
 
     </modal>
+    <modal v-if="showDeleteRows" @close="showDeleteRows = false">
+        <div class="modal-mask">
+            <div class="delete">
+                <p>Сигурни ли сте, че искате да изтриете {{ checked }} елементи?</p>
+                <button type="button" class="btn btn-danger" v-on:click="removeRows(checked, false)">Confirm</button>
+                <button type="button" class="btn btn-primary" v-on:click="showDeleteRows = false">Cancel</button>
+            </div>
+        </div>
+
+    </modal>
 </template>
 
 <script>
 import Paginate from 'vuejs-paginate-next';
 export default {
     components: {
-      paginate: Paginate,
+        paginate: Paginate,
     },
     data() {
         return {
@@ -163,14 +175,16 @@ export default {
             search: '',
             cinema: [],
             pages: [],
+            checked: [],
             suc: "",
             errO: " ",
             selPageNum: 5,
-            searchModel: "movieTitle",
+            searchModel: "id",
             searchDateModel: "default",
             searchTimeModel: "default",
             showModal: false,
             showDelete: false,
+            showDeleteRows: false,
             id: Number,
             firstname: String,
             lastname: String,
@@ -207,6 +221,10 @@ export default {
         searchTimeModel(after, before) {
             this.getResults();
             console.log(this.searchTimeModel);
+        },
+        checked(after, before){
+            this.getResults();
+            console.log(this.checked);
         }
     },
     methods: {
@@ -230,8 +248,9 @@ export default {
             }
         },
         getResults() {
-            axios.get('bookings', { params: { keyword: this.keyword,searchModel: this.searchModel,searchDateModel: this.searchDateModel,searchTimeModel: this.searchTimeModel } })
-                .then(res => this.cinema = res.data)
+            axios.get('bookings', { params: { keyword: this.keyword, searchModel: this.searchModel, searchDateModel: this.searchDateModel, 
+                searchTimeModel: this.searchTimeModel,checked: this.checked } })
+                .then(res => {this.cinema = res.data;console.log(this.checked)} )
         },
         onChangeSearch(event) {
             this.searchModel = event.target.value;
@@ -244,6 +263,16 @@ export default {
         onChangeTime(event) {
             this.searchTimeModel = event.target.value;
             console.log(this.searchTimeModel);
+        },
+        checkBox(event) {
+            console.log(event);
+            var checkBox = document.getElementById(event);
+            if (checkBox.checked == true) {
+                this.checked.push(checkBox.id);
+            } 
+            else{
+                this.checked.pop(checkBox.id);
+            }
         },
         orderedCinema(aa) {
             if (this.sorted == false) {
@@ -289,9 +318,24 @@ export default {
             this.id = id;
             this.showDelete = showDelete;
         },
+        DeleteRows: function (checked, showDeleteRows) {
+            this.checked = checked;
+            this.showDeleteRows = showDeleteRows;
+        },
         removeRow: function (id, showDelete) {
             console.log("Row Deleted")
             axios.delete(`deleteBookings/${id}`).then(response => {
+                console.log(response.data);
+                if (response.data.status == true) {
+                    this.show();
+                    this.showDelete = showDelete;
+                    this.suc = "Record deleted successfully";
+                }
+            });
+        },
+        removeRows: function (id, showDelete) {
+            console.log("Row Deleted")
+            axios.delete(`deleteMultiBookings`).then(response => {
                 console.log(response.data);
                 if (response.data.status == true) {
                     this.show();

@@ -1,6 +1,28 @@
 @extends('masterUser')
 
 @section('content')
+@if(session()->has('success'))
+
+<div class="modal fade" role="dialog" id="ModalSuccess">
+  <div class="modal-dialog" >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Успешна резервация</h5>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Затвори">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>{{ session()->get('success') }}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+@endif
+
 
 <div id="fpContent">
   <table id="tableContent">
