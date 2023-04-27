@@ -61,18 +61,14 @@ class Movie extends Model
         }*/
         if (request()->genres) {
             $genres = array_unique(array_keys(request()->genres));
-            $impGenres = implode(" ", $genres);
             $arr = array();
             foreach ($genres as $genre) {
                 $aa = ($search->orWhere('movieGenre', 'LIKE', "%" . $genre . "%")->pluck('movieGenre'))->toArray();
             }            
             for ($i = 0; $i < count($aa); $i++) {
                 $expSort = explode(", ",$aa[$i]);
-                sort($expSort);
-                $impSort = implode(" ",$expSort);
-                $newImpArr[$i] = $impSort;
-                similar_text($newImpArr[$i], $impGenres, $perc);
-                array_push($arr,$perc);
+                $result=array_intersect($expSort,$genres);
+                array_push($arr,count($result));
                 Movie::where('movieGenre',$aa[$i])->update(["sim"=>$arr[$i]]);
             }
         }
