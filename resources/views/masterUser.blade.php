@@ -34,10 +34,8 @@
         <div id="background">
 
             <div class="header">
-                <div class="headerTitle">
-                    <h1>Уеб информационна система за кино</h1>
-                </div>
                 <div class="headerSearch">
+                    <h1>Уеб информационна система за кино</h1>
                     <form id="searchMov" action="{{ url('/') }}" method="GET">
                         <input type="text" name="search" class="searchTerm" required />
                         <button type="submit" class="searchButton">
@@ -56,13 +54,13 @@
                             </div>
                         </div>
                     </form>
-                    <form name="genresCheckBox" action="{{ url('/') }}" method="GET" class="mb-4">
+                    <form name="genresCheckBox" action="{{ url('/') }}" method="GET" class="mb-3">
                         {{csrf_field()}}
-                        <div class="form-group">
+                        <div class="form-group" id="checkGroup">
                             @foreach (($arr) as $moviesGenres)
                             <input type="checkbox" name="genres[{{$moviesGenres}}]">{{$moviesGenres}}
                             @endforeach
-                            <input type="submit" value="Search" />
+                            <input type="submit" class="GenreButton" value="Търси по жанр" />
                         </div>
                     </form>
                 </div>

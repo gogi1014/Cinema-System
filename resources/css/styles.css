@@ -267,27 +267,31 @@ a:active {
   background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0, 0.7); /* Black w/opacity/see-through */
   color: white;
-  position: absolute;
+  position: relative;
   top: 20%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 2;
-  width: 40%;
-  padding: 20px;
+  width: fit-content;
   text-align: center;
   font-family: "Lucida Console", monospace;
 }
 .headerSearch{
   background-color: rgb(0,0,0); /* Fallback color */
   color: white;
-  position: absolute;
+  position: relative;
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 2;
-  width: 40%;
-  padding: 20px;
+  width: fit-content;
   text-align: center;
+}
+
+#checkGroup{
+  position: relative;
+  width: 50%;
+  margin-left: 25%;
 }
 
 .hero {
@@ -390,6 +394,13 @@ a:active {
   border: 3px solid #9c0606;
   border-right: none;
   height: 50px;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+}
+.genreButton {
+  width: 50%;
+  border: 3px solid #9c0606;
+  border-right: none;
   border-radius: 5px 0 0 5px;
   outline: none;
 }
@@ -547,16 +558,16 @@ a:active {
 }
 .item{
    display: flex;
-    width: 200px;
+    width: 100%;
     color: #fff;
     text-align: center;
     font-size: 40px;
     font-weight: 800;
     overflow: hidden;
-    margin-right:-5%;
+    margin-right:-4%;
 }
 .imgSoon {
-  width: 350px;
+  width: 80%;
   height: 500px
 }
 
