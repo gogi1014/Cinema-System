@@ -136,15 +136,11 @@ class AdminAuthController extends Controller
     }
     public function deleteMultiBookings(Request $request)
     {   
-        if($request->checked){
-            return ["status" => false, "message" => "Checked not found"];
-        }
-        $movie = new User;
-        $movie = User::orWhereIn('id', $request->checked)->delete();
+        $movie = User::destroy($request->checked);
         if (!$movie) {
             return ["status" => false, "message" => "Booking not found"];
         }
-        return ["status" => true];
+        return ["status" => true , "message" => "Booking deleted succesfully"];
     }
     public function getmoviesDateAdmin(Request $request)
     {

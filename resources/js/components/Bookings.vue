@@ -29,10 +29,12 @@
         <option value="10">10</option>
         <option value="20">20</option>
     </select>
-    <button type="button" class="btn btn-danger" @click="DeleteRows(checked, true)">Изтривате</button>
+    <button type="button" class="btn btn-danger" @click="DeleteRows(checked, true)">Изтриване на избраните</button>
     <table class="table" id="adminTable">
         <thead class="thead-dark">
             <tr>
+                <th class="text-left">
+                </th>
                 <th class="text-left" @click="orderedCinema('movieId')">
                     ID
                     <div ref="myId" id="id"></div>
@@ -68,7 +70,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr v-for="item in paginated" :key="item.id">
+            <tr v-for="item in paginated" :key=item.id>
                 <td><input type="checkbox" v-bind:id=item.id @click="checkBox(item.id)"></td>
                 <td>{{ item.id }}</td>
                 <td>{{ item.firstname }}</td>
@@ -153,7 +155,7 @@
         <div class="modal-mask">
             <div class="delete">
                 <p>Сигурни ли сте, че искате да изтриете {{ checked }} елементи?</p>
-                <button type="button" class="btn btn-danger" v-on:click="removeRows(checked, false)">Confirm</button>
+                <button type="button" class="btn btn-danger" v-on:click="removeRows(false)">Confirm</button>
                 <button type="button" class="btn btn-primary" v-on:click="showDeleteRows = false">Cancel</button>
             </div>
         </div>
@@ -250,7 +252,7 @@ export default {
         getResults() {
             axios.get('bookings', { params: { keyword: this.keyword, searchModel: this.searchModel, searchDateModel: this.searchDateModel, 
                 searchTimeModel: this.searchTimeModel,checked: this.checked } })
-                .then(res => {this.cinema = res.data;console.log(this.checked)} )
+                .then(res => {this.cinema = res.data;console.log(this.checked);} )
         },
         onChangeSearch(event) {
             this.searchModel = event.target.value;
@@ -265,6 +267,7 @@ export default {
             console.log(this.searchTimeModel);
         },
         checkBox(event) {
+            this.getResults();
             console.log(event);
             var checkBox = document.getElementById(event);
             if (checkBox.checked == true) {
@@ -321,6 +324,7 @@ export default {
         DeleteRows: function (checked, showDeleteRows) {
             this.checked = checked;
             this.showDeleteRows = showDeleteRows;
+            console.log(this.checked.values);
         },
         removeRow: function (id, showDelete) {
             console.log("Row Deleted")
@@ -333,13 +337,13 @@ export default {
                 }
             });
         },
-        removeRows: function (id, showDelete) {
+        removeRows: function (showDeleteRows) {
             console.log("Row Deleted")
-            axios.delete(`deleteMultiBookings`).then(response => {
+            axios.delete(`deleteMultiBookings`, { params: {checked: this.checked }}).then(response => {
                 console.log(response.data);
                 if (response.data.status == true) {
                     this.show();
-                    this.showDelete = showDelete;
+                    this.showDeleteRows = showDeleteRows;
                     this.suc = "Record deleted successfully";
                 }
             });
