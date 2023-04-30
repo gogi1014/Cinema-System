@@ -5,23 +5,24 @@
     <div class="form-inline">
         <label>Търси резервация:</label>
         <input type="text" v-model="keyword" placeholder="Търси .." />
-        <label for="searchSelect">Търси по:</label>
+        <label  id="sortElements" for="searchSelect">Търси по:</label>
         <select class="form-control" name="searchSelect" @change="onChangeSearch($event)" v-model="searchModel">
             <option value="id">ID на филм</option>
             <option value="MovieId">Имена на потребител</option>
             <option value="MovieName">Име на филм</option>
         </select>
-        <select class="form-control" name="searchSelect" @change="onChangeDate($event)" v-model="searchDateModel">
+        <select id="sortElements" class="form-control" name="searchSelect" @change="onChangeDate($event)" v-model="searchDateModel">
             <option value="default">Изберете дата:</option>
             <option v-for="item in cinema" :key="item">
                 {{ item.date }}</option>
         </select>
-        <select class="form-control" name="searchSelect" @change="onChangeTime($event)" v-model="searchTimeModel">
+        <select id="sortElements" class="form-control" name="searchSelect" @change="onChangeTime($event)" v-model="searchTimeModel">
             <option value="default">Изберете час:</option>
             <option v-for="item in cinema" :key="item">
                 {{ item.time }}</option>
         </select>
     </div>
+    <div id="loginDelete">
     <label for="ElementsNumber">Брой елементи на страница:</label>
     <select name="ElementsNumber" @change="onChange($event)" v-model="selPageNum">
         <option value="3">3</option>
@@ -29,7 +30,8 @@
         <option value="10">10</option>
         <option value="20">20</option>
     </select>
-    <button type="button" class="btn btn-danger" @click="DeleteRows(checked, true)">Изтриване на избраните</button>
+    <button id="sortElements" type="button" class="btn btn-danger" @click="DeleteRows(checked, true)">Изтриване на избраните</button>
+    </div>
     <table class="table" id="adminTable">
         <thead class="thead-dark">
             <tr>
@@ -80,9 +82,9 @@
                 <td>{{ item.ticknum }}</td>
                 <td>{{ item.time }}</td>
                 <td>{{ item.MovieId }}</td>
-                <td><button type="button" class="btn btn-danger" v-on:click="Delete(item.id, true)">Delete</button></td>
+                <td><button type="button" class="btn btn-danger" v-on:click="Delete(item.id, true)">Изтриване</button></td>
                 <td><button id="show-modal" class="btn btn-primary" @click="select(item.id, item.firstname, item.lastname, item.email, item.date,
-                    item.ticknum, item.time, item.MovieId, true)">Edit</button>
+                    item.ticknum, item.time, item.MovieId, true)">Редактиране</button>
                 </td>
             </tr>
         </tbody>
@@ -131,8 +133,8 @@
                     </tr>
                     <tr>
                         <td><button type="button" class="btn btn-primary" v-on:click="updateRow(id, firstname, lastname, email, date,
-                            ticknum, time, MovieId)">Update</button></td>
-                        <td><button type="button" class="btn btn-danger" @click="showModal = false">Cancel</button></td>
+                            ticknum, time, MovieId)">Актуализиране</button></td>
+                        <td><button type="button" class="btn btn-danger" @click="showModal = false">Отказ</button></td>
                     </tr>
                 </table>
                 <div class="Err">
@@ -145,8 +147,8 @@
         <div class="modal-mask">
             <div class="delete">
                 <p>Сигурни ли сте, че искате да изтриете този елемент?</p>
-                <button type="button" class="btn btn-danger" v-on:click="removeRow(id, false)">Confirm</button>
-                <button type="button" class="btn btn-primary" v-on:click="showDelete = false">Cancel</button>
+                <button type="button" class="btn btn-danger" v-on:click="removeRow(id, false)">Потвърди</button>
+                <button type="button" class="btn btn-primary" v-on:click="showDelete = false">Отказ</button>
             </div>
         </div>
 
@@ -155,8 +157,8 @@
         <div class="modal-mask">
             <div class="delete">
                 <p>Сигурни ли сте, че искате да изтриете {{ checked }} елементи?</p>
-                <button type="button" class="btn btn-danger" v-on:click="removeRows(false)">Confirm</button>
-                <button type="button" class="btn btn-primary" v-on:click="showDeleteRows = false">Cancel</button>
+                <button type="button" class="btn btn-danger" v-on:click="removeRows(false)">Потвърди</button>
+                <button type="button" class="btn btn-primary" v-on:click="showDeleteRows = false">Отказ</button>
             </div>
         </div>
 
@@ -251,7 +253,7 @@ export default {
         },
         getResults() {
             axios.get('bookings', { params: { keyword: this.keyword, searchModel: this.searchModel, searchDateModel: this.searchDateModel, 
-                searchTimeModel: this.searchTimeModel,checked: this.checked } })
+                searchTimeModel: this.searchTimeModel} })
                 .then(res => {this.cinema = res.data;console.log(this.checked);} )
         },
         onChangeSearch(event) {
@@ -267,14 +269,14 @@ export default {
             console.log(this.searchTimeModel);
         },
         checkBox(event) {
-            this.getResults();
-            console.log(event);
             var checkBox = document.getElementById(event);
             if (checkBox.checked == true) {
                 this.checked.push(checkBox.id);
             } 
             else{
-                this.checked.pop(checkBox.id);
+                var index = this.checked.indexOf(checkBox.id);
+                this.checked.splice(index, 1);
+                console.log(this.checked);
             }
         },
         orderedCinema(aa) {

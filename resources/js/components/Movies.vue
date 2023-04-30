@@ -5,25 +5,25 @@
     <div class="form-inline">
         <label>Търси филм:</label>
         <input type="text" v-model="keyword" placeholder="Търси филм.." />
-        <label for="searchSelect">Търси по:</label>
-        <select class="form-control" name="searchSelect" @change="onChangeSearch($event)" v-model="searchModel">
+        <label id="sortElements" for="searchSelect">Търси по:</label>
+        <select class="form-control " name="searchSelect" @change="onChangeSearch($event)" v-model="searchModel">
             <option value="movieTitle">Заглавие</option>
             <option value="movieId">ID на филм</option>
         </select>
-        <label for="ChooseGenre">Търси по жанр:</label>
+        <label id="sortElements" for="ChooseGenre">Търси по жанр:</label>
         <select class="form-control" name="ChooseGenre" @change="changeGenre($event)" v-model="genreSelect">
             <option value="default">Изберете жанр</option>
             <option v-for="item in genres" :key="item">
                 {{ item }}</option>
         </select>
-        <label for="ChooseCategory">Търси по категория:</label>
-        <select class="form-control" name="ChooseCategory" @change="changeCategory($event)" v-model="categorySelect">
+        <label id="sortElements" for="ChooseCategory">Търси по категория:</label>
+        <select class="form-control"  name="ChooseCategory" @change="changeCategory($event)" v-model="categorySelect">
             <option value="default">Изберете Категория</option>
             <option v-for="item in sortCat" :key="item.movieCat">
                 {{ item.movieCat }}</option>
         </select>
     </div>
-
+    <div id="loginDelete">
     <label for="ElementsNumber">Брой елементи на страница:</label>
     <select name="ElementsNumber" @change="onChange($event)" v-model="selPageNum">
         <option value="3">3</option>
@@ -31,12 +31,15 @@
         <option value="10">10</option>
         <option value="20">20</option>
     </select>
-
+    <button id="sortElements" type="button" class="btn btn-danger" @click="DeleteRows(checked, true)">Изтриване на избраните</button>
+    </div>
 
     <div class="container">
         <table style="display: block; height: 1020px; overflow: auto;" class="table " id="adminTable">
             <thead class="thead-dark">
                 <tr>
+                    <th>
+                    </th>
                     <th class="text-left" @click="orderedCinema('movieId')">
                         ID
                         <div v-html="message" ref="myId" id="movieId"></div>
@@ -88,6 +91,7 @@
             </thead>
             <tbody>
                 <tr v-for="item in paginated" :key="item.movieId">
+                    <td><input type="checkbox" v-bind:id=item.movieId @click="checkBox(item.movieId)"></td>
                     <td>{{ item.movieId }}</td>
                     <td>{{ item.movieTitle }}</td>
                     <td>{{ item.movieTrailer }}</td>
@@ -104,11 +108,11 @@
                     <td>{{ item.movieCat }}</td>
                     <td>{{ item.movieLan }}</td>
                     <td>{{ item.active }}</td>
-                    <td><button type="button" class="btn btn-danger" v-on:click="Delete(item.movieId, true)">Delete</button>
+                    <td><button type="button" class="btn btn-danger" v-on:click="Delete(item.movieId, true)">Изтриване</button>
                     </td>
                     <td><button id="show-modal" class="btn btn-primary"
                             @click="select(item.movieId, item.movieTitle, item.movieImg, item.movieTrailer, item.movieGenre, item.movieDuration,
-                                item.movieRelDate, item.movieDirector, item.movieActors, item.Description, item.movieCat, item.movieLan, item.active, true)">Edit</button>
+                                item.movieRelDate, item.movieDirector, item.movieActors, item.Description, item.movieCat, item.movieLan, item.active, true)">Редактиране</button>
                     </td>
                 </tr>
             </tbody>
@@ -193,9 +197,9 @@
                     <tr>
                         <td><button type="button" class="btn btn-primary"
                                 v-on:click="updateRow(movieId, movieTitle, movieImg, movieTrailer, movieGenre, movieDuration,
-                                    movieRelDate, movieDirector, movieActors, Description, movieCat, movieLan, active)">Update</button>
+                                    movieRelDate, movieDirector, movieActors, Description, movieCat, movieLan, active)">Актуализиране</button>
                         </td>
-                        <td><button type="button" class="btn btn-danger" @click="showModal = false">Cancel</button></td>
+                        <td><button type="button" class="btn btn-danger" @click="showModal = false">Отказ</button></td>
                     </tr>
                 </table>
                 <div class="Err">
@@ -208,11 +212,19 @@
         <div class="modal-mask">
             <div class="delete">
                 <p>Сигурни ли сте, че искате да изтриете този елемент?</p>
-                <button type="button" class="btn btn-danger" v-on:click="removeRow(movieId, false)">Confirm</button>
-                <button type="button" class="btn btn-primary" v-on:click="showDelete = false">Cancel</button>
+                <button type="button" class="btn btn-danger" v-on:click="removeRow(movieId, false)">Потвърждаване</button>
+                <button type="button" class="btn btn-primary" v-on:click="showDelete = false">Отказ</button>
             </div>
         </div>
-
+    </modal>
+    <modal v-if="showDeleteRows" @close="showDeleteRows = false">
+        <div class="modal-mask">
+            <div class="delete">
+                <p>Сигурни ли сте, че искате да изтриете {{ checked }} елементи?</p>
+                <button type="button" class="btn btn-danger" v-on:click="removeRows(false)">Потвърди</button>
+                <button type="button" class="btn btn-primary" v-on:click="showDeleteRows = false">Отказ</button>
+            </div>
+        </div>
     </modal>
 </template>
 
@@ -230,6 +242,7 @@ export default {
             cinema: [],
             genres: [],
             pages: [],
+            checked: [],
             sortCat: [],
             selPageNum: 5,
             categorySelect: "default",
@@ -240,6 +253,7 @@ export default {
             selected: 5,
             showModal: false,
             showDelete: false,
+            showDeleteRows: false,
             sorted: false,
             movieId: Number,
             movieTitle: String,
@@ -307,6 +321,17 @@ export default {
                 this.pages.push(index);
             }
         },
+        checkBox(event) {
+            var checkBox = document.getElementById(event);
+            if (checkBox.checked == true) {
+                this.checked.push(checkBox.id);
+            } 
+            else{
+                var index = this.checked.indexOf(checkBox.id);
+                this.checked.splice(index, 1);
+                console.log(this.checked);
+            }
+        },
         changeGenre(event) {
             this.genreSelect = event.target.value;
         },
@@ -368,6 +393,11 @@ export default {
             this.movieId = movieId;
             this.showDelete = showDelete;
         },
+        DeleteRows: function (checked, showDeleteRows) {
+            this.checked = checked;
+            this.showDeleteRows = showDeleteRows;
+            console.log(this.checked.values);
+        },
         removeRow: function (movieId, showDelete) {
             console.log("Row Deleted")
             axios.delete(`delete/${movieId}`).then(response => {
@@ -375,6 +405,17 @@ export default {
                 if (response.data.status == true) {
                     this.show();
                     this.showDelete = showDelete;
+                    this.suc = "Record deleted successfully";
+                }
+            });
+        },
+        removeRows: function (showDeleteRows) {
+            console.log("Row Deleted")
+            axios.delete(`deleteMultiMovies`, { params: {checked: this.checked }}).then(response => {
+                console.log(response.data);
+                if (response.data.status == true) {
+                    this.show();
+                    this.showDeleteRows = showDeleteRows;
                     this.suc = "Record deleted successfully";
                 }
             });

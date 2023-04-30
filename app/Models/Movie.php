@@ -38,7 +38,7 @@ class Movie extends Model
         if ($request->searchModel == 'movieTitle') {
             return Movie::where('movieTitle', 'LIKE', '%' . $request->keyword . '%')->get();
         } 
-        elseif($request->searchModel == 'movieId') {
+        if($request->searchModel == 'movieId') {
             return Movie::where('movieId', 'LIKE', '%' . $request->keyword . '%')->get();
         }
     }

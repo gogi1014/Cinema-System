@@ -31,23 +31,23 @@ class AdminAuthController extends Controller
         $model = Admin::query()->where('email', $request->get('email'))->firstOrFail();
 
         if(!$model){
-            return back()->with('error', 'Email or password is incorrect');
+            return back()->with('error', 'Имейлът или паролата са неправилни');
         }
         if (!Hash::check($request->get('password'), $model->password)) {
-            return back()->with('error', 'Email or password is incorrect');
+            return back()->with('error', 'Имейлът или паролата са неправилни');
         }
 
         Auth::guard('admin')->login($model);
 
         return redirect()->route('adminDashboard')
-            ->with('success', 'Welcome ' . $model->name . '!');
+            ->with('success', 'Добре дошъл ' . $model->name . '!');
     }
  
     public function adminLogout(Request $request)
     {
         auth()->guard('admin')->logout();
         Session::flush();
-        Session::put('success', 'You are logout sucessfully');
+        Session::put('success', 'Излязохте успешно от системата');
         return redirect(route('adminLogin'));
     }
     public function getCount(Request $request)
@@ -88,6 +88,14 @@ class AdminAuthController extends Controller
         }
         $movie->delete();
         return ["status" => true];
+    }
+    public function deleteMultiMovies(Request $request)
+    {   
+        $movie = Movie::destroy($request->checked);
+        if (!$movie) {
+            return ["status" => false, "message" => "Movie not found"];
+        }
+        return ["status" => true , "message" => "Movie deleted succesfully"];
     }
     public function insertform()
     {
@@ -185,5 +193,13 @@ class AdminAuthController extends Controller
         }
         $movie->delete();
         return ["status" => true];
+    }
+    public function deleteMultiMoviesDate(Request $request)
+    {   
+        $movie = MovieDate::destroy($request->checked);
+        if (!$movie) {
+            return ["status" => false, "message" => "Movie not found"];
+        }
+        return ["status" => true , "message" => "Movie deleted succesfully"];
     }
 }

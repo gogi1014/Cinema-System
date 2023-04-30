@@ -8,7 +8,7 @@ function closeNav() {
 
 
 function showPass() {
-  var x = document.getElementById("password");
+  var x = document.getElementById("passwordLogin");
   if (x.type === "password") {
     x.type = "text";
   } else {

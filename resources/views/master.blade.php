@@ -18,9 +18,6 @@
     <script src="https://unpkg.com/vuesax@4.0.1-alpha.16/dist/vuesax.min.js"></script>
     <script src="https://unpkg.com/vuejs-paginate-next@latest/dist/vuejs-paginate-next.umd.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-
-
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
     <script type="text/javascript" src="{{ URL::asset('js/menu.js') }}"></script>
 
@@ -37,6 +34,7 @@
         <a href="{{ url('/admin/bookingsView') }}">Резервации</a>
         <a href="{{ url('/admin/moviesDateView') }}">Дати и часове</a>
         <a href="{{ url('/admin/addMovieDate/1') }}">Добавяне на дати и часове</a>
+        <a href="{{ url('/admin/logout') }}">Изход</a>
     </div>
     <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Отвори меню</span>
 

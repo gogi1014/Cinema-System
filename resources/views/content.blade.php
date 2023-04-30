@@ -60,9 +60,9 @@
   <h2 id="title">Направи резервация</h2>
   <form action="/create" method="post" id="form1">
     @csrf
-    <div class="form-group">
+    <div class="form-inline">
       <label for="dateSelected">Дата</label>
-      <select name="dateSelected" id="dateSelected" onchange="window.history.pushState(null, null,this.value);">
+      <select class="form-control" name="dateSelected" id="dateSelected" onchange="window.history.pushState(null, null,this.value);">
         <option disabled selected value> -- Изберете дата -- </option>
         @foreach ($moviedate as $date)
         <option value="{{ url('content/'.$movies->movieId.'/'.$date->date.'/') }}" @if($reqDate==$date->date) selected @endif>{{ $date->date}}</option>
@@ -74,11 +74,11 @@
       <p id="label2D">2D</p>
       @endif
       @foreach ($movietime as $time)
-      <button type="button" value="{{ url('content/'.$movies->movieId.'/'.$reqDate.'/'.$time->time.'/') }}" class="btnTime" type="button" onclick="window.history.pushState(null, null,this.value);timeButton('{{$reqDate}}','{{ $time->date}}')" id="2DTheater">{{$time->time}}</button>
+      <button type="button" value="{{ url('content/'.$movies->movieId.'/'.$reqDate.'/'.$time->time.'/') }}" class="btnTime" type="button" onclick="window.history.pushState(null, null,this.value);timeButton('{{$time->time}}','{{ $time->date}}')" id="2DTheater">{{$time->time}}</button>
       @endforeach
       <p id="label3D">3D</p>
       @foreach ($movietimee as $time)
-      <button type="button" value="{{ url('content/'.$movies->movieId.'/'.$reqDate.'/'.$time->time.'/') }}" class="btnTime" type="button" onclick="window.history.pushState(null, null,this.value);timeButton('{{$reqDate}}','{{ $time->date}}')" id="3DTheater">{{$time->time}}</button>
+      <button type="button" value="{{ url('content/'.$movies->movieId.'/'.$reqDate.'/'.$time->time.'/') }}" class="btnTime" type="button" onclick="window.history.pushState(null, null,this.value);timeButton('{{$time->time}}','{{ $time->date}}')" id="3DTheater">{{$time->time}}</button>
       @endforeach
       <p id="myPara"></p>
       <div class="form-row">
@@ -159,7 +159,7 @@
       <input type="hidden" class="form-control" name="datte" id="datte" value="{{$reqDate}}">
     </div>
     <div class="form-group">
-      <input type="hidden" class="form-control" name="timee" id="timee" value="{{$reqTime}}">
+      <input type="hidden" class="form-control" name="timee" id="timee" value="{{$time->time}}">
     </div>
     @endif
 </div>

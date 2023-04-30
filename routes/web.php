@@ -32,7 +32,8 @@ Route::post('/aaa', [MovieController::class, 'getMovieApi']);
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::get('/login', [AdminAuthController::class, 'getLogin'])->name('adminLogin');
     Route::post('/login', [AdminAuthController::class, 'postLogin'])->name('adminLoginPost');
- 
+    Route::get('/logout', [AdminAuthController::class, 'adminLogout']);
+
     Route::group(['middleware' => 'adminauth'], function () {
         Route::get('/', [AdminAuthController::class, 'getCount'])->name("adminDashboard");
         Route::get('/addMovie', [AdminAuthController::class, 'insertform']);
@@ -42,6 +43,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('/moviesViewSearch/', [AdminAuthController::class, 'getMoviesAdmin']);
         Route::post('/update/{id}', [AdminAuthController::class, 'update']);
         Route::delete('/delete/{id}', [AdminAuthController::class, 'delete']);
+        Route::delete('/deleteMultiMovies', [AdminAuthController::class, 'deleteMultiMovies']);
         Route::get('/bookings', [AdminAuthController::class, 'getBookingAdmin']);
         Route::get('/bookingsView', [AdminAuthController::class, 'getBookingAdminView']);
         Route::get('/bookingsViewSearch/', [AdminAuthController::class, 'getBookingAdmin']);
@@ -54,5 +56,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('/createMovieDate', [AdminAuthController::class, 'addMovieDate']);
         Route::post('/updateMoviesDate/{id}', [AdminAuthController::class, 'updateMoviesDate']);
         Route::delete('/deleteMoviesDate/{id}', [AdminAuthController::class, 'deleteMoviesDate']);
+        Route::delete('/deleteMultiMoviesDate', [AdminAuthController::class, 'deleteMultiMoviesDate']);
     });
 });
