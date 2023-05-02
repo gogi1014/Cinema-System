@@ -58,6 +58,7 @@ $(window).on('load', function() {
   $('#ModalSuccess').modal('show');
 });
 
+
 function getTicketNum(obj) {
   if (obj.value.length > 0) {
     document.getElementById("chooseBtn").disabled = false;

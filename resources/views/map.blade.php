@@ -121,13 +121,18 @@
         @foreach ($movies as $movie)
         <div>
             Id:{{ $movie->movieId }} | Заглавие:{{ $movie->movieTitle }}
+            <div class="form-inline">
+            <div id="apiDelete">
             <form id="searchform" action="{{route('movie.destroy', $movie->movieId)}}" method="POST">
                 @csrf
                 @method('DELETE')
-
                 <button id="deleteBtn" class="btn btn-secondary btn-sm" type="submit">Изтрий</button>
             </form>
+            </div>
+            <div class="col-md-10">
             <button id="editBtn" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#a{{ $movie->movieId }}"> Редактирай</button>
+            </div>
+            </div>
             <div class="modal fade" id="a{{ $movie->movieId }}" role="dialog">
                 <div class="modal-dialog">
                     <div class="modal-content">

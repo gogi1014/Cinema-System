@@ -12,9 +12,10 @@
 <h1>Здравейте, {{ $full }}!</h1>
 <p><strong>Направихте резервация за филма: {{$movieName}}</strong></p>
 <p><strong>на дата: {{$date}}</strong></p>
-<p><strong>от: {{$time}}</strong></p>
+<p><strong>от: {{$time}} часа</strong></p>
 <p><strong>брой билети: {{$ticknum}}</strong></p>
 <p><strong>места: {{$places}}</strong></p>
+<p><strong>№ на резервация: #{{$ticked_id}}</strong></p>
 </div>
 </body>
 </html>

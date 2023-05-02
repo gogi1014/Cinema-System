@@ -55,6 +55,7 @@ class Movie extends Model
         }
         if (isset($input['category'])) {
             $search->where('movieCat', 'LIKE', $input["category"]);
+            print_r($request->all);
         }
         /*if (isset($input['genres'])) {
             $search->where('movieGenre', 'LIKE', "%" . $input["genres"] . "%");

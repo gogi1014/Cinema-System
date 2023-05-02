@@ -37,7 +37,7 @@
                 <div class="headerSearch">
                     <h1>Уеб информационна система за кино</h1>
                     <form id="searchMov" action="{{ url('/') }}" method="GET">
-                        <input type="text" name="search" class="searchTerm" required />
+                        <input type="text" value="{{(request()->search)}}" name="search" class="searchTerm" required />
                         <button type="submit" class="searchButton">
                             <i class="fa fa-search" class="searchButton"></i></button>
                     </form>
@@ -48,7 +48,7 @@
                                     <option disabled selected value> -- Изберете категория -- </option>
                                     <option value=" "> -- Всички -- </option>
                                     @foreach ($moviesAll as $movie)
-                                    <option value="{{$movie->movieCat}}">{{$movie->movieCat}}</option>
+                                    <option value="{{$movie->movieCat}}" @if(request()->category==$movie->movieCat) selected @endif>{{$movie->movieCat}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -58,7 +58,7 @@
                         {{csrf_field()}}
                         <div class="form-group" id="checkGroup">
                             @foreach (($arr) as $moviesGenres)
-                            <input type="checkbox" name="genres[{{$moviesGenres}}]">{{$moviesGenres}}
+                            <input type="checkbox" name="genres[{{$moviesGenres}}]" value="{{$moviesGenres}}" @if(request()->genres) @if(in_array($moviesGenres,request()->genres)) checked @endif @endif>{{$moviesGenres}}
                             @endforeach
                             <input type="submit" class="GenreButton" value="Търси по жанр" />
                         </div>

@@ -4,7 +4,7 @@
 @if(session()->has('success'))
 
 <div class="modal fade" role="dialog" id="ModalSuccess">
-  <div class="modal-dialog" >
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Успешна резервация</h5>
@@ -26,6 +26,7 @@
 
 <div id="fpContent">
   <table id="tableContent">
+    @if(sizeof($movies))
 
     @foreach ($movies as $movie)
     <tr class='trMovie'>
@@ -45,7 +46,7 @@
       <td>
         <!-- Modal -->
         <div class="modal fade" id="a{{ $movie->movieId }}" role="dialog">
-          <div class="modal-dialog modal-lg" >
+          <div class="modal-dialog modal-lg">
 
             <!-- Modal content-->
             <div class="modal-content">
@@ -54,7 +55,7 @@
                 <h4 class="modal-title">{{ $movie->movieTitle }}</h4>
               </div>
               <div class="modal-body">
-                <iframe class="iframe"  src="{{ $movie->movieTrailer }}" frameborder="0" allowfullscreen></iframe>
+                <iframe class="iframe" src="{{ $movie->movieTrailer }}" frameborder="0" allowfullscreen></iframe>
               </div>
               <div class="modal-footer">
                 {{ $movie->movieGenre }} | {{ $movie->movieDuration }} мин. | Категория: {{ $movie->movieCat }} | {{ $movie->movieLan }}
@@ -67,6 +68,9 @@
       </td>
     </tr>
     @endforeach
+    @else
+    <h3>Няма открити резултати</h3>
+    @endif
   </table>
 </div>
 <div class="d-felx justify-content-center">

@@ -63,17 +63,16 @@ class User extends Authenticatable
         $user->MovieId = $input["MovieId"];
         $email = $input["email"];
         $user->places = $input["places"];
+        $user->save();
         $full = $user->firstname . " " . $user->lastname;
+        $ticked_id = User::where("email",$user->email)->where("date",$user->date)->where("time",$user->time)->where("MovieId",$user->MovieId)->pluck('id');
         $data = array(
             'name' => $fullName, 'movieName' => $user->MovieId, 'full' => $full,
-            'date' => $user->date, 'time' => $user->time, 'ticknum' => $user->ticknum, 'places' => $user->places
-        );
+            'date' => $user->date, 'time' => $user->time, 'ticknum' => $user->ticknum, 'places' => $user->places, 'ticked_id' => $ticked_id);
         Mail::send('mail', $data, function ($message) use ($email) {
             $message->to($email, 'Tutorials Point')->subject('Резервиране на билет за кино');
             $message->from('killaonthehilla@gmail.com', 'Кино');
         });
-        echo "Basic Email Sent. Check your inbox.";
-        $user->save();
     }
     public function upd($request)
     {

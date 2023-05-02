@@ -71,6 +71,10 @@ body {
   text-align: center;
 }
 
+#apiDelete{
+  margin-top: 1.2%;
+}
+
 .delete {
   position: absolute;
   left: 50%;
@@ -702,3 +706,4 @@ label {
 #sortElements{
   margin-left: 2%;
 }
+
