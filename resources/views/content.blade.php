@@ -51,8 +51,8 @@
 
 
 @section('content')
-<div id="app">
-  <br>
+<div id="headContent">
+  <a href="{{ url('') }}">Начало</a> > {{ $movies->movieTitle }}
   <h2 id="title">{{ $movies->movieTitle }}</h2>
   <iframe width="100%" height="600" src="{{ $movies->movieTrailer }}" frameborder="0" allowfullscreen></iframe>
 </div>
