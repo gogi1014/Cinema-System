@@ -23,8 +23,11 @@
 </div>
 @endif
 
+<div id="app" class="vueFp"> <fp></fp> </div>
+<script src="{{ mix('js/app.js') }}" type="text/javascript"></script>
 
 <div id="fpContent">
+<!-- search Laravel
   <table id="tableContent">
     @if(sizeof($movies))
 
@@ -44,11 +47,10 @@
         </table>
       </td>
       <td>
-        <!-- Modal -->
+
         <div class="modal fade" id="a{{ $movie->movieId }}" role="dialog">
           <div class="modal-dialog modal-lg">
 
-            <!-- Modal content-->
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -78,7 +80,7 @@
     {{$movies->appends($_GET)->links('pagination::bootstrap-4')}}
   </ul>
 </div>
-
+-->
 <h2>Очаквайте</h2>
 <div class="slider-container" item-display-d="4" item-display-t="3" item-display-m="1">
   <div class="slider-width">

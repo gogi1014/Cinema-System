@@ -21,21 +21,19 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
         <script src=https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css></script>
         <script src=https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js></script>
+        <link href="https://fonts.cdnfonts.com/css/library-3-am" rel="stylesheet">
+        <link href="https://fonts.cdnfonts.com/css/theatrical" rel="stylesheet">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
         <script type="text/javascript" src="{{ URL::asset('js/menu.js') }}"></script>
-
-
-        <title>View Student Records</title>
+        <title>Система за кино</title>
     </head>
-
     <body>
-
         <div id="background">
-
             <div class="header">
                 <div class="headerSearch">
                     <h1>Уеб информационна система за кино</h1>
+                    <!-- search Laravel
                     <form id="searchMov" action="{{ url('/') }}" method="GET">
                         <input type="text" value="{{(request()->search)}}" name="search" class="searchTerm" required />
                         <button type="submit" class="searchButton">
@@ -63,6 +61,7 @@
                             <input type="submit" class="GenreButton" value="Търси по жанр" />
                         </div>
                     </form>
+                     -->
                 </div>
             </div>
             <div class="hero">

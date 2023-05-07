@@ -65,7 +65,7 @@ class User extends Authenticatable
         $user->places = $input["places"];
         $user->save();
         $full = $user->firstname . " " . $user->lastname;
-        $ticked_id = User::where("email",$user->email)->where("date",$user->date)->where("time",$user->time)->where("MovieId",$user->MovieId)->pluck('id');
+        $ticked_id = User::where("email",$user->email)->where("date",$user->date)->where("time",$user->time)->where("MovieId",$user->MovieId)->where("places",$user->places)->pluck('id');
         $data = array(
             'name' => $fullName, 'movieName' => $user->MovieId, 'full' => $full,
             'date' => $user->date, 'time' => $user->time, 'ticknum' => $user->ticknum, 'places' => $user->places, 'ticked_id' => $ticked_id);

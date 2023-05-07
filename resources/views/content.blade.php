@@ -52,16 +52,16 @@
 
 @section('content')
 <div id="app">
+  <br>
   <h2 id="title">{{ $movies->movieTitle }}</h2>
   <iframe width="100%" height="600" src="{{ $movies->movieTrailer }}" frameborder="0" allowfullscreen></iframe>
 </div>
-
 <div id="createBooking">
   <h2 id="title">Направи резервация</h2>
   <form action="/create" method="post" id="form1">
     @csrf
     <div class="form-inline">
-      <label for="dateSelected">Дата</label>
+      <label for="dateSelected">Дата: </label>
       <select class="form-control" name="dateSelected" id="dateSelected" onchange="window.history.pushState(null, null,this.value);">
         <option disabled selected value> -- Изберете дата -- </option>
         @foreach ($moviedate as $date)
@@ -71,12 +71,12 @@
     </div>
     <div id="Selecteed">
       @if($movietime)
-      <p id="label2D">2D</p>
+      <p id="label2D">2D </p>
       @endif
       @foreach ($movietime as $time)
       <button type="button" value="{{ url('content/'.$movies->movieId.'/'.$reqDate.'/'.$time->time.'/') }}" class="btnTime" type="button" onclick="window.history.pushState(null, null,this.value);timeButton('{{$time->time}}','{{ $time->date}}')" id="2DTheater">{{$time->time}}</button>
       @endforeach
-      <p id="label3D">3D</p>
+      <p id="label3D">3D </p>
       @foreach ($movietimee as $time)
       <button type="button" value="{{ url('content/'.$movies->movieId.'/'.$reqDate.'/'.$time->time.'/') }}" class="btnTime" type="button" onclick="window.history.pushState(null, null,this.value);timeButton('{{$time->time}}','{{ $time->date}}')" id="3DTheater">{{$time->time}}</button>
       @endforeach
@@ -92,9 +92,6 @@
           <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Фамилия">
         </div>
       </div>
-      <div class="form-group">
-        <input type="hidden" class="form-control" name="MovieId" id="MovieId" value="{{ $movies->movieTitle }}">
-      </div>
       <div class="form-row">
         <div class="form-group col-md-10">
           <label for="email">Имейл</label>
@@ -107,9 +104,10 @@
           <input type="text" class="form-control" name="ticknum" id="ticknum" onkeyup="getTicketNum(this)" placeholder="Брой билети">
         </div>
         <button disabled type="button" id="chooseBtn" class="btn btn-secondary" data-toggle="modal" data-target="#a">Избор на място</button>
-
+        <div class="form-group">
+          <input type="hidden" class="form-control" name="MovieId" id="MovieId" value="{{ $movies->movieTitle }}">
+        </div>
       </div>
-
       <div class="modal fade" id="a" role="dialog">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">

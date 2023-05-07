@@ -11,39 +11,37 @@
       <option value="{{ url('admin/addMovieDate/'. $movie->movieTitle) }}" @if($reqTitle==$movie->movieTitle) selected @endif>{{$movie->movieTitle}}</option>
       @endforeach
     </select>
-  @if(isset($movietitle->movieId)&& (isset($movie->movieTitle)))
-  <div class="form-group">
-    <input type="hidden"  name="MovieId" id="MovieId" value="{{$movietitle->movieId}}">
+    @if(isset($movietitle->movieId)&& (isset($movie->movieTitle)))
+    <div class="form-group">
+      <input type="hidden" name="MovieId" id="MovieId" value="{{$movietitle->movieId}}">
+    </div>
+    <div class="form-group">
+      <input type="hidden" name="movieTitle" id="movieTitle" value="{{$reqTitle}}">
+    </div>
+    @endif
   </div>
-  <div class="form-group">
-    <input type="hidden" name="movieTitle" id="movieTitle" value="{{$reqTitle}}">
-  </div>
-  @endif
-  </div>
-  <div class="form-group">
-    <label for="time">Час</label>
-    <input type="text" class="form-control" name="time" id="time" placeholder="Час">
-  </div>
-  <div class="form-group">
-    <label for="date">Дата</label>
-    <input type="date" class="form-control" name="date" id="date" placeholder="date">
+  <div class="form-row">
+    <div class="form-group col-md-5">
+      <label for="time">Час</label>
+      <input type="text" class="form-control" name="time" id="time" placeholder="Час">
+    </div>
+    <div class="form-group col-md-5">
+      <label for="date">Дата</label>
+      <input type="date" class="form-control" name="date" id="date" placeholder="date">
+    </div>
   </div>
   <div class="form-inline">
-  <select class="form-control" name="type" onchange="changeType(this.value);">
-    <option disabled selected value> -- Изберете тип -- </option>
-    <option value="2D">2D</option>
-    <option value="3D">3D</option>
-  </select>
+    <select class="form-control" name="type" onchange="changeType(this.value);">
+      <option disabled selected value> -- Изберете тип -- </option>
+      <option value="2D">2D</option>
+      <option value="3D">3D</option>
+    </select>
   </div>
-  <div class="form-group">
-  <input type="hidden" class="form-control" name="Typ" id="Typ" >
-  <button type="submit" class="btn btn-primary">Създай</button>
-  </div>
+  <input type="hidden" class="form-control" name="Typ" id="Typ">
   <p id="myPara"></p>
-
+  <button type="submit" class="btn btn-primary">Създай</button>
 </form>
 <script src="{{ asset('js/menu.js') }}" defer></script>
-
 @if ($errors->any())
 <div class="alert alert-danger">
   <ul>

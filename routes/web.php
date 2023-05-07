@@ -23,6 +23,7 @@ Route::get('/fpMovies', [MovieController::class, 'jsonGetMovies']);
 Route::get('/content/{id}/{date?}/{time?}', [MovieController::class, 'ShowContent']);
 Route::get('/search/', [MovieController::class, 'getMovies']);
 Route::post('/create', [MovieController::class, 'addBooking']);
+Route::get('/movies', [AdminAuthController::class, 'getMoviesAdmin']);
 
 Route::get('/aaa', [MovieController::class, 'getMovieApi']);
 Route::post('/aaa', [MovieController::class, 'getMovieApi']);

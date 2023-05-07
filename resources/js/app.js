@@ -11,6 +11,9 @@ import example from './components/Movies.vue';
 import Bookings from './components/Bookings.vue';
 import aa from './components/MovieDate.vue';
 import book from './components/aa.vue';
+import fp from './components/fpMovies.vue';
+
+
 
 import JwPagination from 'jw-vue-pagination';
 
@@ -20,6 +23,7 @@ app.component('bookings', Bookings);
 app.component('aa', aa);
 app.component('jw-pagination', JwPagination);
 app.component('book', book);
+app.component('fp', fp);
 
 
 

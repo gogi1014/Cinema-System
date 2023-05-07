@@ -29,16 +29,33 @@ class Movie extends Model
 
     public function searchMovies($request)
     {
-        if($request->categorySelect != 'default'){
+        $search = Movie::orderBy("sim", "desc");
+        if ($request->genres) {
+            $genres = array_unique(($request->genres));
+            $arr = array();
+            foreach ($genres as $genre) {
+                $aa = ($search->orWhere('movieGenre', 'LIKE', "%" . $genre . "%")->pluck('movieGenre'))->toArray();
+            }
+            for ($i = 0; $i < count($aa); $i++) {
+                $expSort = explode(", ", $aa[$i]);
+                $result = array_intersect($expSort, $genres);
+                array_push($arr, count($result));
+                Movie::where('movieGenre', $aa[$i])->update(["sim" => $arr[$i]]);
+            }
+            foreach ($request->genres as $genre) {
+                return $search->where('movieGenre', 'LIKE', '%' . $genre . '%')->get();
+            }
+        }
+        if ($request->categorySelect != 'default') {
             return Movie::where('movieCat', 'LIKE', '%' . $request->categorySelect . '%')->get();
         }
-        if($request->genreSelect != 'default'){
+        if ($request->genreSelect != 'default') {
             return Movie::where('movieGenre', 'LIKE', '%' . $request->genreSelect . '%')->get();
         }
         if ($request->searchModel == 'movieTitle') {
             return Movie::where('movieTitle', 'LIKE', '%' . $request->keyword . '%')->get();
-        } 
-        if($request->searchModel == 'movieId') {
+        }
+        if ($request->searchModel == 'movieId') {
             return Movie::where('movieId', 'LIKE', '%' . $request->keyword . '%')->get();
         }
     }
@@ -49,7 +66,7 @@ class Movie extends Model
     public function getMovies($input, $request)
     {
         $pagg = 5;
-        $search = Movie::orderBy("sim","desc");
+        $search = Movie::orderBy("sim", "desc");
         if (isset($input['search'])) {
             $search->where('movieTitle', 'LIKE', "%" . $input["search"] . "%");
         }
@@ -65,12 +82,12 @@ class Movie extends Model
             $arr = array();
             foreach ($genres as $genre) {
                 $aa = ($search->orWhere('movieGenre', 'LIKE', "%" . $genre . "%")->pluck('movieGenre'))->toArray();
-            }            
+            }
             for ($i = 0; $i < count($aa); $i++) {
-                $expSort = explode(", ",$aa[$i]);
-                $result=array_intersect($expSort,$genres);
-                array_push($arr,count($result));
-                Movie::where('movieGenre',$aa[$i])->update(["sim"=>$arr[$i]]);
+                $expSort = explode(", ", $aa[$i]);
+                $result = array_intersect($expSort, $genres);
+                array_push($arr, count($result));
+                Movie::where('movieGenre', $aa[$i])->update(["sim" => $arr[$i]]);
             }
         }
         if (isset($input['pagg'])) {
@@ -78,6 +95,7 @@ class Movie extends Model
         }
         return $search->paginate($pagg);
     }
+
     public static function store($request)
     {
         $input = $request->input();

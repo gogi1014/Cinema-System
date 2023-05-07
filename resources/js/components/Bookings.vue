@@ -1,5 +1,3 @@
-// resources/components/HelloVue.vue
-
 <template >
     <h1>Списък с резервации</h1>
     <div class="form-inline">

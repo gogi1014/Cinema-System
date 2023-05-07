@@ -1,179 +1,121 @@
-// resources/components/HelloVue.vue
-
 <template >
-    <h1>Списък с филми</h1>
-    <div class="search-wrapper">
-        <label>Търси филм:</label>
-        <input type="text" v-model="keyword" placeholder="Търси филм.." />
+    <div id="headerSearchVue">
+        <br>
+        <div class="form-group" id="searchVue">
+            <input type="text" class="searchTerm" v-model="keyword" placeholder="Търси филм.." />
+            <button type="button" @click="searchEngine()" class="searchButton"><i class="fa fa-search"></i></button>
+        </div>
+        <div class="form-group">
+            <div class="selectCat">
+                <select class="form-control" name="ChooseCategory" @change="changeCategory($event)"
+                    v-model="categorySelect">
+                    <option value="default">Изберете Категория</option>
+                    <option v-for="item in sortCat" :key="item.movieCat">
+                        {{ item.movieCat }}</option>
+                </select>
+            </div>
+        </div>
+        Търси по жанр:
+        <div class="form-inline" id="checkBoxVue">
+            <span v-for="item in showGenres" :key="item">
+                <input type="checkbox" v-model="item" v-bind:id=item @change="checkBox(item)">
+                <span class="checkbox-label">
+                    {{ item }} </span> <br>
+            </span>
+        </div>
+        <div id="loginDelete">
+            <label for="ElementsNumber">Брой филми на страница:</label>
+            <select name="ElementsNumber" @change="onChange($event)" v-model="selPageNum">
+                <option value="3">3</option>
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
+            </select>
+        </div>
     </div>
     <div class="container">
-    <table style="display: block; height: 1020px; overflow: auto;" class="table table-striped table-dark" >
-        <thead>
-            <tr>
-                <th class="text-left">
-                    ID
-                </th>
-                <th class="text-left">
-                    Заглавие
-                </th>
-                <th class="text-left">
-                    Трейлър
-                </th>
-                <th class="text-left">
-                    Жанр
-                </th>
-                <th class="text-left">
-                    Времетраене
-                </th>
-                <th class="text-left">
-                    Дата на излизане
-                </th>
-                <th class="text-left">
-                    Продуцент
-                </th>
-                <th class="text-left">
-                    Актъори
-                </th>
-                <th class="text-left">
-                    Описание
-                </th>
-                <th class="text-left">
-                    Категория
-                </th>
-                <th class="text-left">
-                    Език
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr v-for="item in paginated" :key="item.movieId">
-                <td>{{ item.movieId }}</td>
-                <td>{{ item.movieTitle }}</td>
-                <td>{{ item.movieTrailer }}</td>
-                <td>{{ item.movieGenre }}</td>
-                <td>{{ item.movieDuration }}</td>
-                <td>{{ item.movieRelDate }}</td>
-                <td>{{ item.movieDirector }}</td>
-                <td><div style="height:125px; overflow:hidden">{{ item.movieActors }}</div></td>
-                <td><div style="height:125px; overflow:hidden">{{ item.Description }}</div></td>
-                <td>{{ item.movieCat }}</td>
-                <td>{{ item.movieLan }}</td>
-                <td>{{ item.active }}</td>
-                <td><button type="button" class="btn btn-danger" v-on:click="Delete(item.movieId, true)">Delete</button>
-                </td>
-                <td><button id="show-modal" class="btn btn-primary"
-                        @click="select(item.movieId, item.movieTitle, item.movieImg, item.movieTrailer, item.movieGenre, item.movieDuration,
-                        item.movieRelDate, item.movieDirector, item.movieActors, item.Description, item.movieCat, item.movieLan,item.active, true)">Edit</button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+        <table id="tableContent">
+            <tbody>
+                <tr class='trMovie' v-for="item in paginated" :key="item.movieId">
+                    <td><img class="imgContent" :src="item.movieImg"
+                            @click="selectTrailer(item.movieId, item.movieTitle, item.movieTrailer, true)"></td>
+                    <td class='trMovie'>
+                        <table>
+                            <tr>
+                                <td>
+                                    <h4><a style="text-decoration:none" :href="this.contentRoute + item.movieId">
+                                            {{ item.movieTitle }}</a></h4>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>{{ item.movieGenre }} | {{ item.movieDuration }} мин. | Категория: {{ item.movieCat }} |
+                                    {{ item.movieLan }}</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
     <!-- PAGINATION START -->
     <div class="clearfix btn-group col-md-2 offset-md-5">
         <button type="button" class="btn btn-sm btn-outline-secondary" @click="prev"> &lt&lt </button>
-        <button type="button" class="btn btn-sm btn-outline-secondary"
-            v-for="pageNumber  in pages" @click="current = pageNumber"> {{ pageNumber }}
+        <button type="button" class="btn btn-sm btn-outline-secondary" v-for="pageNumber  in pages"
+            @click="current = pageNumber"> {{ pageNumber }}
         </button>
         <button type="button" class="btn btn-sm btn-outline-secondary" @click="next"> >> </button>
     </div><!--end col-->
     <!-- PAGINATION END -->
+    <!-- MODAL FOR TRAILER -->
     <modal v-if="showModal" @close="showModal = false">
         <div class="modal-mask">
-            <div class="edit">
-                <h3>Редактиране</h3>
-                <table class="tab">
-                    <tr>
-                        <td><label for="movieTitle">Заглавие </label></td>
-                        <td><input type='text' id="movieTitle" style="width: 100%;" v-model="movieTitle" placeholder="Заглавие" /></td>
-                    </tr>
-                    <tr>
-                        <td><label for="movieImg">Постер </label></td>
-                        <td><input type='text' id="movieImg" style="width: 100%;" v-model="movieImg" placeholder="Постер" /></td>
-                    </tr>
-                    <tr>
-                        <td><label for="movieTrailer">Трейлър </label></td>
-                        <td><input type='text' id="movieTrailer" style="width: 100%;" v-model="movieTrailer" placeholder="Трейлър" /></td>
-                    </tr>
-                    <tr>
-                        <td><label for="movieGenre">Жанр </label></td>
-                        <td><input type='text' id="movieGenre" style="width: 100%;" v-model="movieGenre" placeholder="Жанр" /></td>
-                    </tr>
-                    <tr>
-                        <td><label for="movieDuration">Времетраене </label></td>
-                        <td><input type='text' id="movieDuration" style="width: 100%;" v-model="movieDuration" placeholder="Времетраене" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><label for="movieRelDate">Дата на излизане </label></td>
-                        <td><input type='text' id="movieRelDate" style="width: 100%;" v-model="movieRelDate"
-                                placeholder="Дата на излизане" /></td>
-                    </tr>
-                    <tr>
-                        <td><label for="movieDirector">Режисьор </label></td>
-                        <td><input type='text' id="movieDirector" style="width: 100%;" v-model="movieDirector" placeholder="Режисьор" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><label for="movieActors">Актъори </label></td>
-                        <td><input  type='text' id="movieActors" style="width: 100%;" v-model="movieActors" placeholder="Актъори" /></td>
-                    </tr>
-                    <tr>
-                        <td><label for="Description">Описание </label></td>
-                        <td><textarea rows = "5" cols = "60" id="Description" v-model="Description" placeholder="Описание" ></textarea></td>
-                    </tr>
-                    <tr>
-                        <td><label for="movieCat">Категория </label></td>
-                        <td><input type='text' id="movieCat" style="width: 100%;" v-model="movieCat" placeholder="Категория" /></td>
-                    </tr>
-                    <tr>
-                        <td><label for="movieLan">Език </label></td>
-                        <td><input type='text' id="movieLan" style="width: 100%;" v-model="movieLan" placeholder="Език" /></td>
-                    </tr>
-                    <tr>
-                        <td><label for="active">Активен </label></td>
-                        <td><input type='number' id="active" style="width: 100%;" v-model="active" placeholder="Активен" /></td>
-                    </tr>
-                    <tr>
-                        <td><button type="button" class="btn btn-primary" v-on:click="updateRow(movieId, movieTitle, movieImg, movieTrailer, movieGenre, movieDuration,
-                        movieRelDate, movieDirector, movieActors, Description, movieCat, movieLan,active)">Update</button>
-                        </td>
-                        <td><button type="button" class="btn btn-danger" @click="showModal = false">Cancel</button></td>
-                    </tr>
-                </table>
-                <div class="Err">
-                    {{ errO }}
+            <div class="modalTrailer">
+                <div class="modalTrailerHeadX">
+                    <h3 v-on:click="showModal = false">X</h3>
+                </div>
+                <div class="modalTrailerHead">
+                    <div class="modalTrailerHeadChild">
+                        <h3>{{ movieTitle }}</h3>
+                    </div>
+                </div>
+                <div class="modalTrailerContent">
+                    <iframe class="iframe" :src=movieTrailer frameborder="0" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
     </modal>
-    <modal v-if="showDelete" @close="showDelete = false">
-        <div class="modal-mask">
-            <div class="delete">
-                <p>Сигурни ли сте, че искате да изтриете този елемент?</p>
-                <button type="button" class="btn btn-danger" v-on:click="removeRow(movieId, false)">Confirm</button>
-                <button type="button" class="btn btn-primary" v-on:click="showDelete = false">Cancel</button>
-            </div>
-        </div>
-
-    </modal>
+    <!-- END MODAL FOR TRAILER -->
 </template>
 
 <script>
+import _ from 'lodash';
+
 export default {
 
     data() {
         return {
             current: 1,
-            pageSize: 5,
+            pageSize: 3,
             keyword: null,
             search: '',
             cinema: [],
+            genres: [],
             pages: [],
+            checked: [],
+            sortCat: [],
+            showGenres: [],
+            selPageNum: 3,
+            categorySelect: "default",
+            genreSelect: "default",
+            searchModel: "movieTitle",
             suc: "",
             errO: " ",
+            selected: 5,
             showModal: false,
             showDelete: false,
+            showDeleteRows: false,
+            sorted: false,
+            contentRoute: "content/",
             movieId: Number,
             movieTitle: String,
             movieImg: String,
@@ -204,11 +146,27 @@ export default {
         cinema() {
             this.setPages();
         },
-        keyword(after, before) {
+        genreSelect(after, before) {
             this.getResults();
-        }
+            console.log(this.genreSelect);
+        },
+        categorySelect(after, before) {
+            this.getResults();
+            console.log(this.genreSelect);
+        },
     },
     methods: {
+        searchEngine() {
+            this.getResults();
+        },
+        onChange(event) {
+            this.pageSize = event.target.value;
+            this.setPages();
+        },
+        onChangeSearch(event) {
+            this.searchModel = event.target.value;
+            console.log(this.searchModel);
+        },
         prev() {
             if ((this.current != 1))
                 this.current--;
@@ -224,13 +182,58 @@ export default {
                 this.pages.push(index);
             }
         },
+        checkBox(event) {
+            var checkBox = document.getElementById(event);
+            if (checkBox.checked == true) {
+                this.genres.push(checkBox.id);
+                console.log(this.genres);
+                this.getResults();
+            }
+            else {
+                var index = this.genres.indexOf(checkBox.id);
+                this.genres.splice(index, 1);
+                this.getResults();
+            }
+        },
+        changeGenre(event) {
+            this.genreSelect = event.target.value;
+        },
+        changeCategory(event) {
+            this.categorySelect = event.target.value;
+            console.log(this.categorySelect);
+        },
+        orderedCinema(aa) {
+            if (this.sorted == false) {
+                this.cinema = _.orderBy(this.cinema, aa, 'asc');
+                this.sorted = true;
+                document.getElementById(aa).innerHTML = "<i class='fas fa-angle-up'></i>";
+            }
+            else {
+                this.cinema = _.orderBy(this.cinema, aa, 'desc');
+                this.sorted = false;
+                document.getElementById(aa).innerHTML = "<i class='fas fa-angle-down'></i>";
+            }
+        },
         getResults() {
-            axios.get('movies', { params: { keyword: this.keyword } })
-                .then(res => this.cinema = res.data)
+            axios.get('movies', {
+                params: {
+                    keyword: this.keyword, searchModel: this.searchModel, genreSelect: this.genreSelect, categorySelect: this.categorySelect,
+                    genres: this.genres
+                }
+            })
+                .then(res => { this.cinema = res.data.cinema; })
+        },
+        selectTrailer(movieId, movieTitle, movieTrailer, showModal) {
+            this.movieId = movieId;
+            this.movieTitle = movieTitle;
+            this.movieTrailer = movieTrailer;
+            this.showModal = showModal;
         },
         show: function () {
-            axios.get('fpMovies').then(function (res) {
-                this.cinema = res.data;
+            axios.get('movies').then(function (res) {
+                this.cinema = res.data.cinema;
+                this.sortCat = res.data.sortCat;
+                this.showGenres = res.data.fpMovies;
             }.bind(this));
         },
     },

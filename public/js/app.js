@@ -18266,6 +18266,174 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/fpMovies.vue?vue&type=script&lang=js":
+/*!**************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/fpMovies.vue?vue&type=script&lang=js ***!
+  \**************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      current: 1,
+      pageSize: 3,
+      keyword: null,
+      search: '',
+      cinema: [],
+      genres: [],
+      pages: [],
+      checked: [],
+      sortCat: [],
+      showGenres: [],
+      selPageNum: 3,
+      categorySelect: "default",
+      genreSelect: "default",
+      searchModel: "movieTitle",
+      suc: "",
+      errO: " ",
+      selected: 5,
+      showModal: false,
+      showDelete: false,
+      showDeleteRows: false,
+      sorted: false,
+      contentRoute: "content/",
+      movieId: Number,
+      movieTitle: String,
+      movieImg: String,
+      movieTrailer: String,
+      movieGenre: String,
+      movieDuration: Number,
+      movieRelDate: Date,
+      movieDirector: String,
+      movieActors: String,
+      Description: String,
+      movieCat: String,
+      movieLan: String,
+      active: Number
+    };
+  },
+  computed: {
+    indexStart: function indexStart() {
+      return this.current * this.pageSize - this.pageSize;
+    },
+    indexEnd: function indexEnd() {
+      return this.current * this.pageSize;
+    },
+    paginated: function paginated() {
+      return this.cinema.slice(this.indexStart, this.indexEnd);
+    }
+  },
+  watch: {
+    cinema: function cinema() {
+      this.setPages();
+    },
+    genreSelect: function genreSelect(after, before) {
+      this.getResults();
+      console.log(this.genreSelect);
+    },
+    categorySelect: function categorySelect(after, before) {
+      this.getResults();
+      console.log(this.genreSelect);
+    }
+  },
+  methods: {
+    searchEngine: function searchEngine() {
+      this.getResults();
+    },
+    onChange: function onChange(event) {
+      this.pageSize = event.target.value;
+      this.setPages();
+    },
+    onChangeSearch: function onChangeSearch(event) {
+      this.searchModel = event.target.value;
+      console.log(this.searchModel);
+    },
+    prev: function prev() {
+      if (this.current != 1) this.current--;
+    },
+    next: function next() {
+      if (this.current < Math.ceil(this.cinema.length / this.pageSize)) this.current++;
+    },
+    setPages: function setPages() {
+      this.pages.length = 0;
+      var numberOfPages = Math.ceil(this.cinema.length / this.pageSize);
+      for (var index = 1; index <= numberOfPages; index++) {
+        this.pages.push(index);
+      }
+    },
+    checkBox: function checkBox(event) {
+      var checkBox = document.getElementById(event);
+      if (checkBox.checked == true) {
+        this.genres.push(checkBox.id);
+        console.log(this.genres);
+        this.getResults();
+      } else {
+        var index = this.genres.indexOf(checkBox.id);
+        this.genres.splice(index, 1);
+        this.getResults();
+      }
+    },
+    changeGenre: function changeGenre(event) {
+      this.genreSelect = event.target.value;
+    },
+    changeCategory: function changeCategory(event) {
+      this.categorySelect = event.target.value;
+      console.log(this.categorySelect);
+    },
+    orderedCinema: function orderedCinema(aa) {
+      if (this.sorted == false) {
+        this.cinema = lodash__WEBPACK_IMPORTED_MODULE_0___default().orderBy(this.cinema, aa, 'asc');
+        this.sorted = true;
+        document.getElementById(aa).innerHTML = "<i class='fas fa-angle-up'></i>";
+      } else {
+        this.cinema = lodash__WEBPACK_IMPORTED_MODULE_0___default().orderBy(this.cinema, aa, 'desc');
+        this.sorted = false;
+        document.getElementById(aa).innerHTML = "<i class='fas fa-angle-down'></i>";
+      }
+    },
+    getResults: function getResults() {
+      var _this = this;
+      axios.get('movies', {
+        params: {
+          keyword: this.keyword,
+          searchModel: this.searchModel,
+          genreSelect: this.genreSelect,
+          categorySelect: this.categorySelect,
+          genres: this.genres
+        }
+      }).then(function (res) {
+        _this.cinema = res.data.cinema;
+      });
+    },
+    selectTrailer: function selectTrailer(movieId, movieTitle, movieTrailer, showModal) {
+      this.movieId = movieId;
+      this.movieTitle = movieTitle;
+      this.movieTrailer = movieTrailer;
+      this.showModal = showModal;
+    },
+    show: function show() {
+      axios.get('movies').then(function (res) {
+        this.cinema = res.data.cinema;
+        this.sortCat = res.data.sortCat;
+        this.showGenres = res.data.fpMovies;
+      }.bind(this));
+    }
+  },
+  created: function created() {
+    this.show();
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/Bookings.vue?vue&type=template&id=e75628b6":
 /*!******************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/Bookings.vue?vue&type=template&id=e75628b6 ***!
@@ -19665,6 +19833,209 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/fpMovies.vue?vue&type=template&id=500c0378":
+/*!******************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/fpMovies.vue?vue&type=template&id=500c0378 ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+var _hoisted_1 = {
+  id: "headerSearchVue"
+};
+var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1 /* HOISTED */);
+var _hoisted_3 = {
+  "class": "form-group",
+  id: "searchVue"
+};
+var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+  "class": "fa fa-search"
+}, null, -1 /* HOISTED */);
+var _hoisted_5 = [_hoisted_4];
+var _hoisted_6 = {
+  "class": "form-group"
+};
+var _hoisted_7 = {
+  "class": "selectCat"
+};
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "default"
+}, "Изберете Категория", -1 /* HOISTED */);
+var _hoisted_9 = {
+  "class": "form-inline",
+  id: "checkBoxVue"
+};
+var _hoisted_10 = ["id", "onChange"];
+var _hoisted_11 = {
+  "class": "checkbox-label"
+};
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1 /* HOISTED */);
+var _hoisted_13 = {
+  id: "loginDelete"
+};
+var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "ElementsNumber"
+}, "Брой филми на страница:", -1 /* HOISTED */);
+var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "3"
+}, "3", -1 /* HOISTED */);
+var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "5"
+}, "5", -1 /* HOISTED */);
+var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "10"
+}, "10", -1 /* HOISTED */);
+var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "20"
+}, "20", -1 /* HOISTED */);
+var _hoisted_19 = [_hoisted_15, _hoisted_16, _hoisted_17, _hoisted_18];
+var _hoisted_20 = {
+  "class": "container"
+};
+var _hoisted_21 = {
+  id: "tableContent"
+};
+var _hoisted_22 = ["src", "onClick"];
+var _hoisted_23 = {
+  "class": "trMovie"
+};
+var _hoisted_24 = ["href"];
+var _hoisted_25 = {
+  "class": "clearfix btn-group col-md-2 offset-md-5"
+};
+var _hoisted_26 = ["onClick"];
+var _hoisted_27 = {
+  "class": "modal-mask"
+};
+var _hoisted_28 = {
+  "class": "modalTrailer"
+};
+var _hoisted_29 = {
+  "class": "modalTrailerHeadX"
+};
+var _hoisted_30 = {
+  "class": "modalTrailerHead"
+};
+var _hoisted_31 = {
+  "class": "modalTrailerHeadChild"
+};
+var _hoisted_32 = {
+  "class": "modalTrailerContent"
+};
+var _hoisted_33 = ["src"];
+function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _this = this;
+  var _component_modal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("modal");
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "text",
+    "class": "searchTerm",
+    "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
+      return $data.keyword = $event;
+    }),
+    placeholder: "Търси филм.."
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.keyword]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    type: "button",
+    onClick: _cache[1] || (_cache[1] = function ($event) {
+      return $options.searchEngine();
+    }),
+    "class": "searchButton"
+  }, _hoisted_5)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+    "class": "form-control",
+    name: "ChooseCategory",
+    onChange: _cache[2] || (_cache[2] = function ($event) {
+      return $options.changeCategory($event);
+    }),
+    "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
+      return $data.categorySelect = $event;
+    })
+  }, [_hoisted_8, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.sortCat, function (item) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("option", {
+      key: item.movieCat
+    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.movieCat), 1 /* TEXT */);
+  }), 128 /* KEYED_FRAGMENT */))], 544 /* HYDRATE_EVENTS, NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.categorySelect]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Търси по жанр: "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.showGenres, function (item) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", {
+      key: item
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      type: "checkbox",
+      id: item,
+      onChange: function onChange($event) {
+        return $options.checkBox(item);
+      }
+    }, null, 40 /* PROPS, HYDRATE_EVENTS */, _hoisted_10), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(), _hoisted_12]);
+  }), 128 /* KEYED_FRAGMENT */))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [_hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+    name: "ElementsNumber",
+    onChange: _cache[4] || (_cache[4] = function ($event) {
+      return $options.onChange($event);
+    }),
+    "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
+      return $data.selPageNum = $event;
+    })
+  }, _hoisted_19, 544 /* HYDRATE_EVENTS, NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.selPageNum]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($options.paginated, function (item) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("tr", {
+      "class": "trMovie",
+      key: item.movieId
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+      "class": "imgContent",
+      src: item.movieImg,
+      onClick: function onClick($event) {
+        return $options.selectTrailer(item.movieId, item.movieTitle, item.movieTrailer, true);
+      }
+    }, null, 8 /* PROPS */, _hoisted_22)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+      style: {
+        "text-decoration": "none"
+      },
+      href: _this.contentRoute + item.movieId
+    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.movieTitle), 9 /* TEXT, PROPS */, _hoisted_24)])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.movieGenre) + " | " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.movieDuration) + " мин. | Категория: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.movieCat) + " | " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.movieLan), 1 /* TEXT */)])])])]);
+  }), 128 /* KEYED_FRAGMENT */))])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" PAGINATION START "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    type: "button",
+    "class": "btn btn-sm btn-outline-secondary",
+    onClick: _cache[6] || (_cache[6] = function () {
+      return $options.prev && $options.prev.apply($options, arguments);
+    })
+  }, " << "), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.pages, function (pageNumber) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
+      type: "button",
+      "class": "btn btn-sm btn-outline-secondary",
+      onClick: function onClick($event) {
+        return $data.current = pageNumber;
+      }
+    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(pageNumber), 9 /* TEXT, PROPS */, _hoisted_26);
+  }), 256 /* UNKEYED_FRAGMENT */)), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    type: "button",
+    "class": "btn btn-sm btn-outline-secondary",
+    onClick: _cache[7] || (_cache[7] = function () {
+      return $options.next && $options.next.apply($options, arguments);
+    })
+  }, " >> ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("end col"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" PAGINATION END "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" MODAL FOR TRAILER "), $data.showModal ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_modal, {
+    key: 0,
+    onClose: _cache[9] || (_cache[9] = function ($event) {
+      return $data.showModal = false;
+    })
+  }, {
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_27, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_28, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_29, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", {
+        onClick: _cache[8] || (_cache[8] = function ($event) {
+          return $data.showModal = false;
+        })
+      }, "X")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_30, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_31, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.movieTitle), 1 /* TEXT */)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_32, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("iframe", {
+        "class": "iframe",
+        src: $data.movieTrailer,
+        frameborder: "0",
+        allowfullscreen: ""
+      }, null, 8 /* PROPS */, _hoisted_33)])])])];
+    }),
+    _: 1 /* STABLE */
+  })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" END MODAL FOR TRAILER ")], 64 /* STABLE_FRAGMENT */);
+}
+
+/***/ }),
+
 /***/ "./resources/js/app.js":
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
@@ -19678,8 +20049,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Bookings_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/Bookings.vue */ "./resources/js/components/Bookings.vue");
 /* harmony import */ var _components_MovieDate_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/MovieDate.vue */ "./resources/js/components/MovieDate.vue");
 /* harmony import */ var _components_aa_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/aa.vue */ "./resources/js/components/aa.vue");
-/* harmony import */ var jw_vue_pagination__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! jw-vue-pagination */ "./node_modules/jw-vue-pagination/lib/JwPagination.js");
-/* harmony import */ var jw_vue_pagination__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(jw_vue_pagination__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _components_fpMovies_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/fpMovies.vue */ "./resources/js/components/fpMovies.vue");
+/* harmony import */ var jw_vue_pagination__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! jw-vue-pagination */ "./node_modules/jw-vue-pagination/lib/JwPagination.js");
+/* harmony import */ var jw_vue_pagination__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(jw_vue_pagination__WEBPACK_IMPORTED_MODULE_6__);
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -19693,12 +20065,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var app = (0,vue__WEBPACK_IMPORTED_MODULE_0__.createApp)({});
 app.component('example-component', _components_Movies_vue__WEBPACK_IMPORTED_MODULE_1__["default"]);
 app.component('bookings', _components_Bookings_vue__WEBPACK_IMPORTED_MODULE_2__["default"]);
 app.component('aa', _components_MovieDate_vue__WEBPACK_IMPORTED_MODULE_3__["default"]);
-app.component('jw-pagination', (jw_vue_pagination__WEBPACK_IMPORTED_MODULE_5___default()));
+app.component('jw-pagination', (jw_vue_pagination__WEBPACK_IMPORTED_MODULE_6___default()));
 app.component('book', _components_aa_vue__WEBPACK_IMPORTED_MODULE_4__["default"]);
+app.component('fp', _components_fpMovies_vue__WEBPACK_IMPORTED_MODULE_5__["default"]);
 app.mount("#app");
 
 /***/ }),
@@ -37072,6 +37446,34 @@ if (false) {}
 
 /***/ }),
 
+/***/ "./resources/js/components/fpMovies.vue":
+/*!**********************************************!*\
+  !*** ./resources/js/components/fpMovies.vue ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _fpMovies_vue_vue_type_template_id_500c0378__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./fpMovies.vue?vue&type=template&id=500c0378 */ "./resources/js/components/fpMovies.vue?vue&type=template&id=500c0378");
+/* harmony import */ var _fpMovies_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./fpMovies.vue?vue&type=script&lang=js */ "./resources/js/components/fpMovies.vue?vue&type=script&lang=js");
+/* harmony import */ var D_xampp_htdocs_my_site_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+
+
+
+
+;
+const __exports__ = /*#__PURE__*/(0,D_xampp_htdocs_my_site_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_fpMovies_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_fpMovies_vue_vue_type_template_id_500c0378__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/fpMovies.vue"]])
+/* hot reload */
+if (false) {}
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__exports__);
+
+/***/ }),
+
 /***/ "./resources/js/components/Bookings.vue?vue&type=script&lang=js":
 /*!**********************************************************************!*\
   !*** ./resources/js/components/Bookings.vue?vue&type=script&lang=js ***!
@@ -37136,6 +37538,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/fpMovies.vue?vue&type=script&lang=js":
+/*!**********************************************************************!*\
+  !*** ./resources/js/components/fpMovies.vue?vue&type=script&lang=js ***!
+  \**********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_fpMovies_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_fpMovies_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./fpMovies.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/fpMovies.vue?vue&type=script&lang=js");
+ 
+
+/***/ }),
+
 /***/ "./resources/js/components/Bookings.vue?vue&type=template&id=e75628b6":
 /*!****************************************************************************!*\
   !*** ./resources/js/components/Bookings.vue?vue&type=template&id=e75628b6 ***!
@@ -37196,6 +37614,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_aa_vue_vue_type_template_id_7d8b00aa__WEBPACK_IMPORTED_MODULE_0__.render)
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_aa_vue_vue_type_template_id_7d8b00aa__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./aa.vue?vue&type=template&id=7d8b00aa */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/aa.vue?vue&type=template&id=7d8b00aa");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/fpMovies.vue?vue&type=template&id=500c0378":
+/*!****************************************************************************!*\
+  !*** ./resources/js/components/fpMovies.vue?vue&type=template&id=500c0378 ***!
+  \****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_fpMovies_vue_vue_type_template_id_500c0378__WEBPACK_IMPORTED_MODULE_0__.render)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_fpMovies_vue_vue_type_template_id_500c0378__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./fpMovies.vue?vue&type=template&id=500c0378 */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/fpMovies.vue?vue&type=template&id=500c0378");
 
 
 /***/ }),
