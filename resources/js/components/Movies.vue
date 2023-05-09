@@ -88,6 +88,7 @@
                 </tr>
             </thead>
             <tbody>
+                <div v-if="!paginated.length">Няма открити резултати</div>
                 <tr v-for="item in paginated" :key="item.movieId">
                     <td><input type="checkbox" v-bind:id=item.movieId @click="checkBox(item.movieId)"></td>
                     <td>{{ item.movieId }}</td>

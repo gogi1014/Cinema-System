@@ -36,6 +36,7 @@
     <div class="container">
         <table id="tableContent">
             <tbody>
+                <div v-if="!paginated.length">Няма открити резултати</div>
                 <tr class='trMovie' v-for="item in paginated" :key="item.movieId">
                     <td><img class="imgContent" :src="item.movieImg"
                             @click="selectTrailer(item.movieId, item.movieTitle, item.movieTrailer, true)"></td>
