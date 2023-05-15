@@ -22,29 +22,23 @@
     <script type="text/javascript" src="{{ URL::asset('js/menu.js') }}"></script>
 
 </head>
-<div id="backgroundAdmin">
+
 <body>
-
-
-    <div id="mySidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="{{ url('/admin') }}">Начало</a>
-        <a href="{{ url('/admin/moviesView') }}">Филми</a>
-        <a href="{{ url('/admin/addMovie') }}">Добавяне на филм</a>
-        <a href="{{ url('/admin/bookingsView') }}">Резервации</a>
-        <a href="{{ url('/admin/moviesDateView') }}">Дати и часове</a>
-        <a href="{{ url('/admin/addMovieDate/1') }}">Добавяне на дати и часове</a>
-        <a href="{{ url('/admin/logout') }}">Изход</a>
-    </div>
-    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Отвори меню</span>
-
-    <script>
-
-    </script>
-    <div class="container">
-        @yield('content')
+    <div id="backgroundAdmin">
+        <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <a href="{{ url('/admin') }}">Начало</a>
+            <a href="{{ url('/admin/moviesView') }}">Филми</a>
+            <a href="{{ url('/admin/addMovie') }}">Добавяне на филм</a>
+            <a href="{{ url('/admin/bookingsView') }}">Резервации</a>
+            <a href="{{ url('/admin/moviesDateView') }}">Дати и часове</a>
+            <a href="{{ url('/admin/addMovieDate/1') }}">Добавяне на дати и часове</a>
+            <a href="{{ url('/admin/logout') }}">Изход</a>
+        </div>
+        <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Отвори меню</span>
+        <div class="container">
+            @yield('content')
+        </div>
     </div>
 </body>
-</div>
-
 </html>

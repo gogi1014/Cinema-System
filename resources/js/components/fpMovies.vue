@@ -3,7 +3,7 @@
         <br>
         <div class="form-group" id="searchVue">
             <input type="text" class="searchTerm" v-model="keyword" placeholder="Търси филм.." />
-            <button type="button" @click="searchEngine()" class="searchButton"><i class="fa fa-search"></i></button>
+            <button type="button" @click="getResults()" class="searchButton"><i class="fa fa-search"></i></button>
         </div>
         <div class="form-group">
             <div class="selectCat">
@@ -18,7 +18,7 @@
         Търси по жанр:
         <div class="form-inline" id="checkBoxVue">
             <span v-for="item in showGenres" :key="item">
-                <input type="checkbox" v-model="item" v-bind:id=item @change="checkBox(item)">
+                <input type="checkbox"  v-bind:id=item @change="checkBox(item)">
                 <span class="checkbox-label">
                     {{ item }} </span> <br>
             </span>
@@ -44,7 +44,7 @@
                         <table>
                             <tr>
                                 <td>
-                                    <h4><a style="text-decoration:none" :href="this.contentRoute + item.movieId">
+                                    <h4><a class="FpMoviesTitles" :href="this.contentRoute + item.movieId">
                                             {{ item.movieTitle }}</a></h4>
                                 </td>
                             </tr>
@@ -157,9 +157,6 @@ export default {
         },
     },
     methods: {
-        searchEngine() {
-            this.getResults();
-        },
         onChange(event) {
             this.pageSize = event.target.value;
             this.setPages();
