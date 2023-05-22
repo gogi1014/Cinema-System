@@ -63,6 +63,8 @@ class Movie extends Model
     {
         return Movie::get()->unique('movieCat');
     }
+
+    
     public function getMovies($input, $request)
     {
         $pagg = 5;
@@ -76,7 +78,8 @@ class Movie extends Model
         }
         /*if (isset($input['genres'])) {
             $search->where('movieGenre', 'LIKE', "%" . $input["genres"] . "%");
-        }*/
+        }
+        */
         if (request()->genres) {
             $genres = array_unique(array_keys(request()->genres));
             $arr = array();
@@ -95,6 +98,7 @@ class Movie extends Model
         }
         return $search->paginate($pagg);
     }
+    
 
     public static function store($request)
     {

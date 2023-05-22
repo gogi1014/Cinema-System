@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Mail;
+use PDF;
+
 
 class User extends Authenticatable
 {
@@ -69,9 +71,11 @@ class User extends Authenticatable
         $data = array(
             'name' => $fullName, 'movieName' => $user->MovieId, 'full' => $full,
             'date' => $user->date, 'time' => $user->time, 'ticknum' => $user->ticknum, 'places' => $user->places, 'ticked_id' => $ticked_id);
-        Mail::send('mail', $data, function ($message) use ($email) {
-            $message->to($email, 'Tutorials Point')->subject('Резервиране на билет за кино');
+        $pdf = PDF::loadView('mailPDF', $data);
+        Mail::send('mail', $data, function ($message) use ($email,$pdf) {
+            $message->to($email, 'Tutorials Point')->subject('Резервиране на билет за кино')->attachData($pdf->output(), "Booking.pdf");
             $message->from('killaonthehilla@gmail.com', 'Кино');
+            
         });
     }
     public function upd($request)

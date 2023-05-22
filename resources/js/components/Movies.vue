@@ -370,8 +370,10 @@ export default {
             this.active = active;
             this.showModal = showModal;
         },
-        updateRow: function (movieId, movieTitle, movieImg, movieTrailer, movieGenre, movieDuration, movieRelDate, movieDirector, movieActors, Description, movieCat, movieLan, active) {
-            axios.post(`update/${movieId}`, { movieId, movieTitle, movieImg, movieTrailer, movieGenre, movieDuration, movieRelDate, movieDirector, movieActors, Description, movieCat, movieLan, active }).then(response => {
+        updateRow: function (movieId, movieTitle, movieImg, movieTrailer, movieGenre, movieDuration, movieRelDate,
+         movieDirector, movieActors, Description, movieCat, movieLan, active) {
+            axios.post(`update/${movieId}`, { movieId, movieTitle, movieImg, movieTrailer, movieGenre, 
+                movieDuration, movieRelDate, movieDirector, movieActors, Description, movieCat, movieLan, active }).then(response => {
                 console.log(response);
                 this.show();
                 this.suc = "Record updated successfully";
