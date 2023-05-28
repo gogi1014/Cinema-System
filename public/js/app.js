@@ -18814,7 +18814,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onClick: _cache[30] || (_cache[30] = function ($event) {
           return $options.removeRow($data.id, false);
         })
-      }, "Потвърди"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+      }, "Потвърждаване"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         type: "button",
         "class": "btn btn-primary",
         onClick: _cache[31] || (_cache[31] = function ($event) {
@@ -18836,7 +18836,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onClick: _cache[33] || (_cache[33] = function ($event) {
           return $options.removeRows(false);
         })
-      }, "Потвърди"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+      }, "Потвърждаване"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         type: "button",
         "class": "btn btn-primary",
         onClick: _cache[34] || (_cache[34] = function ($event) {
@@ -19054,13 +19054,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       onClick: function onClick($event) {
         return $options.Delete(item.id, true);
       }
-    }, "Delete", 8 /* PROPS */, _hoisted_22)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    }, "Изтриване", 8 /* PROPS */, _hoisted_22)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
       id: "show-modal",
       "class": "btn btn-primary",
       onClick: function onClick($event) {
         return $options.select(item.id, item.MovieId, item.MovieName, item.date, item.time, item.type, true);
       }
-    }, "Edit", 8 /* PROPS */, _hoisted_23)])]);
+    }, "Редактиране", 8 /* PROPS */, _hoisted_23)])]);
   }), 128 /* KEYED_FRAGMENT */))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" PAGINATION START "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     type: "button",
     "class": "btn btn-sm btn-outline-secondary",
@@ -19129,13 +19129,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onClick: _cache[17] || (_cache[17] = function ($event) {
           return $options.updateRow($data.id, $data.MovieId, $data.MovieName, $data.date, $data.time, $data.type);
         })
-      }, "Update")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+      }, "Актуализация")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         type: "button",
         "class": "btn btn-danger",
         onClick: _cache[18] || (_cache[18] = function ($event) {
           return $data.showModal = false;
         })
-      }, "Cancel")])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_35, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.errO), 1 /* TEXT */)])])];
+      }, "Отказ")])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_35, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.errO), 1 /* TEXT */)])])];
     }),
 
     _: 1 /* STABLE */
@@ -19152,13 +19152,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onClick: _cache[20] || (_cache[20] = function ($event) {
           return $options.removeRow($data.id, false);
         })
-      }, "Confirm"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+      }, "Потвърждаване"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         type: "button",
         "class": "btn btn-primary",
         onClick: _cache[21] || (_cache[21] = function ($event) {
           return $data.showDelete = false;
         })
-      }, "Cancel")])])];
+      }, "Отказ")])])];
     }),
     _: 1 /* STABLE */
   })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.showDeleteRows ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_modal, {
@@ -19174,7 +19174,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onClick: _cache[23] || (_cache[23] = function ($event) {
           return $options.removeRows(false);
         })
-      }, "Потвърди"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+      }, "Потвърждаване"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         type: "button",
         "class": "btn btn-primary",
         onClick: _cache[24] || (_cache[24] = function ($event) {
@@ -19739,7 +19739,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onClick: _cache[41] || (_cache[41] = function ($event) {
           return $options.removeRows(false);
         })
-      }, "Потвърди"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+      }, "Потвърждаване"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         type: "button",
         "class": "btn btn-primary",
         onClick: _cache[42] || (_cache[42] = function ($event) {

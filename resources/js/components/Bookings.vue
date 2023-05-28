@@ -146,7 +146,7 @@
         <div class="modal-mask">
             <div class="delete">
                 <p>Сигурни ли сте, че искате да изтриете този елемент?</p>
-                <button type="button" class="btn btn-danger" v-on:click="removeRow(id, false)">Потвърди</button>
+                <button type="button" class="btn btn-danger" v-on:click="removeRow(id, false)">Потвърждаване</button>
                 <button type="button" class="btn btn-primary" v-on:click="showDelete = false">Отказ</button>
             </div>
         </div>
@@ -156,7 +156,7 @@
         <div class="modal-mask">
             <div class="delete">
                 <p>Сигурни ли сте, че искате да изтриете {{ checked }} елементи?</p>
-                <button type="button" class="btn btn-danger" v-on:click="removeRows(false)">Потвърди</button>
+                <button type="button" class="btn btn-danger" v-on:click="removeRows(false)">Потвърждаване</button>
                 <button type="button" class="btn btn-primary" v-on:click="showDeleteRows = false">Отказ</button>
             </div>
         </div>

@@ -68,9 +68,9 @@
                 <td>{{ item.date }}</td>
                 <td>{{ item.type }}</td>
                 <td>{{ item.time }}</td>
-                <td><button type="button" class="btn btn-danger" v-on:click="Delete(item.id, true)">Delete</button></td>
+                <td><button type="button" class="btn btn-danger" v-on:click="Delete(item.id, true)">Изтриване</button></td>
                 <td><button id="show-modal" class="btn btn-primary"
-                        @click="select(item.id, item.MovieId, item.MovieName, item.date, item.time, item.type, true)">Edit</button>
+                        @click="select(item.id, item.MovieId, item.MovieName, item.date, item.time, item.type, true)">Редактиране</button>
                 </td>
             </tr>
         </tbody>
@@ -111,8 +111,8 @@
                     </tr>
                     <tr>
                         <td><button type="button" class="btn btn-primary"
-                                v-on:click="updateRow(id, MovieId, MovieName, date, time, type)">Update</button></td>
-                        <td><button type="button" class="btn btn-danger" @click="showModal = false">Cancel</button></td>
+                                v-on:click="updateRow(id, MovieId, MovieName, date, time, type)">Актуализация</button></td>
+                        <td><button type="button" class="btn btn-danger" @click="showModal = false">Отказ</button></td>
                     </tr>
                 </table>
                 <div class="Err">
@@ -125,8 +125,8 @@
         <div class="modal-mask">
             <div class="delete">
                 <p>Сигурни ли сте, че искате да изтриете този елемент?</p>
-                <button type="button" class="btn btn-danger" v-on:click="removeRow(id, false)">Confirm</button>
-                <button type="button" class="btn btn-primary" v-on:click="showDelete = false">Cancel</button>
+                <button type="button" class="btn btn-danger" v-on:click="removeRow(id, false)">Потвърждаване</button>
+                <button type="button" class="btn btn-primary" v-on:click="showDelete = false">Отказ</button>
             </div>
         </div>
     </modal>
@@ -134,7 +134,7 @@
         <div class="modal-mask">
             <div class="delete">
                 <p>Сигурни ли сте, че искате да изтриете {{ checked }} елементи?</p>
-                <button type="button" class="btn btn-danger" v-on:click="removeRows(false)">Потвърди</button>
+                <button type="button" class="btn btn-danger" v-on:click="removeRows(false)">Потвърждаване</button>
                 <button type="button" class="btn btn-primary" v-on:click="showDeleteRows = false">Отказ</button>
             </div>
         </div>
