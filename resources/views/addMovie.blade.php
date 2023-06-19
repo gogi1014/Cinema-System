@@ -72,7 +72,7 @@
         <input type="number" class="form-control" name="active" id="active" placeholder="Активен">
       </div>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary">Създай</button>
   </div>
 </form>
 

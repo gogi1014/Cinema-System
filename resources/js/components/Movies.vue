@@ -8,14 +8,12 @@
             <option value="movieTitle">Заглавие</option>
             <option value="movieId">ID на филм</option>
         </select>
-        <label id="sortElements" for="ChooseGenre">Търси по жанр:</label>
-        <select class="form-control" name="ChooseGenre" @change="changeGenre($event)" v-model="genreSelect">
+        <select id="sortElements" class="form-control" name="ChooseGenre" @change="changeGenre($event)" v-model="genreSelect">
             <option value="default">Изберете жанр</option>
             <option v-for="item in genres" :key="item">
                 {{ item }}</option>
         </select>
-        <label id="sortElements" for="ChooseCategory">Търси по категория:</label>
-        <select class="form-control"  name="ChooseCategory" @change="changeCategory($event)" v-model="categorySelect">
+        <select id="sortElements" class="form-control"  name="ChooseCategory" @change="changeCategory($event)" v-model="categorySelect">
             <option value="default">Изберете Категория</option>
             <option v-for="item in sortCat" :key="item.movieCat">
                 {{ item.movieCat }}</option>
