@@ -18537,7 +18537,8 @@ var _hoisted_30 = ["id", "onClick"];
 var _hoisted_31 = ["onClick"];
 var _hoisted_32 = ["onClick"];
 var _hoisted_33 = {
-  "class": "clearfix btn-group col-md-2 offset-md-5"
+  "class": "clearfix btn-group col-md-2 offset-md-5",
+  id: "addMovieCont"
 };
 var _hoisted_34 = ["onClick"];
 var _hoisted_35 = {
@@ -18935,7 +18936,8 @@ var _hoisted_21 = ["id", "onClick"];
 var _hoisted_22 = ["onClick"];
 var _hoisted_23 = ["onClick"];
 var _hoisted_24 = {
-  "class": "clearfix btn-group col-md-2 offset-md-5"
+  "class": "clearfix btn-group col-md-2 offset-md-5",
+  id: "addMovieCont"
 };
 var _hoisted_25 = ["onClick"];
 var _hoisted_26 = {
@@ -19291,7 +19293,8 @@ var _hoisted_36 = {
 var _hoisted_37 = ["onClick"];
 var _hoisted_38 = ["onClick"];
 var _hoisted_39 = {
-  "class": "clearfix btn-group col-md-2 offset-md-5"
+  "class": "clearfix btn-group col-md-2 offset-md-5",
+  id: "addMovieCont"
 };
 var _hoisted_40 = ["onClick"];
 var _hoisted_41 = {

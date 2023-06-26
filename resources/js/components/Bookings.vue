@@ -89,7 +89,7 @@
         </tbody>
     </table>
     <!-- PAGINATION START -->
-    <div class="clearfix btn-group col-md-2 offset-md-5">
+    <div class="clearfix btn-group col-md-2 offset-md-5" id="addMovieCont">
         <button type="button" class="btn btn-sm btn-outline-secondary" @click="prev"> &lt&lt </button>
         <button type="button" class="btn btn-sm btn-outline-secondary" v-for="pageNumber  in pages"
             @click="current = pageNumber"> {{ pageNumber }}

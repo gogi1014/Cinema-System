@@ -30,7 +30,7 @@
     <button id="sortElements" type="button" class="btn btn-danger" @click="DeleteRows(checked, true)">Изтриване на избраните</button>
     </div>
 
-    <div class="container">
+    <div class="container" >
         <table style="display: block; height: 1020px; overflow: auto;" class="table " id="adminTable">
             <thead class="thead-dark">
                 <tr>
@@ -116,7 +116,7 @@
         </table>
     </div>
     <!-- PAGINATION START -->
-    <div class="clearfix btn-group col-md-2 offset-md-5">
+    <div class="clearfix btn-group col-md-2 offset-md-5" id="addMovieCont">
         <button type="button" class="btn btn-sm btn-outline-secondary" @click="prev"> &lt&lt </button>
         <button type="button" class="btn btn-sm btn-outline-secondary" v-for="pageNumber  in pages"
             @click="current = pageNumber"> {{ pageNumber }}

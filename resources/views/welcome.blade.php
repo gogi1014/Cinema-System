@@ -2,9 +2,9 @@
 
 @section('content')
 
-<div class="container">
+<div class="container" >
     <h1>Администраторски панел</h1>
-    <div class="container">
+    <div class="container" id="addMovieCont">
         <div class="row justify-content-center" id="welcome">
             <div class="col-4">
             <i class="bi-gear"></i>
