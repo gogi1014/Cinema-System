@@ -1,4 +1,7 @@
-# my-site
+# Cinema-System
+Technology Stack: PHP (Laravel), JavaScript (Vue.js), MySQL, Bootstrap.
+
+Key Features
 Comprehensive Admin Dashboard: Built-in functionality for managing movies, screening dates, and user bookings with full CRUD capabilities.
 
 Dynamic Booking Engine: Integration of Vue.js for a responsive front-end experience, allowing users to browse movies and view real-time availability.
